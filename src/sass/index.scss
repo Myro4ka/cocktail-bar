@@ -1,2 +1,12 @@
-@import './common';
-@import './example';
+@import '~node_modules/modern-normalize/modern-normalize.css';
+
+@import './utils/mixin';
+@import './utils/vars';
+@import './base/reset';
+@import './base/container';
+
+@import './layouts/home';
+@import './layouts/favorites';
+
+@import './components/button';
+@import './components/modal';
