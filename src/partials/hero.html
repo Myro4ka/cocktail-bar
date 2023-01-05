@@ -1,72 +1,22 @@
-<section class="section hero">
-  <div class="container hero-container">
-    <div class="hero-wrapper">
-      <h1 class="hero-title">
-        A party without cocktails <br />
-        is not like a party
-      </h1>
-      <p class="hero-text">Search your favorite cocktail by ABC</p>
-      <ul class="hero-list js-hero-list"></ul>
-    </div>
-    <picture class="hero-img">
-      <source
-        srcset="
-          ./images/hero_desc.png 1x,
-          ./images/hero_desc@2x.png 2x
-        "
-        media="(min-width: 1200px)"
-      />
-      <source
-        srcset="
-          ./images/hero_tab.png 1x,
-          ./images/hero_tab@2x.png 2x
-        "
-        media="(min-width: 768px)"
-      />
-      <source
-        srcset="
-          ./images/hero_mob.png 1x,
-          ./images/hero_mob@2x.png 2x
-        "
-        media="(min-width: 320px)"
-        width="280"
-      />
-      <img src="./images/hero_desc.png" alt="Coctail" />
-    </picture>
-<!--______________________ select ___________________-->
-    <div class="hero-wrapper-select">
-    <label for="search" class="hero-label-mob"
-      >Search your favorite cocktail by ABC</label
-    >
-    <select id="search-letter" name="search-letter" class="hero-select-mob"></select>
-  </div>
-  </div>
-</section>
+<section class="hero container">
 
-<!--____________________section  sorry___________________ -->
-<section class="section sorry js-sorry is-hidden">
-      <div class="container sorry-container">
-        <h2 class="sorry-title section-title">
-          Sorry, we didn't find <br />
-          any cocktail for you
-        </h2>
-        <picture class="sorry-img">
-          <source
-            srcset="
-              ./images/frame_desc.png 1x,
-              ./images/frame_desc@2x.png 2x
-            "
-            media="(min-width: 768px)"
-          />
-          <source
-            srcset="./images/frame_mob.png 1x, 
-            ./images/frame_mob@2x.png 2x"
-            media="(min-width: 480px)"
-            width="280"
-          />
-          <img src="./images/frame_desc.png" alt="People and table" />
-        </picture>
-      </div>
-    </section>
-  </div>
+    <div class="hero__box">
+        <h1 class="hero-title">A party without cocktails <br>
+            is not like a party</h1>
+        <span class="hero-text">Search your favorite cocktail by ABC </span>
+        <ul class="hero-list">
+          <div class=" hero-div is-hiden">
+            <div class="hero-boxList"> <span class="hero-span ">A</span>
+                <svg class="hero-svg">
+                    <use href="/src/images/Vector.svg#vector-svg"></use>
+                  </svg>
+        </div>
+        <div class="hero-list__ul is-hiden-select">
+            <ul class="hero-select"></ul>
+            <div class="hero-list__ulItem"></div>
+        </div>
+        </div>
+        </ul>
+    </div>
+
 </section>
