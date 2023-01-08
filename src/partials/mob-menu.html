@@ -1,0 +1,49 @@
+<div class="mob-menu is-hidden" data-menu>
+    <div class="container">
+      <a href="./index.html" class="logo">
+        <img class="logo" src="./images/logo.png" alt="logo" width="123" height="34" /></a>
+      <div class="container-menu">
+        <div class="switcher-container">
+          <span class="light">Light</span>
+          <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+          </label>
+          <span class="dark">Dark</span>
+        </div>      
+        <form class="search-form " id="search-form">
+          <button class="search-btn" type="submit">
+            <svg class="search-icon" width="24" height="24">
+              <use href="./images/symbol-defs.svg#icon-search"></use>
+            </svg>
+          </button>
+          <input type="text" name="searchQuery" class="searchQuery" autocomplete="off" placeholder="Search |" />
+        </form>
+        <!-- <nav class="modal-menu__nav"> -->
+          
+          <ul class="mob-menu__list">
+            <li>
+              <a href="./index.html" class="mob-menu__item">Home</a>
+            </li>
+            <li>
+              <button type="button" class="mob-menu__item" aria-expanded="false" data-favorite-button>
+                Favorite
+                <svg width="24" height="24" aria-label="favorites menu switch">
+                  <use class="icon-menu" href="./images/symbol-defs.svg#icon-down-arrow"></use>
+                </svg>
+              </button>
+              <ul class="favorites-list" data-favorites-menu>
+                <li><a href="#">Favorite cocktails</a></li>
+                <li><a href="#">Favorite ingredients</a></li>
+              </ul>
+            </li>
+          </ul>
+        <!-- </nav>         -->
+  </div>
+  <button class="close-btn" data-menu-close>
+    <svg class="close-btn__icon" width="32" height="32">
+      <use href="./images/symbol-defs.svg#icon-close-line"></use>
+    </svg>
+  </button>
+  </div>
+</div>
