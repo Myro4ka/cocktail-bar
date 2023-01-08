@@ -16,6 +16,14 @@ body {
     background-color: $light-primary-color;
 }
 
+.theme-light {
+    --color-primary: $light-primary-color;
+ }
+
+.theme-dark {
+    --color-primary: $dark-primary-color;
+}
+
 h1,
 h2,
 h3,
