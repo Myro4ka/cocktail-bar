@@ -7,8 +7,8 @@
 
 @import './layouts/_header.scss';
 @import './layouts/_mob-menu.scss';
-// @import './layouts/_hero';
-// @import './layouts/_gallery';
+@import './layouts/hero';
+@import './layouts/gallery';
 // @import './layouts/_footer';
 
 @import './components/_button';

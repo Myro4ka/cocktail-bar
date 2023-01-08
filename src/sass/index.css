@@ -1,0 +1,262 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: rgb(32, 32, 37);
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.section {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+@media screen and (min-width: 768px) {
+  .section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.container {
+  min-width: 320px;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 480px) {
+  .container {
+    width: 480px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 0 32px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+    padding: 0 16px;
+  }
+}
+
+.gallery {
+  text-align: center;
+}
+.gallery__title {
+  margin-bottom: 60px;
+  color: #202025;
+  font-size: 22px;
+  line-height: 1.9;
+  font-weight: 600;
+}
+@media screen and (min-width: 768px) {
+  .gallery__title {
+    font-family: "Roboto";
+    font-size: 32px;
+    line-height: 1.9;
+    font-weight: 700;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .gallery__title {
+    font-family: "Poppins";
+    font-size: 48px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+}
+.gallery__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+@media screen and (min-width: 768px) {
+  .gallery__list {
+    gap: 32px;
+  }
+}
+.gallery__item {
+  border: 1px solid rgb(253, 81, 3);
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+@media screen and (min-width: 768px) {
+  .gallery__item {
+    width: calc((100% - 32px) / 2);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .gallery__item {
+    width: calc((100% - 64px) / 3);
+  }
+}
+.gallery__img {
+  margin-bottom: 48px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media screen and (min-width: 768px) {
+  .gallery__img {
+    margin-bottom: 20px;
+  }
+}
+.gallery__card-title {
+  margin-bottom: 16px;
+  color: #202025;
+  font-family: "Roboto";
+  font-size: 26px;
+  line-height: 1.6;
+  font-weight: 900;
+}
+@media screen and (min-width: 768px) {
+  .gallery__card-title {
+    margin-bottom: 23px;
+    font-size: 28px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .gallery__card-title {
+    margin-bottom: 27px;
+    font-size: 32px;
+  }
+}
+.gallery__card-btns {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 24px;
+}
+@media screen and (min-width: 768px) {
+  .gallery__card-btns {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .gallery__card-btns {
+    margin-bottom: 28px;
+  }
+}
+
+.btn__learn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fcfcfc;
+  min-width: 108px;
+  min-height: 39px;
+  border: none;
+  background-color: #fe7031;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 1.14;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+@media screen and (min-width: 768px) {
+  .btn__learn {
+    width: 160px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .btn__learn {
+    width: 182px;
+    height: 48px;
+  }
+}
+
+.btn__add {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 16px;
+  min-width: 108px;
+  min-height: 39px;
+  text-align: start;
+  border: 1px solid rgb(253, 81, 3);
+  border-radius: 4px;
+  color: rgb(253, 81, 3);
+  background: #fcfcfc;
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+@media screen and (min-width: 768px) {
+  .btn__add {
+    width: 123px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .btn__add {
+    width: 141px;
+    height: 48px;
+  }
+}
+
+.btn__svg {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 20%;
+}/*# sourceMappingURL=index.css.map */
