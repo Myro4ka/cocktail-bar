@@ -14,6 +14,10 @@ body {
     margin: 0;
 
     background-color: $light-primary-color;
+
+    &.no-scroll {
+        overflow: hidden;
+    }
 }
 
 .theme-light {
@@ -34,7 +38,9 @@ p {
     margin: 0;
 }
 
-ul {
+ul,
+ol,
+li {
     list-style: none;
     padding: 0;
     margin: 0;
