@@ -1,17 +1,17 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
 
-@import './utils/_mixin.scss';
-@import './utils/_vars.scss';
-@import './base/_reset.scss';
-@import './base/_container.scss';
+@import './utils/mixin';
+@import './utils/vars';
+@import './base/reset';
+@import './base/container';
 
-@import './layouts/_header.scss';
-@import './layouts/_mob-menu.scss';
+@import './layouts/header';
+@import './layouts/mob-menu';
 @import './layouts/hero';
 @import './layouts/gallery';
-// @import './layouts/_footer';
+@import './layouts/footer';
 
-@import './components/_button';
-@import './components/_logo';
-@import './components/_switcher';
+@import './components/button';
+@import './components/logo';
+@import './components/switcher';
 // @import './components/_modal';
