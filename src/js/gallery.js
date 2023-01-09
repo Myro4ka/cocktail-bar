@@ -1,6 +1,8 @@
-import { refs } from "./gallery/refs/refs";
-import { coctailCardMarkup } from "./gallery/render/render";
-import { fetchProductsRandom } from "./gallery/api/api";
+import { refs } from './gallery/refs/refs';
+import { coctailCardMarkup } from './gallery/render/render';
+import { fetchProductsRandom } from './gallery/api/api';
+import { onOpenCocktailModal } from './modal-cocktail';
+
 let coctailsAmount = 0;
 // переменная для идентификации кнопок коктейля
 let coctailNumber = 0;
@@ -51,15 +53,14 @@ export default function mainFunction(
         if (searchIn) {
           coctailIterationNumber = i;
         }
-        const { strDrinkThumb = '', strDrink = '' } =
-          newData.drinks[coctailIterationNumber];
+        const {strDrinkThumb = '', strDrink = '', idDrink = '',
+        } = newData.drinks[coctailIterationNumber];
 
         // создаем разметку карточки
-        coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb);
-      }).catch(alert.log);
-    
+        coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb, idDrink);
+      })
+      .catch(alert.log);
   }
- 
 }
 mainFunction(
   0,
@@ -67,3 +68,5 @@ mainFunction(
   coctailsAmount,
   refs.coctailsList
 );
+
+refs.coctailsList.addEventListener('click', onOpenCocktailModal);
