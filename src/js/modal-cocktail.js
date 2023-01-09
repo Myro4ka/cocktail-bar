@@ -48,7 +48,7 @@ export async function onOpenCocktailModal(event) {
           response.drinks[0][key] !== '' &&
           event.target.textContent.includes(response.drinks[0][key])
         ) {
-          cocktailIngredient = await getIngredientByName(
+          let cocktailIngredient = await getIngredientByName(
             response.drinks[0][key]
           );
 
@@ -145,7 +145,7 @@ export function makeList(cocktail) {
   return { resultList: resultList, modIngredientsList: modIngredientsList };
 }
 
-function onEscKeyPress(event) {
+export function onEscKeyPress(event) {
   if (
     event.code === 'Escape' &&
     !modalIngredientRef.classList.contains('is-hidden')
