@@ -1,4 +1,4 @@
-import sprite from './symbol-defs.svg';
+import sprite from '../images/symbol-defs.svg';
 refs = {
   pagination: document.querySelector('.pagination'),
 };
