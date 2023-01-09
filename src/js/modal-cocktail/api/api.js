@@ -1,4 +1,4 @@
-const BASE_URL = 'https://www.thecocktaildb.com/';
+export const BASE_URL = 'https://www.thecocktaildb.com/';
 
 export async function getCocktailById(id) {
   return await fetch(`${BASE_URL}api/json/v1/1/lookup.php?i=${id}`)

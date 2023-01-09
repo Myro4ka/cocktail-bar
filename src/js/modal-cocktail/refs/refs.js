@@ -1,8 +1,8 @@
 
-export const backdropFirstRef = document.querySelector('.js-backdrop-first');
-export const backdropSecondRef = document.querySelector('.js-backdrop-second');
+export const backdropCocktailRef = document.querySelector('.js-backdrop-cocktail');
+export const backdropIngredientRef = document.querySelector('.js-backdrop-ingredient');
 
-export const modalFirstRef = document.querySelector('[data-modal-first]');
-export const modalSecondRef = document.querySelector('[data-modal-second]');
+export const modalCocktailRef = document.querySelector('[data-modal-cocktail]');
+export const modalIngredientRef = document.querySelector('[data-modal-ingredient]');
 
-export const modalCocktailListRef =document.querySelector('.js-modal-first-list');
+export const modalCocktailListRef =document.querySelector('.js-modal-list-ingredients');

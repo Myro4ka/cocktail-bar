@@ -150,7 +150,7 @@
     }
   }
   
-  .modal__description--second-mobile {
+  .modal__description--ingredient-mobile {
     margin-bottom: 28px;
   }
   
@@ -162,17 +162,22 @@
     border-radius: 4px;
   
     @media screen and (min-width: 768px) {
+      display: flex;
+      // align-self: start;
+      // align-items: start;
+
       max-width: 288px;
       height: 320px;
       order: 0;
       margin-left: -28px;
       margin-top: -106px;
-      margin-bottom: 0;
+      margin-bottom: auto;
     }
   }
   
   .modal__info {
     @media screen and (min-width: 768px) {
+      width: calc(100% - 40px - 288px); // 280
       order: 2;
     }
   }
@@ -204,6 +209,7 @@
     padding-left: 0px;
   
     @media screen and (min-width: 768px) {
+      
     }
   }
   

@@ -1,78 +1,170 @@
-import { modalFirstRef, backdropFirstRef } from './modal-cocktail/refs/refs';
-import { getCocktailById } from './modal-cocktail/api/api';
-import { renderList, renderModalFirst } from './modal-cocktail/render/render';
+import {
+  modalCocktailRef,
+  backdropCocktailRef,
+  modalIngredientRef,
+  backdropIngredientRef,
+} from './modal-cocktail/refs/refs';
+import { getCocktailById, getIngredientByName } from './modal-cocktail/api/api';
+import { renderList, renderModalCocktail } from './modal-cocktail/render/render';
 
-export function makeList(cocktail) {
-  let quantityList = [];
-  let ingredientsList = [];
-  let resultList = [];
-  for (let key in cocktail.drinks[0]) {
-    if (
-      key.includes('strMeasure') &&
-      cocktail.drinks[0][key] !== null &&
-      cocktail[key] !== ''
-    ) {
-      quantityList.push(cocktail.drinks[0][key]);
-    }
+import { renderModalIngredient } from './modal-ingredient/render/render';
 
-    if (
-      key.includes('strIngredient') &&
-      cocktail.drinks[0][key] !== null &&
-      cocktail.drinks[0][key] !== ''
-    ) {
-      ingredientsList.push(cocktail.drinks[0][key].toLowerCase());
-    }
-  }
-  resultList = quantityList.map(
-    (quantity, ingredient) => quantity + ' ' + ingredientsList[ingredient]
-  );
-  //   console.log(quantityList);
-  //   console.log(ingredientsList);
-  //   console.log(resultList);
-
-  return resultList;
-}
+let response = null;
 
 export async function onOpenCocktailModal(event) {
-  try {
+  if (event.target.classList.contains('btn__learn')) {
     let el = await event.target.closest('[data-cocktailId]');
-    //console.log(el);
     const cocktailId = await el.dataset.cocktailid;
-    //console.log('cocktailId', el.dataset);
-    //console.log('cocktailId', cocktailId);
 
-    const response = await getCocktailById(cocktailId);
-    //console.log('response', response);
+    response = await getCocktailById(cocktailId);
 
-    modalFirstRef.classList.remove('is-hidden');
+    modalCocktailRef.classList.remove('is-hidden');
     window.addEventListener('keydown', onEscKeyPress);
+
     let cocktailTitle = response.drinks[0].strDrink;
-    //console.log(cocktailTitle);
-
     let cocktailInstructions = response.drinks[0].strInstructions;
-    //console.log(cocktailInstructions);
-
     let cocktailImage = response.drinks[0].strDrinkThumb;
-    //console.log(cocktailImage);
+    let list = makeList(response);
 
-    let list = renderList(makeList(response));
-    // console.log(list);
+    let listMarkup = await renderList(list.resultList);
 
     insertMarkup(
       cocktailId,
       cocktailTitle,
       cocktailInstructions,
       cocktailImage,
-      list
+      listMarkup
     );
-  } catch (error) {
-    console.log(error.message);
+  }
+
+  if (event.target.classList.contains('modal__link')) {
+    modalIngredientRef.classList.remove('is-hidden');
+    console.log(response);
+    try {
+      for (let key in response.drinks[0]) {
+        if (
+          key.includes('strIngredient') &&
+          response.drinks[0][key] !== null &&
+          response.drinks[0][key] !== '' &&
+          event.target.textContent.includes(response.drinks[0][key])
+        ) {
+          cocktailIngredient = await getIngredientByName(
+            response.drinks[0][key]
+          );
+
+          const ingredient = await cocktailIngredient.ingredients[0];
+
+          const ingredientTitle = ingredient.strIngredient;
+          const ingredientType = ingredient.strType || 'no information';
+          const ingredientDescription =
+            ingredient.strDescription || 'no information';
+
+          let ingredientAlcohol = '';
+          ingredient.strABV + ' %' || 'no information';
+          if (
+            ingredient.strAlcohol.toLowerCase() === 'yes' &&
+            ingredient.strABV
+          ) {
+            ingredientAlcohol = `${ingredient.strABV} %`;
+          } else {
+            ingredientAlcohol = 'no information';
+          }
+
+          if (ingredient.strAlcohol.toLowerCase() === 'no') {
+            ingredientAlcohol = `no alcohol`;
+          }
+
+          backdropIngredientRef.innerHTML = renderModalIngredient(
+            ingredientTitle,
+            ingredientType,
+            ingredientDescription,
+            ingredientAlcohol
+          );
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  }
+
+  if (
+    event.target.classList.contains('js-modal-close-cocktail') ||
+    event.target.classList.contains('js-modal-icon-cocktail') ||
+    event.target.classList.contains('js-backdrop-cocktail')
+  ) {
+    onCloseModalCocktail();
+    return;
+  }
+
+  if (
+    event.target.classList.contains('modal__close-button-ingredient') ||
+    event.target.classList.contains('modal__icon--ingredient') ||
+    event.target.classList.contains('js-backdrop-ingredient')
+  ) {
+    onCloseModalIngredient();
+    window.removeEventListener('keydown', onEscKeyPress);
+    return;
+  }
+}
+
+export function makeList(cocktail) {
+  let quantityList = [];
+  let ingredientsList = [];
+  let resultList = [];
+  for (let key in cocktail.drinks[0]) {
+    if (key.includes('strMeasure')) {
+      quantityList.push(cocktail.drinks[0][key]);
+    }
+
+    if (key.includes('strIngredient')) {
+      ingredientsList.push(cocktail.drinks[0][key]);
+    }
+  }
+  const modIngredientsList = ingredientsList.filter(Boolean);
+  const modQuantityList = quantityList.filter(Boolean);
+  let length;
+  if (modQuantityList.length >= modIngredientsList.length) {
+    length = modQuantityList.length;
+  } else {
+    length = modIngredientsList.length;
+  }
+
+  for (let i = 0; i < length; i += 1) {
+    let a = !modIngredientsList[i] ? '' : modIngredientsList[i];
+    let b = !modQuantityList[i] ? '' : modQuantityList[i];
+    a = a.replace(/\n/g, '');
+    b = b.replace(/\n/g, '');
+    resultList.push(b + ' ' + a);
+  }
+
+  console.log(modQuantityList); //!+++++++++++++++
+  console.log(modIngredientsList); //!+++++++++++++++
+  console.log(resultList); //!+++++++++++++++
+
+  return { resultList: resultList, modIngredientsList: modIngredientsList };
+}
+
+function onEscKeyPress(event) {
+  if (
+    event.code === 'Escape' &&
+    !modalIngredientRef.classList.contains('is-hidden')
+  ) {
+    modalIngredientRef.classList.add('is-hidden');
+    return;
+  }
+  if (
+    event.code === 'Escape' &&
+    !modalCocktailRef.classList.contains('is-hidden')
+  ) {
+    modalCocktailRef.classList.add('is-hidden');
+    return;
   }
 }
 
 export async function insertMarkup(id, title, instructions, image, list) {
   try {
-    backdropFirstRef.innerHTML = renderModalFirst(
+    backdropCocktailRef.innerHTML = renderModalCocktail(
       id,
       title,
       instructions,
@@ -84,25 +176,14 @@ export async function insertMarkup(id, title, instructions, image, list) {
   }
 }
 
-export async function onCloseCocktailModal(event) {
-  // console.log(event.target.classList);
-  if (
-    event.target.classList.contains('js-modal-close-first') ||
-    event.target.classList.contains('js-modal-icon-first') ||
-    event.target.classList.contains('js-backdrop-first')
-  ) {
-    modalFirstRef.classList.add('is-hidden');
-  }
+function onCloseModalIngredient() {
+  modalIngredientRef.classList.add('is-hidden');
 }
 
-function onEscKeyPress(event) {
-  if (
-    event.code === 'Escape' &&
-    !modalFirstRef.classList.contains('is-hidden')
-  ) {
-    modalFirstRef.classList.add('is-hidden');
-    return;
-  }
+function onCloseModalCocktail() {
+  modalCocktailRef.classList.add('is-hidden');
 }
 
-modalFirstRef.addEventListener('click', onCloseCocktailModal);
+function getData() {}
+
+modalCocktailRef.addEventListener('click', onOpenCocktailModal);
