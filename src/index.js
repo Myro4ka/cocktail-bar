@@ -4,3 +4,4 @@ import './js/switcher.js';
 import './js/hero';
 
 import './js/gallery';
+import './js/pagination';
