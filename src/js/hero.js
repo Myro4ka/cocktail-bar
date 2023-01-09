@@ -1,40 +1,20 @@
-'use strict';
-const refst = {
-  heroList: document.querySelector('.hero-list'),
-  heroTitle: document.querySelector('.hero-text'),
-  hero: document.querySelector('.hero'),
-  select: document.querySelector('.hero-select'),
-
-
-  isHiden: document.querySelector('.is-hiden'),
-  coctailTitel: document.querySelector('.coctails-section__title'),
-  cocktalisTitel: document.querySelector('.coctails-section__coctails-list'),
- 
-
-  herospan : document.querySelector('.hero-span'),
-  heroBox : document.querySelector('.hero-div'),
-  heroSelect : document.querySelector('.hero-boxList'),
-  heroListUl:document.querySelector('.hero-list__ul'),
- 
-  headerinput:document.querySelector('.header-input'),
-};
-
+import { refst } from './refs';
 
 // import mainFunction from './coctails';
 const coctailsList = document.querySelector('.coctails-section__coctails-list');
 
 let arrayLength = 0;
 
-const { heroList, heroTitle, hero, select, isHiden, 
-  heroItem ,headerinput,herospan,coctailTitel,cocktalisTitel,heroBox,
-  heroSelect,heroListUl } = refst;
+const { heroList, heroTitle, hero, select, isHiden,
+  heroItem, headerinput, herospan, coctailTitel, cocktalisTitel, heroBox,
+  heroSelect, heroListUl } = refst;
 
 const heroTitleImg = () => {
   return `<div class="hero-container">
 </div>`;
 };
-
-function creaitMarkapArr(e) {
+createMarkup
+function createMarkupArr(e) {
   return e.map(e => {
     return `<li class=hero-item >
         <button class=hero-button data-name=${e}>${e}</button>
@@ -82,16 +62,14 @@ const arrr = [
 ];
 
 
-function creaitMarkap(e) {
+function createMarkup(e) {
   return e.map(e => {
     return `<li class=hero-item value=${e} id=${e}>${e}</li>`;
   });
 }
 
 function clickHeroTitel(e) {
-  headerinput.value = " "
-
-
+  headerinput.value = " ";
   const target = e.target.dataset.name;
   const hover = e.target;
   const item = e.currentTarget.querySelectorAll('.hero-button');
@@ -100,16 +78,9 @@ function clickHeroTitel(e) {
   }
   if (innerWidth > 767) {
     item.forEach(e => {
-        if(!e.classList.contains('is-hover')){return}
-        e.classList.remove('is-hover')
-    })
-    // try {
-    //   const removeTarget = document.querySelector('.is-hover');
-    //   removeTarget.classList.remove('is-hover')
-    //   item.classList.add('is-hover');
-    // } catch {}
- 
-
+      if (!e.classList.contains('is-hover')) { return }
+      e.classList.remove('is-hover')
+    });
     hover.classList.add('is-hover');
     cocktalis(target);
   }
@@ -117,8 +88,8 @@ function clickHeroTitel(e) {
 
 heroList.addEventListener('click', clickHeroTitel);
 
-const hiden = creaitMarkap(arrr);
-const markap = creaitMarkapArr(arrr);
+const hiden = createMarkup(arrr);
+const markap = createMarkupArr(arrr);
 const heroWidth = heroTitleImg();
 
 if (innerWidth > 767) {
@@ -136,28 +107,30 @@ if (innerWidth < 767) {
 
   function heroSelectA(e) {
     const heroSvg = document.querySelector('.hero-svg');
-    const HeroSpann = document.querySelector('.hero-span');
-      const targetMo = e.target
-      if(targetMo === heroSelect || targetMo === HeroSpann || targetMo === heroSvg){
-        heroListUl.classList.remove("is-hiden-select")
-        heroListUl.classList.add("is-hden-select_display")
-      }else{
-        heroListUl.classList.add("is-hiden-select")
-        heroListUl.classList.remove("is-hden-select_display")
+    const heroSpann = document.querySelector('.hero-span');
+    const targetMo = e.target
+    if (targetMo === heroSelect || targetMo === heroSpann || targetMo === heroSvg) {
+      heroListUl.classList.remove("is-hiden-select")
+      heroListUl.classList.add("is-hden-select_display")
+    } else {
+      heroListUl.classList.add("is-hiden-select")
+      heroListUl.classList.remove("is-hden-select_display")
 
+    }
+    const targetValue = e.target;
+    if (targetValue) {
+      const targetId = e.target.id
+
+      if (targetId) {
+        ;
+
+        cocktalis(targetId).then(e => {
+          ;
+          herospan.textContent = targetId
+        })
       }
-      const targetValue = e.target;
-         if(targetValue){
-  const targetId = e.target.id
-
-     if(targetId){;
-
-cocktalis(targetId).then(e =>{;
-  herospan.textContent = targetId
-})
-     }
- }
- }
+    }
+  }
 }
 
 function cocktalis(name) {
@@ -167,47 +140,37 @@ function cocktalis(name) {
       if (!response) {
         throw new Error(response.message);
       }
-
       return response.json();
     })
     .then(response => {
-    
-         const {drinks} = response
+      const { drinks } = response
       if (drinks === null) {
-       return responsNull()
-      } else{
+        return responsNull()
+      } else {
         coctailTitel.classList.add("coctails-section__title")
         coctailTitel.classList.remove("coctails-section-coctailTitel")
-
         coctailsList.classList.remove("coctails-section-hover")
-       cocktalisTitel.innerHTML =  '';
-       coctailTitel.textContent = `Searching results`;
-      arrayLength = response.drinks.length;
-      mainFunction(1, URL, arrayLength, coctailsList);
+        cocktalisTitel.innerHTML = '';
+        coctailTitel.textContent = `Searching results`;
+        arrayLength = response.drinks.length;
+        mainFunction(1, URL, arrayLength, coctailsList);
       }
-     });
-}
-
-
+    });
+};
 function responsNull() {
-  coctailsList.classList.add("coctails-section-hover")
+  coctailsList.classList.add("coctails-section-hover");
+  cocktalisTitel.innerHTML = '';
+  const sorryCocktaili = sorryCocktailFor();
 
-  cocktalisTitel.innerHTML =  '';
-const sorryCocktaili = sorryCocktailFor();
+  coctailTitel.classList.remove("coctails-section__title")
+  coctailTitel.classList.add("coctails-section-coctailTitel")
 
-coctailTitel.classList.remove("coctails-section__title")
-coctailTitel.classList.add("coctails-section-coctailTitel")
-
-coctailTitel.textContent = `Sorry, we didn't find  any cocktail for you`;
+  coctailTitel.textContent = `Sorry, we didn't find  any cocktail for you`;
   cocktalisTitel.innerHTML = sorryCocktaili
-
-
-}
-
+};
 
 function sorryCocktailFor() {
   return `<div class='coctails-section__coctails-img-div'>
   <div class='coctails-section__coctails-img'></div>
   </div>`
-}
-
+};
