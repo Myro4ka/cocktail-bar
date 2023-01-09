@@ -5,11 +5,17 @@
 @import './base/reset';
 @import './base/container';
 
-@import './layouts/home';
-@import './layouts/favorites';
+@import './layouts/header';
+@import './layouts/mob-menu';
+@import './layouts/hero';
+
 @import './layouts/gallery';
+@import './layouts/footer';
 
 @import './components/button';
 @import './layouts/modal'; 
 
-@import './layouts/hero';
+@import './components/logo';
+@import './components/switcher';
+@import './components/pagination';
+// @import './components/_modal';

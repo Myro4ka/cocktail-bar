@@ -1,0 +1,46 @@
+<div class="container header-wrap">
+        <nav class="nav">
+            <a href="./index.html" class="logo">
+              <img class="logo" src="./images/logo.png" alt="logo" width="123" height="34" /></a>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="./index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item favorites">
+                    <button type="button" aria-expanded="false" data-favorite-button>
+                      Favorite
+                      <svg width="24" height="24" aria-label="favorites menu switch">
+                        <use class="icon-menu" href="./images/symbol-defs.svg#icon-down-arrow"></use>
+                      </svg>
+                    </button>
+                    <ul class="favorites-list" data-favorites-menu>
+                      <li><a href="#">Favorite cocktails</a></li>
+                      <li><a href="#">Favorite ingredients</a></li>
+                  </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="search-wrap">
+          <form class="search-form" id="search-form">
+          <button class="search-btn" type="submit" onclick="this.blur()">
+            <svg class="search-icon" width="24" height="24">
+              <use href="./images/symbol-defs.svg#icon-search"></use>
+            </svg>
+          </button>
+          <input type="text" name="searchQuery" class="searchQuery" autocomplete="off" placeholder="Search |" />
+          </form>
+          <button class="menu-btn" type="button" aria-expanded="false" data-menu-button>
+            <svg class="menu-btn-icon" width="30" height="16" aria-label="mobile menu switch">
+                <use class="icon-menu"href="./images/symbol-defs.svg#icon-menu"></use>                
+            </svg>
+          </button>
+        </div>
+        <div class="switcher-container">
+          <span class="light">Light</span>
+          <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+          </label>
+          <span class="dark">Dark</span>
+        </div>
+</div>

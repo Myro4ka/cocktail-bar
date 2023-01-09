@@ -1,41 +1,32 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page title</title>
+  <title>Cocktails Bar</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;500;600;700;900&family=Roboto:wght@400;700;900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" />
   <link rel="stylesheet" href="./sass/index.scss" />
 </head>
 
 <body>
   <header class="header-section">
-    <!-- <include src="./partials/header.html"></include> -->
+    <include src="./partials/header.html"></include>
+    <include src="./partials/mob-menu.html"></include>
   </header>
   <main>
-    <!-- TODO delete test button -->
-    <button class='test-button' type="button" style="min-width: 250px; height: 100px; color: red; font-size: 30px;">Test button (to be removed) </button>
-    <!-- TODO end -->
-
     <include src="./partials/hero.html"></include>
     <include src="./partials/gallery.html"></include>
-    <include src="./partials/modal.html"></include>
+    <include src="./partials/pagination.html"></include>
+
   </main>
   <footer>
-    <div></div>
+    <include src="./partials/footer.html"></include>
   </footer>
-
+  
   <script type="module" src="./index.js"></script>
-  <!-- <script type="module" src="./js/hero.js"></script> -->
-  <!-- <script type="module" src="./js/coctails.js"></script> -->
-  <script type="module" src="./js/modal-cocktail.js"></script>
-  <script type="module" src="./js/modal-ingredient.js"></script>
-
-  <!--<script src="./js/mobile-menu.js"></script>
-    <script src="./js/modal.js"></script>-->
 </body>
 
 </html>
