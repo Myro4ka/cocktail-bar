@@ -4,19 +4,17 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    padding-top: 27px;
+    padding-top: 20px;
+    overflow-y: scroll;
 
     background-color: $light-primary-color;
 
-    @include tablet {
-        padding-top: 20px;
-    }
-
-    & .container {
+     & .container {
         position: relative;
         height: 100%;
         display: flex;
-        overflow: auto;
+        overflow-y: scroll;
+        
 
         @include tablet {
             flex-direction: row;
@@ -39,9 +37,7 @@
     @include tablet {
       margin-right: 246px;
       padding-top: 13px;
-    }
-    
-    
+    }        
    }
 
     & .switcher-container {
@@ -122,6 +118,13 @@
         @include tablet {
             position: static;
         }
+    }
+    & .footer {
+      display: none;
+
+      @include tablet {
+        display: block;
+      }
     }
    }
 
