@@ -85,7 +85,7 @@ function clickHeroTitel(e) {
     cocktalis(target);
   }
 }
-
+// console.log ('hello')
 heroList.addEventListener('click', clickHeroTitel);
 
 const hiden = createMarkup(arrr);

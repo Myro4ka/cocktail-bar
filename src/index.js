@@ -7,4 +7,4 @@ import './js/gallery';
 import './js/modal-cocktail';
 import './js/modal-ingredient';
 
-import './js/pagination';
+// import './js/pagination';
