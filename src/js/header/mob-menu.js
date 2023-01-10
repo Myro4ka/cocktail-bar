@@ -1,4 +1,6 @@
-import { mobMenuRefs, favorMenuRefs } from '../refs/mob.menu.js';
+import { mobMenuRefs, favorMenuRefs } from './refs/mob-menu.js';
+import { refs } from './refs/mob-menu';
+import { searchCocktailsInput } from './api/search';
 
 (() => {
   mobMenuRefs.menuBtn.addEventListener('click', toggleMenu);
@@ -25,3 +27,15 @@ import { mobMenuRefs, favorMenuRefs } from '../refs/mob.menu.js';
     favorMenuRefs.favorMenu.classList.toggle('is-open');
   });
 })();
+
+refs.mobMenuForm.addEventListener('submit', onMobSubmit);
+
+function onMobSubmit(e) {
+  e.preventDefault();
+
+  let searchQuery = e.target.elements[1].value.trim();
+  searchCocktailsInput(searchQuery);
+  mobMenuRefs.mobileMenu.classList.add('is-hidden');
+  mobMenuRefs.body.classList.toggle('no-scroll');
+  refs.mobMenuForm.reset();
+}

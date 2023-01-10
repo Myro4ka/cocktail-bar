@@ -2,6 +2,8 @@
     text-align: center;
 
     &__title {
+        display: flex;
+        width: 331px;
         margin-bottom: 60px;
         color: #202025;
         font-size: 22px;
