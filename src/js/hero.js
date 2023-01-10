@@ -1,7 +1,5 @@
-import { refst } from './refs';
-
-// import mainFunction from './coctails';
-const coctailsList = document.querySelector('.coctails-section__coctails-list');
+import { refst } from './hero/refs/refs';
+import { cocktalis } from './hero/api/api';
 
 let arrayLength = 0;
 
@@ -12,7 +10,6 @@ const {
   select,
   isHiden,
   heroItem,
-  headerinput,
   herospan,
   coctailTitel,
   cocktalisTitel,
@@ -80,7 +77,6 @@ function createMarkup(e) {
 }
 
 function clickHeroTitel(e) {
-  headerinput.value = ' ';
   const target = e.target.dataset.name;
   const hover = e.target;
   const item = e.currentTarget.querySelectorAll('.hero-button');
@@ -146,31 +142,7 @@ if (innerWidth < 767) {
   }
 }
 
-function cocktalis(name) {
-  const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${name}`;
-  return fetch(URL)
-    .then(response => {
-      if (!response) {
-        throw new Error(response.message);
-      }
-      return response.json();
-    })
-    .then(response => {
-      const { drinks } = response;
-      if (drinks === null) {
-        return responsNull();
-      } else {
-        coctailTitel.classList.add('coctails-section__title');
-        coctailTitel.classList.remove('coctails-section-coctailTitel');
-        coctailsList.classList.remove('coctails-section-hover');
-        cocktalisTitel.innerHTML = '';
-        coctailTitel.textContent = `Searching results`;
-        arrayLength = response.drinks.length;
-        mainFunction(1, URL, arrayLength, coctailsList);
-      }
-    });
-}
-function responsNull() {
+export function responsNull() {
   coctailsList.classList.add('coctails-section-hover');
   cocktalisTitel.innerHTML = '';
   const sorryCocktaili = sorryCocktailFor();
