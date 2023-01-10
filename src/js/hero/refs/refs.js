@@ -7,6 +7,7 @@ export const refst = {
 
   isHiden: document.querySelector('.is-hiden'),
 
+  coctailsTitle: document.querySelector('.gallery__title'),
   coctailsList: document.querySelector('.gallery__list'),
 
   herospan: document.querySelector('.hero-span'),

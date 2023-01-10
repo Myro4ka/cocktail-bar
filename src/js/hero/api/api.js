@@ -1,7 +1,5 @@
-import {responsNull} from '../../hero'
-
-import { refst } from '../refs/refs'; 
-
+import { responsNull } from '../../hero';
+import { refst } from '../refs/refs';
 import mainFunction from '../../gallery';
 
 export function cocktalis(name) {
@@ -18,8 +16,8 @@ export function cocktalis(name) {
       if (drinks === null) {
         return responsNull();
       } else {
-         refst.coctailsList.classList.remove('coctails-section-hover');
-         const arrayLength = response.drinks.length;
+        refst.coctailsTitle.textContent = 'Cocktails';
+        const arrayLength = response.drinks.length;
         mainFunction(1, URL, arrayLength, refst.coctailsList);
       }
     });

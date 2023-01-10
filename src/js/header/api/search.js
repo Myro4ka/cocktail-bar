@@ -11,6 +11,7 @@ export const searchCocktailsInput = async query => {
       if (drinks === null) {
         return responseNull();
       } else {
+        refsSearch.cocktailsTitle.textContent = 'Cocktails';
         const arrayLength = response.drinks.length;
         mainFunction(
           1,
