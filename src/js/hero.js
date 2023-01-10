@@ -1,24 +1,5 @@
-'use strict';
-const refst = {
-  heroList: document.querySelector('.hero-list'),
-  heroTitle: document.querySelector('.hero-text'),
-  hero: document.querySelector('.hero'),
-  select: document.querySelector('.hero-select'),
-
-  isHiden: document.querySelector('.is-hiden'),
-  coctailTitel: document.querySelector('.coctails-section__title'),
-  cocktalisTitel: document.querySelector('.coctails-section__coctails-list'),
-
-  herospan: document.querySelector('.hero-span'),
-  heroBox: document.querySelector('.hero-div'),
-  heroSelect: document.querySelector('.hero-boxList'),
-  heroListUl: document.querySelector('.hero-list__ul'),
-
-  headerinput: document.querySelector('.header-input'),
-};
-
-// import mainFunction from './coctails';
-const coctailsList = document.querySelector('.coctails-section__coctails-list');
+import { refst } from './hero/refs/refs';
+import { cocktalis } from './hero/api/api';
 
 let arrayLength = 0;
 
@@ -29,7 +10,6 @@ const {
   select,
   isHiden,
   heroItem,
-  headerinput,
   herospan,
   coctailTitel,
   cocktalisTitel,
@@ -42,8 +22,8 @@ const heroTitleImg = () => {
   return `<div class="hero-container">
 </div>`;
 };
-
-function creaitMarkapArr(e) {
+createMarkup;
+function createMarkupArr(e) {
   return e.map(e => {
     return `<li class=hero-item >
         <button class=hero-button data-name=${e}>${e}</button>
@@ -90,15 +70,13 @@ const arrr = [
   '0',
 ];
 
-function creaitMarkap(e) {
+function createMarkup(e) {
   return e.map(e => {
     return `<li class=hero-item value=${e} id=${e}>${e}</li>`;
   });
 }
 
 function clickHeroTitel(e) {
-  headerinput.value = ' ';
-
   const target = e.target.dataset.name;
   const hover = e.target;
   const item = e.currentTarget.querySelectorAll('.hero-button');
@@ -112,12 +90,6 @@ function clickHeroTitel(e) {
       }
       e.classList.remove('is-hover');
     });
-    // try {
-    //   const removeTarget = document.querySelector('.is-hover');
-    //   removeTarget.classList.remove('is-hover')
-    //   item.classList.add('is-hover');
-    // } catch {}
-
     hover.classList.add('is-hover');
     cocktalis(target);
   }
@@ -125,8 +97,8 @@ function clickHeroTitel(e) {
 
 heroList.addEventListener('click', clickHeroTitel);
 
-const hiden = creaitMarkap(arrr);
-const markap = creaitMarkapArr(arrr);
+const hiden = createMarkup(arrr);
+const markap = createMarkupArr(arrr);
 const heroWidth = heroTitleImg();
 
 if (innerWidth > 767) {
@@ -144,11 +116,11 @@ if (innerWidth < 767) {
 
   function heroSelectA(e) {
     const heroSvg = document.querySelector('.hero-svg');
-    const HeroSpann = document.querySelector('.hero-span');
+    const heroSpann = document.querySelector('.hero-span');
     const targetMo = e.target;
     if (
       targetMo === heroSelect ||
-      targetMo === HeroSpann ||
+      targetMo === heroSpann ||
       targetMo === heroSvg
     ) {
       heroListUl.classList.remove('is-hiden-select');
@@ -170,36 +142,8 @@ if (innerWidth < 767) {
   }
 }
 
-function cocktalis(name) {
-  const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${name}`;
-  return fetch(URL)
-    .then(response => {
-      if (!response) {
-        throw new Error(response.message);
-      }
-
-      return response.json();
-    })
-    .then(response => {
-      const { drinks } = response;
-      if (drinks === null) {
-        return responsNull();
-      } else {
-        coctailTitel.classList.add('coctails-section__title');
-        coctailTitel.classList.remove('coctails-section-coctailTitel');
-
-        coctailsList.classList.remove('coctails-section-hover');
-        cocktalisTitel.innerHTML = '';
-        coctailTitel.textContent = `Searching results`;
-        arrayLength = response.drinks.length;
-        mainFunction(1, URL, arrayLength, coctailsList);
-      }
-    });
-}
-
-function responsNull() {
+export function responsNull() {
   coctailsList.classList.add('coctails-section-hover');
-
   cocktalisTitel.innerHTML = '';
   const sorryCocktaili = sorryCocktailFor();
 
