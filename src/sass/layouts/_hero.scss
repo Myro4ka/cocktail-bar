@@ -3,7 +3,6 @@
 }
 
 .hero {
-
   &-title {
     font-family: $main-font;
     font-style: normal;
@@ -30,7 +29,6 @@
     font-style: normal;
     align-items: center;
     color: $second-text-color;
-
   }
 }
 
@@ -44,7 +42,6 @@
   display: flex;
   justify-content: center;
 }
-
 
 @include desktop {
   .coctails-section-coctailTitel {
@@ -65,7 +62,6 @@
 
     &__box {
       margin-right: auto;
-
     }
 
     &-container {
@@ -88,7 +84,6 @@
       font-weight: 500;
       font-size: 14px;
       line-height: 28px;
-
     }
 
     &-list {
@@ -97,7 +92,6 @@
       display: flex;
       flex-wrap: wrap;
       height: 120px;
-
     }
 
     &-button {
@@ -112,13 +106,10 @@
   }
 
   .coctails-section__coctails-img {
-
     width: 345px;
     height: 380px;
     background-size: cover;
     background-image: url(../images/frame_desc@2x.png);
-
-
   }
 }
 
@@ -141,7 +132,6 @@
 
     &__box {
       margin-right: auto;
-
     }
 
     &-container {
@@ -215,7 +205,6 @@
     &-item {
       width: 24px;
       height: 25px;
-
     }
 
     &-title {
@@ -270,7 +259,6 @@
       line-height: 135%;
 
       &:hover {
-
         background-color: $accent-color;
         fill: $light-primary-color;
         color: $light-primary-color;
@@ -315,7 +303,6 @@
       height: 34px;
       background: $second-text-color;
       border-radius: 4px;
-
     }
 
     &-item {
@@ -352,11 +339,7 @@
     background-image: url(../images/frame_mob@2x.png);
     margin-bottom: 63px;
   }
-
-  ;
 }
-
-;
 
 .is-hover {
   color: $accent-color;
@@ -364,7 +347,5 @@
 
 .coctails-section-hover {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
-
-;

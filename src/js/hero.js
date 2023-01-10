@@ -5,15 +5,27 @@ const coctailsList = document.querySelector('.coctails-section__coctails-list');
 
 let arrayLength = 0;
 
-const { heroList, heroTitle, hero, select, isHiden,
-  heroItem, headerinput, herospan, coctailTitel, cocktalisTitel, heroBox,
-  heroSelect, heroListUl } = refst;
+const {
+  heroList,
+  heroTitle,
+  hero,
+  select,
+  isHiden,
+  heroItem,
+  headerinput,
+  herospan,
+  coctailTitel,
+  cocktalisTitel,
+  heroBox,
+  heroSelect,
+  heroListUl,
+} = refst;
 
 const heroTitleImg = () => {
   return `<div class="hero-container">
 </div>`;
 };
-createMarkup
+createMarkup;
 function createMarkupArr(e) {
   return e.map(e => {
     return `<li class=hero-item >
@@ -61,7 +73,6 @@ const arrr = [
   '0',
 ];
 
-
 function createMarkup(e) {
   return e.map(e => {
     return `<li class=hero-item value=${e} id=${e}>${e}</li>`;
@@ -69,7 +80,7 @@ function createMarkup(e) {
 }
 
 function clickHeroTitel(e) {
-  headerinput.value = " ";
+  headerinput.value = ' ';
   const target = e.target.dataset.name;
   const hover = e.target;
   const item = e.currentTarget.querySelectorAll('.hero-button');
@@ -78,14 +89,16 @@ function clickHeroTitel(e) {
   }
   if (innerWidth > 767) {
     item.forEach(e => {
-      if (!e.classList.contains('is-hover')) { return }
-      e.classList.remove('is-hover')
+      if (!e.classList.contains('is-hover')) {
+        return;
+      }
+      e.classList.remove('is-hover');
     });
     hover.classList.add('is-hover');
     cocktalis(target);
   }
 }
-// console.log ('hello')
+
 heroList.addEventListener('click', clickHeroTitel);
 
 const hiden = createMarkup(arrr);
@@ -103,31 +116,31 @@ if (innerWidth < 767) {
   heroTitle.insertAdjacentHTML('beforebegin', heroWidth);
   select.insertAdjacentHTML('beforeend', hiden.join(''));
 
-  heroList.addEventListener("click", heroSelectA)
+  heroList.addEventListener('click', heroSelectA);
 
   function heroSelectA(e) {
     const heroSvg = document.querySelector('.hero-svg');
     const heroSpann = document.querySelector('.hero-span');
-    const targetMo = e.target
-    if (targetMo === heroSelect || targetMo === heroSpann || targetMo === heroSvg) {
-      heroListUl.classList.remove("is-hiden-select")
-      heroListUl.classList.add("is-hden-select_display")
+    const targetMo = e.target;
+    if (
+      targetMo === heroSelect ||
+      targetMo === heroSpann ||
+      targetMo === heroSvg
+    ) {
+      heroListUl.classList.remove('is-hiden-select');
+      heroListUl.classList.add('is-hden-select_display');
     } else {
-      heroListUl.classList.add("is-hiden-select")
-      heroListUl.classList.remove("is-hden-select_display")
-
+      heroListUl.classList.add('is-hiden-select');
+      heroListUl.classList.remove('is-hden-select_display');
     }
     const targetValue = e.target;
     if (targetValue) {
-      const targetId = e.target.id
+      const targetId = e.target.id;
 
       if (targetId) {
-        ;
-
         cocktalis(targetId).then(e => {
-          ;
-          herospan.textContent = targetId
-        })
+          herospan.textContent = targetId;
+        });
       }
     }
   }
@@ -143,34 +156,34 @@ function cocktalis(name) {
       return response.json();
     })
     .then(response => {
-      const { drinks } = response
+      const { drinks } = response;
       if (drinks === null) {
-        return responsNull()
+        return responsNull();
       } else {
-        coctailTitel.classList.add("coctails-section__title")
-        coctailTitel.classList.remove("coctails-section-coctailTitel")
-        coctailsList.classList.remove("coctails-section-hover")
+        coctailTitel.classList.add('coctails-section__title');
+        coctailTitel.classList.remove('coctails-section-coctailTitel');
+        coctailsList.classList.remove('coctails-section-hover');
         cocktalisTitel.innerHTML = '';
         coctailTitel.textContent = `Searching results`;
         arrayLength = response.drinks.length;
         mainFunction(1, URL, arrayLength, coctailsList);
       }
     });
-};
+}
 function responsNull() {
-  coctailsList.classList.add("coctails-section-hover");
+  coctailsList.classList.add('coctails-section-hover');
   cocktalisTitel.innerHTML = '';
   const sorryCocktaili = sorryCocktailFor();
 
-  coctailTitel.classList.remove("coctails-section__title")
-  coctailTitel.classList.add("coctails-section-coctailTitel")
+  coctailTitel.classList.remove('coctails-section__title');
+  coctailTitel.classList.add('coctails-section-coctailTitel');
 
   coctailTitel.textContent = `Sorry, we didn't find  any cocktail for you`;
-  cocktalisTitel.innerHTML = sorryCocktaili
-};
+  cocktalisTitel.innerHTML = sorryCocktaili;
+}
 
 function sorryCocktailFor() {
   return `<div class='coctails-section__coctails-img-div'>
   <div class='coctails-section__coctails-img'></div>
-  </div>`
-};
+  </div>`;
+}
