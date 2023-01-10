@@ -1,6 +1,11 @@
-import * as iconModalClose from '../../../images/modal-close.svg'
+import * as iconModalClose from '../../../images/modal-close.svg';
 
-export function renderModalCocktail(id, strDrink, strInstructions, strDrinkThumb, list) {
+export function renderModalCocktail(
+  strDrink,
+  strInstructions,
+  strDrinkThumb,
+  list
+) {
   const markup = `
             <div class="modal js-modal-cocktail">
                 <button class="modal__close-button js-modal-close-cocktail" data-modal-cocktail-close>
@@ -34,15 +39,21 @@ export function renderModalCocktail(id, strDrink, strInstructions, strDrinkThumb
   return markup;
 }
 
-export function renderList(arr) {
-  const markup = arr
-    .map(el => {
-      return `
-        <li class="modal__item" data-ingredient='${el}'>
-          <a class="modal__link js-modal-link" href="#">&sext;${el}</a>
-        </li>
-        `;
-    })
-    .join('');
+export function renderList(resultList, ingredientList) {
+  // console.log(resultList);
+  // console.log(ingredientList);
+
+  let ingredient = '';
+  let markup = '';
+  for (let i = 0; i < ingredientList.length; i += 1) {
+    ingredient = ingredientList[i];
+    // console.log(ingredient);
+    markup += `
+       <li class="modal__item" data-ingredient='${ingredient}'>
+         <a class="modal__link js-modal-link" href="#">&sext;${resultList[i]}</a>
+      </li>
+      `;
+  }
+  //console.log(markup);
   return markup;
 }

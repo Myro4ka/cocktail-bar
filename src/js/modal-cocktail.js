@@ -4,108 +4,89 @@ import {
   modalIngredientRef,
   backdropIngredientRef,
 } from './modal-cocktail/refs/refs';
+
 import { getCocktailById, getIngredientByName } from './modal-cocktail/api/api';
-import { renderList, renderModalCocktail } from './modal-cocktail/render/render';
+
+import {
+  renderList,
+  renderModalCocktail,
+} from './modal-cocktail/render/render';
 
 import { renderModalIngredient } from './modal-ingredient/render/render';
 
-let response = null;
+export async function onLoadMoreClick(event) {
+  try {
+    const id = event.target.dataset.cocktailid;
+    // console.log(id);
 
-export async function onOpenCocktailModal(event) {
-  if (event.target.classList.contains('btn__learn')) {
-    let el = await event.target.closest('[data-cocktailId]');
-    const cocktailId = await el.dataset.cocktailid;
+    const response = await getCocktailById(id);
 
-    response = await getCocktailById(cocktailId);
-
-    modalCocktailRef.classList.remove('is-hidden');
-    window.addEventListener('keydown', onEscKeyPress);
-
-    let cocktailTitle = response.drinks[0].strDrink;
-    let cocktailInstructions = response.drinks[0].strInstructions;
-    let cocktailImage = response.drinks[0].strDrinkThumb;
-    let list = makeList(response);
-
-    let listMarkup = await renderList(list.resultList);
-
-    insertMarkup(
-      cocktailId,
-      cocktailTitle,
-      cocktailInstructions,
-      cocktailImage,
-      listMarkup
-    );
+    openCocktailModal(response);
+  } catch (error) {
+    console.log(error);
   }
+}
 
-  if (event.target.classList.contains('modal__link')) {
-    modalIngredientRef.classList.remove('is-hidden');
-    console.log(response);
-    try {
-      for (let key in response.drinks[0]) {
-        if (
-          key.includes('strIngredient') &&
-          response.drinks[0][key] !== null &&
-          response.drinks[0][key] !== '' &&
-          event.target.textContent.includes(response.drinks[0][key])
-        ) {
-          let cocktailIngredient = await getIngredientByName(
-            response.drinks[0][key]
-          );
+async function openCocktailModal(response) {
+  modalCocktailRef.classList.remove('is-hidden');
+  window.addEventListener('keydown', onEscKeyPress);
 
-          const ingredient = await cocktailIngredient.ingredients[0];
+  // console.log(response);
 
-          const ingredientTitle = ingredient.strIngredient;
-          const ingredientType = ingredient.strType || 'no information';
-          const ingredientDescription =
-            ingredient.strDescription || 'no information';
+  let cocktailTitle = response.drinks[0].strDrink;
+  let cocktailInstructions = response.drinks[0].strInstructions;
+  let cocktailImage = response.drinks[0].strDrinkThumb;
 
-          let ingredientAlcohol = '';
-          ingredient.strABV + ' %' || 'no information';
-          if (
-            ingredient.strAlcohol.toLowerCase() === 'yes' &&
-            ingredient.strABV
-          ) {
-            ingredientAlcohol = `${ingredient.strABV} %`;
-          } else {
-            ingredientAlcohol = 'no information';
-          }
+  let list = makeList(response);
+  let listMarkup = renderList(list.resultList, list.modIngredientsList);
 
-          if (ingredient.strAlcohol.toLowerCase() === 'no') {
-            ingredientAlcohol = `no alcohol`;
-          }
+  insertMarkup(cocktailTitle, cocktailInstructions, cocktailImage, listMarkup);
 
-          backdropIngredientRef.innerHTML = renderModalIngredient(
-            ingredientTitle,
-            ingredientType,
-            ingredientDescription,
-            ingredientAlcohol
-          );
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    return;
-  }
+  const modalCloseBtn = document.querySelector('.js-modal-close-cocktail');
+  modalCloseBtn.addEventListener('click', onCloseModalCocktail);
 
+  const modalCocktailList = document.querySelector(
+    '.js-modal-list-ingredients'
+  );
+  modalCocktailList.addEventListener('click', onListClick);
+}
+
+async function onListClick(event) {
+  let el = await event.target.closest('[data-ingredient]');
+  // console.log(el);
+  let dataIngredient = el.dataset.ingredient;
+  // console.log('datIngredient:', dataIngredient);
+  const response = await getIngredientByName(dataIngredient);
+  //console.log('response ingredient', response.ingredients[0]);
+
+  const ingredientTitle = response.ingredients[0].strIngredient;
+  const ingredientType = response.ingredients[0].strType || 'no information';
+  const ingredientDescription =
+    response.ingredients[0].strDescription || 'no information';
+
+  let ingredientAlcohol = '';
+  response.ingredients[0].strABV + ' %' || 'no information';
   if (
-    event.target.classList.contains('js-modal-close-cocktail') ||
-    event.target.classList.contains('js-modal-icon-cocktail') ||
-    event.target.classList.contains('js-backdrop-cocktail')
+    response.ingredients[0].strAlcohol.toLowerCase() === 'yes' &&
+    response.ingredients[0].strABV
   ) {
-    onCloseModalCocktail();
-    return;
+    ingredientAlcohol = `${response.ingredients[0].strABV} %`;
+  } else {
+    ingredientAlcohol = 'no information';
   }
 
-  if (
-    event.target.classList.contains('modal__close-button-ingredient') ||
-    event.target.classList.contains('modal__icon--ingredient') ||
-    event.target.classList.contains('js-backdrop-ingredient')
-  ) {
-    onCloseModalIngredient();
-    window.removeEventListener('keydown', onEscKeyPress);
-    return;
+  if (response.ingredients[0].strAlcohol.toLowerCase() === 'no') {
+    ingredientAlcohol = `no alcohol`;
   }
+
+  modalIngredientRef.classList.remove('is-hidden');
+
+  backdropIngredientRef.innerHTML = renderModalIngredient(
+    ingredientTitle,
+    ingredientType,
+    ingredientDescription,
+    ingredientAlcohol
+  );
 }
 
 export function makeList(cocktail) {
@@ -138,9 +119,9 @@ export function makeList(cocktail) {
     resultList.push(b + ' ' + a);
   }
 
-  console.log(modQuantityList); //!+++++++++++++++
-  console.log(modIngredientsList); //!+++++++++++++++
-  console.log(resultList); //!+++++++++++++++
+  // console.log(modQuantityList); //!+++++++++++++++
+  // console.log(modIngredientsList); //!+++++++++++++++
+  // console.log(resultList); //!+++++++++++++++
 
   return { resultList: resultList, modIngredientsList: modIngredientsList };
 }
@@ -184,6 +165,24 @@ function onCloseModalCocktail() {
   modalCocktailRef.classList.add('is-hidden');
 }
 
-function getData() {}
+function toggleModal() {
+  modalCocktailRef.classList.toggle('is-hidden');
+}
 
-modalCocktailRef.addEventListener('click', onOpenCocktailModal);
+backdropCocktailRef.addEventListener('click', event => {
+  if (
+    event.target.classList.contains('js-modal-close-cocktail') ||
+    event.target.classList.contains('js-modal-icon-cocktail') ||
+    event.target.classList.contains('js-backdrop-cocktail')
+  ) {
+    onCloseModalCocktail();
+  }
+  if (
+    event.target.classList.contains('modal__close-button-ingredient') ||
+    event.target.classList.contains('modal__icon--ingredient') ||
+    event.target.classList.contains('js-backdrop-ingredient')
+  ) {
+    onCloseModalIngredient();
+    window.removeEventListener('keydown', onEscKeyPress);
+  }
+});
