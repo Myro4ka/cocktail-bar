@@ -23,11 +23,13 @@
 
 .modal {
   position: absolute;
-  top: 8%;
+  // top: 8%;
   left: 50%;
 
   width: 320px;
-  /* height: 956px; */
+  // height: 956px;
+  // max-height: 100%;
+  overflow: auto;
   padding: 40px 20px;
 
   display: flex;
@@ -40,9 +42,11 @@
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @media screen and (min-width: 768px) {
+    // top: 8%;
     width: 100vw;
     max-width: 822px;
-    min-height: 598px;
+    // height: 598px;
+    // max-height: 100%;
     padding: 40px 28px;
 
     &--ingredient {
