@@ -31,8 +31,9 @@ export async function onLoadMoreClick(event) {
 
 async function openCocktailModal(response) {
   modalCocktailRef.classList.remove('is-hidden');
+  document.body.style.overflow = "hidden";
   window.addEventListener('keydown', onEscKeyPress);
-
+ document.body
   // console.log(response);
 
   let cocktailTitle = response.drinks[0].strDrink;
@@ -167,6 +168,7 @@ function onCloseModalIngredient() {
 
 function onCloseModalCocktail() {
   modalCocktailRef.classList.add('is-hidden');
+  document.body.style.overflow = "visible";
 }
 
 function toggleModal() {
