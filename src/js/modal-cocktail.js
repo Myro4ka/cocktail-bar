@@ -18,8 +18,6 @@ export async function onLoadMoreClick(event) {
   try {
     // console.log(event.target.classList);
     if (!event.target.classList.contains('btn__learn')) return;
-    // console.log(event.target.classList);
-    if (!event.target.classList.contains('btn__learn')) return;
     const id = event.target.dataset.cocktailid;
     // console.log(id);
 
@@ -35,7 +33,7 @@ async function openCocktailModal(response) {
   modalCocktailRef.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', onEscKeyPress);
- document.body
+
   // console.log(response);
 
   let cocktailTitle = response.drinks[0].strDrink;
@@ -66,7 +64,6 @@ async function onListClick(event) {
   let dataIngredient = el.dataset.ingredient;
   // console.log('datIngredient:', dataIngredient);
   const response = await getIngredientByName(dataIngredient);
-  // console.log('response ingredient', response.ingredients[0]);
   // console.log('response ingredient', response.ingredients[0]);
 
   const ingredientTitle = response.ingredients[0].strIngredient;
@@ -136,9 +133,6 @@ export function makeList(cocktail) {
     resultList.push(b + ' ' + a);
   }
 
-  // console.log(modQuantityList);
-  // console.log(modIngredientsList);
-  // console.log(resultList);
   // console.log(modQuantityList);
   // console.log(modIngredientsList);
   // console.log(resultList);
