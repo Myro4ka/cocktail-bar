@@ -4,8 +4,7 @@ import { sendData, getData, setCoctails, setIngrid, deleteIngrid } from './api';
 import { oNsignInWithPopup, signOutUser } from './api/auth';
 
 // Сабмит получение данных
-async function onSubmit(e) {
-  e.preventDefault();
+async function oNaddClick(e) {
   const value = e.target.message.value.trim();
   if (!value) return;
   try {
@@ -49,4 +48,5 @@ setTimeout(() => {
 
 // formRef.addEventListener('submit', onSubmit);
 loginBtnRef.addEventListener('click', oNsignInWithPopup);
+// addLikeBtn.addEventListener('click', oNaddClick);
 // signOutBtnRef.addEventListener('click', signOutUser);
