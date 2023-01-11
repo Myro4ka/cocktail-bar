@@ -1,15 +1,14 @@
 import sprite from '../images/symbol-defs.svg';
+
 refs = {
   pagination: document.querySelector('.pagination'),
 };
-async function getData() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const data = await response.json();
-  return data;
-}
-async function main() {
-  const postsData = await getData();
+
+export function main(postsData) {
+  refs.pagination.classList.remove('visually-hidden');
+  console.log(postsData);
   let currentPage = 1;
+  let page = 1;
   let rows;
   if (window.innerWidth < 768) {
     rows = 3;
@@ -20,21 +19,39 @@ async function main() {
   }
   const pagesCount = Math.ceil(postsData.length / rows);
   function displayList(arrData, rowPerPage, page) {
-    const postsEl = document.querySelector('.posts');
+    const postsEl = document.querySelector('.gallery__list');
     postsEl.innerHTML = '';
     page--;
     const start = rowPerPage * page;
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
-    paginatedData.forEach(el => {
-      const postEl = document.createElement('div');
-      postEl.classList.add('post');
-      postEl.innerText = `${el.title}`;
-      postsEl.appendChild(postEl);
-    });
+    paginatedData.forEach(
+      ({ strDrink, strDrinkThumb, idDrink, coctailNumber }) => {
+        coctailNumber = 0;
+        postsEl.innerHTML += `<li class="gallery__item">
+                <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}" width="280" height="280" />
+                <div class="gallery__card">
+                    <h3 class="gallery__card-title">${strDrink}</h3>
+                    <div class="gallery__card-btns">
+                        <button class="btn__learn coctails-section__learn-button" type="button" data-cocktailId = ${idDrink}>Learn more</button>
+                        <button class="btn__add coctails-section__like-button" type="button" id="likeBtn${coctailNumber}">
+                            Add to
+                            <svg class="btn__svg" width="18" height="18">
+                                <use href="./images/symbol-defs.svg#icon-Heart-mobile"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </li> `;
+      }
+    );
   }
   function displayPagination(arrData, rowPerPage) {
     const paginationEl = document.querySelector('.pagination');
+    if (arrData.length <= 9) {
+      paginationEl.classList.add('visually-hidden');
+      return;
+    }
     paginationEl.innerHTML = '';
     const pagesCount = Math.ceil(arrData.length / rowPerPage);
     const ulEl = document.createElement('ul');
@@ -143,7 +160,6 @@ async function main() {
     }
     displayList(postsData, rows, currentPage);
     displayPagination(postsData, rows);
-    //
   });
   function displaySeparator() {
     const liEl = document.createElement('li');
@@ -152,10 +168,8 @@ async function main() {
         <use href="${sprite + '#icon-three_points'}"></use>
       </svg>`;
     liEl.innerHTML += liElSvg;
-    // liEl.innerText = '...';
     return liEl;
   }
   displayList(postsData, rows, currentPage);
   displayPagination(postsData, rows);
 }
-main();

@@ -19,6 +19,7 @@ testButtonRef.addEventListener('click', onOpenIngredientModal);
 async function onOpenIngredientModal(event) {
   window.addEventListener('keydown', onEscKeyPress);
   modalIngredientRef.classList.remove('is-hidden');
+  document.body.style.overflow = "hidden";
 
   try {
     let el = await event.target.closest('[data-ingredientId]');
@@ -59,6 +60,7 @@ export async function onCloseIngredientModal(event) {
     event.target.classList.contains('js-backdrop-ingredient')
   ) {
     modalIngredientRef.classList.add('is-hidden');
+    document.body.style.overflow = "visible";
   }
 }
 

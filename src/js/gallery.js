@@ -1,7 +1,7 @@
 import { refs } from './gallery/refs/refs';
 import { coctailCardMarkup } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
-import { onOpenCocktailModal } from './modal-cocktail';
+import { onLoadMoreClick } from './modal-cocktail';
 
 let coctailsAmount = 0;
 // переменная для идентификации кнопок коктейля
@@ -69,4 +69,4 @@ mainFunction(
   refs.coctailsList
 );
 
-refs.coctailsList.addEventListener('click', onOpenCocktailModal);
+refs.coctailsList.addEventListener('click', onLoadMoreClick);
