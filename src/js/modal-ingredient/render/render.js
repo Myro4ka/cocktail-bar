@@ -1,3 +1,4 @@
+import * as iconModalClose from '../../../images/symbol-defs.svg';
 export function renderModalIngredient(
   ingredient = '',
   type = '',
@@ -8,7 +9,7 @@ export function renderModalIngredient(
             <div class="modal modal--ingredient ">
               <button class="modal__close-button modal__close-button-ingredient js-modal-close-ingredient" data-modal-ingredient-close>
                   <svg class="modal__icon js-modal-icon-ingredient" width="32" height="32">
-                      <use href="./img/modal-close.svg" />
+                      <use href="${iconModalClose}#icon-close-line" />
                   </svg>
               </button>
   
@@ -34,4 +35,3 @@ export function renderModalIngredient(
           `;
   return markup;
 }
-
