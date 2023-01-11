@@ -1,3 +1,5 @@
+import sprite from '../../../images/symbol-defs.svg'
+import img from '../../../images/frame_desc.png'
 export const coctailCardMarkup = (
   markupPlace = '',
   cocktailName = '',
@@ -13,11 +15,18 @@ export const coctailCardMarkup = (
                         <button class="btn__learn coctails-section__learn-button" type="button" data-cocktailId = ${cocktailId}>Learn more</button>
                         <button class="btn__add coctails-section__like-button" type="button" id="likeBtn${coctailNumber}">
                             Add to
-                            <svg class="btn__svg" width="18" height="18">
-                                <use href="./images/symbol-defs.svg#icon-Heart-mobile"></use>
-                            </svg>
+                            ${svgHeart}
                         </button>
                     </div>
                 </div>
             </li> `
 }
+
+export const resNotFound = `<picture class="products__notFoundImage">
+                <source srcset="${img}" media="(min-width: 1200px)"/>
+                <source srcset="${img}" media="(min-width: 768px)"/>
+                <img width="270" srcset=" ${img}1x, ${img} 2x, ${img}3x" src="${img}" alt="cafe"/>
+            </picture>`;
+
+export const svgHeart = `  <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-heart"></use> </svg>`;
+export const svgHeartFull = `  <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-addheart"></use> </svg>`;
