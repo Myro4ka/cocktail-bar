@@ -18,6 +18,7 @@ export const oNsignInWithPopup = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      console.log(user.uid);
       // ...
     })
     .catch(error => {
@@ -35,12 +36,12 @@ export const signOutUser = () => {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
-      console.log(auth);
+      // console.log(auth);
     })
     .catch(error => {
       // An error happened.
     });
 };
 onAuthStateChanged(auth, user => {
-  console.log('user :>> ', user);
+  console.log('user :>> ', user.uid);
 });
