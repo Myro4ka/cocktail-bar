@@ -2,21 +2,24 @@
     text-align: center;
 
     &__title {
-        margin-bottom: 60px;
+        margin: 0 auto 60px;
+        width: 100%;
         color: #202025;
         font-size: 22px;
         line-height: 1.9;
         font-weight: 600;
 
         @include tablet {
+            width: 331px;
             font-family: 'Roboto';
             font-size: 32px;
-            line-height: 1.9;
+            line-height: 1.31;
             font-weight: 700;
            
         }
 
         @include desktop {
+            width: 493px;
             font-family: 'Poppins';
             font-size: 48px;
             line-height: 1.5;

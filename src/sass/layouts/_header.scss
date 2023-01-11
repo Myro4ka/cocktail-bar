@@ -3,11 +3,21 @@
 }
 
 .header-wrap {
-    @include flex(space-between);
 
-    // @include tablet {
-    //     @include flex(space-between);
-    // }
+  & .auth {
+    display: flex;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+
+    &:hover,
+    &:focus{
+      border-radius: 50%;
+      outline: none;
+      box-shadow: 0 0 3px $accent-color;
+    }
+  }
+    @include flex(space-between);
 }
 
 .nav {

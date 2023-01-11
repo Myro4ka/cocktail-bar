@@ -143,18 +143,11 @@ if (innerWidth < 767) {
 }
 
 export function responsNull() {
-  coctailsList.classList.add('coctails-section-hover');
-  cocktalisTitel.innerHTML = '';
-  const sorryCocktaili = sorryCocktailFor();
-
-  coctailTitel.classList.remove('coctails-section__title');
-  coctailTitel.classList.add('coctails-section-coctailTitel');
-
-  coctailTitel.textContent = `Sorry, we didn't find  any cocktail for you`;
-  cocktalisTitel.innerHTML = sorryCocktaili;
+  refst.coctailsTitle.textContent = `Sorry, we didn't find any cocktail for you`;
+  refst.coctailsList.innerHTML = createMarkupNullCocktail();
 }
 
-function sorryCocktailFor() {
+function createMarkupNullCocktail() {
   return `<div class='coctails-section__coctails-img-div'>
   <div class='coctails-section__coctails-img'></div>
   </div>`;
