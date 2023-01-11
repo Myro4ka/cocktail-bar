@@ -141,14 +141,3 @@ if (innerWidth < 767) {
     }
   }
 }
-
-export function responsNull() {
-  refst.coctailsTitle.textContent = `Sorry, we didn't find any cocktail for you`;
-  refst.coctailsList.innerHTML = createMarkupNullCocktail();
-}
-
-function createMarkupNullCocktail() {
-  return `<div class='coctails-section__coctails-img-div'>
-  <div class='coctails-section__coctails-img'></div>
-  </div>`;
-}
