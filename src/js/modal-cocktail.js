@@ -16,6 +16,8 @@ import { renderModalIngredient } from './modal-ingredient/render/render';
 
 export async function onLoadMoreClick(event) {
   try {
+    // console.log(event.target.classList);
+    if (!event.target.classList.contains('btn__learn')) return;
     const id = event.target.dataset.cocktailid;
     // console.log(id);
 
@@ -29,8 +31,9 @@ export async function onLoadMoreClick(event) {
 
 async function openCocktailModal(response) {
   modalCocktailRef.classList.remove('is-hidden');
+  document.body.style.overflow = "hidden";
   window.addEventListener('keydown', onEscKeyPress);
-
+ document.body
   // console.log(response);
 
   let cocktailTitle = response.drinks[0].strDrink;
@@ -52,12 +55,14 @@ async function openCocktailModal(response) {
 }
 
 async function onListClick(event) {
+ if (!event.target.classList.contains('js-modal-link')) return;
+  // console.log(event.target);
   let el = await event.target.closest('[data-ingredient]');
   // console.log(el);
   let dataIngredient = el.dataset.ingredient;
   // console.log('datIngredient:', dataIngredient);
   const response = await getIngredientByName(dataIngredient);
-  //console.log('response ingredient', response.ingredients[0]);
+  // console.log('response ingredient', response.ingredients[0]);
 
   const ingredientTitle = response.ingredients[0].strIngredient;
   const ingredientType = response.ingredients[0].strType || 'no information';
@@ -119,9 +124,9 @@ export function makeList(cocktail) {
     resultList.push(b + ' ' + a);
   }
 
-  // console.log(modQuantityList); //!+++++++++++++++
-  // console.log(modIngredientsList); //!+++++++++++++++
-  // console.log(resultList); //!+++++++++++++++
+  // console.log(modQuantityList);
+  // console.log(modIngredientsList);
+  // console.log(resultList);
 
   return { resultList: resultList, modIngredientsList: modIngredientsList };
 }
@@ -163,6 +168,7 @@ function onCloseModalIngredient() {
 
 function onCloseModalCocktail() {
   modalCocktailRef.classList.add('is-hidden');
+  document.body.style.overflow = "visible";
 }
 
 function toggleModal() {

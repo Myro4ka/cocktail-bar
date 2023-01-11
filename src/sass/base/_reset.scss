@@ -1,31 +1,31 @@
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
-    font-family: $main-font;
-    color: $dark-primary-color;
-    margin: 0;
+  font-family: $main-font;
+  color: $dark-primary-color;
+  margin: 0;
 
-    background-color: $light-primary-color;
+  background-color: $light-primary-color;
 
-    &.no-scroll {
-        overflow: hidden;
-    }
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 .theme-light {
-    --color-primary: $light-primary-color;
- }
+  --color-primary: $light-primary-color;
+}
 
 .theme-dark {
-    --color-primary: $dark-primary-color;
+  --color-primary: $dark-primary-color;
 }
 
 h1,
@@ -35,43 +35,57 @@ h4,
 h5,
 h6,
 p {
-    margin: 0;
+  margin: 0;
 }
 
 ul,
 ol,
 li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
-section {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 60px;
-    padding-bottom: 60px;
 
-    @include tablet {
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
+.section {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+
+  @include tablet {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
 }

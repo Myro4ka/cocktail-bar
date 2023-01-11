@@ -1,9 +1,11 @@
-import { responsNull } from '../../hero';
 import { refst } from '../refs/refs';
-import mainFunction from '../../gallery';
+import { main } from '../../pagination';
+import { responseNull } from '../../gallery/render/response_null';
+
+const BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
 export function cocktalis(name) {
-  const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${name}`;
+  const URL = `${BASE_URL}search.php?f=${name}`;
   return fetch(URL)
     .then(response => {
       if (!response) {
@@ -14,11 +16,10 @@ export function cocktalis(name) {
     .then(response => {
       const { drinks } = response;
       if (drinks === null) {
-        return responsNull();
+        return responseNull();
       } else {
         refst.coctailsTitle.textContent = 'Cocktails';
-        const arrayLength = response.drinks.length;
-        mainFunction(1, URL, arrayLength, refst.coctailsList);
+        main(drinks);
       }
     });
 }
