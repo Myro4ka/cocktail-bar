@@ -25,6 +25,8 @@ const getCocktailsAmount = section => {
 
 getCocktailsAmount(refs.coctailsSection);
 
+
+
 export default function mainFunction(
   searchIn,
   searchLink,

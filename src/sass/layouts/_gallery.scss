@@ -48,10 +48,13 @@
 
         @include tablet {
             width: calc((100% - 32px) / 2);
+            height: 541px;
         }
 
        @include desktop {
             width: calc((100% - 64px) / 3);
+            height: 556px;
+
         }
     }
 
