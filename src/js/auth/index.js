@@ -6,20 +6,22 @@ import {
   signOutBtnRef,
   addLikeBtn,
 } from './refs';
-import { sendData, getData, setCoctail, setIngrid, deleteIngrid } from './api';
-import { oNsignInWithPopup, signOutUser } from './api/auth';
+import { getData, setCoctail, setIngrid, deleteIngrid } from './api';
+import { auth } from './api/auth';
+import Notiflix from 'notiflix';
 
-// console.log(addBtn);
 // Сабмит получение данных
 export function oNaddClick(e) {
-  console.log(e.target.previousElementSibling);
   if (!e.target.classList.contains('btn__add')) return;
-  const coctailId = e.target.previousElementSibling.dataset.cocktailid;
-  console.log(coctailId);
-  setCoctail(coctailId);
-  // const value = e.target.message.value.trim();
-  // if (!value) return;
+  if (!auth) {
+    // return Notiflix.Notify('Log in, please!');
+    return;
+  }
   try {
+    const coctailId = e.target.previousElementSibling.dataset.cocktailid;
+    console.log(coctailId);
+
+    setCoctail(coctailId);
     // const data = createDataObj(value);
     // console.log(data);
     //   передаем данные отправляем в базу данных
@@ -31,9 +33,9 @@ export function oNaddClick(e) {
 }
 
 // создание обьекта
-function createDataObj(value) {
-  return { value, checked: false };
-}
+// function createDataObj(value) {
+//   return { value, checked: false };
+// }
 // Возвращение данных (промис)
 // setTimeout(() => {
 //   getData()

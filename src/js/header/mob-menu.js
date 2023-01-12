@@ -1,6 +1,12 @@
-import { mobMenuRefs, favorMenuRefs } from './refs/mob-menu.js';
-import { refs, favorMenuRefs, favorMobMenuRefs } from './refs/mob-menu';
+import {
+  refs,
+  mobMenuRefs,
+  favorMenuRefs,
+  favorMobMenuRefs,
+} from './refs/mob-menu';
 import { searchCocktailsInput } from './api/search';
+import { auth } from '../auth/api/auth.js';
+import { onAuthStateChanged } from '@firebase/auth';
 
 (() => {
   mobMenuRefs.menuBtn.addEventListener('click', toggleMenu);
@@ -17,16 +23,22 @@ import { searchCocktailsInput } from './api/search';
   }
 })();
 
-(() => {
-  favorMenuRefs.favorBtn.addEventListener('click', () => {
-    const expanded =
-      favorMenuRefs.favorBtn.getAttribute('aria-expanded') === 'true' || false;
-    favorMenuRefs.favorBtn.closest('.nav-item').classList.toggle('is-open');
-    favorMenuRefs.favorBtn.setAttribute('aria-expanded', !expanded);
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    favorMenuRefs.favorBtn.removeEventListener('click', onFavorBtn);
+    return;
+  }
+  favorMenuRefs.favorBtn.addEventListener('click', onFavorBtn);
+});
 
-    favorMenuRefs.favorMenu.classList.toggle('is-open');
-  });
-})();
+function onFavorBtn(e) {
+  const expanded =
+    favorMenuRefs.favorBtn.getAttribute('aria-expanded') === 'true' || false;
+  favorMenuRefs.favorBtn.closest('.nav-item').classList.toggle('is-open');
+  favorMenuRefs.favorBtn.setAttribute('aria-expanded', !expanded);
+
+  favorMenuRefs.favorMenu.classList.toggle('is-open');
+}
 
 (() => {
   favorMobMenuRefs.favorMobBtn.addEventListener('click', () => {
