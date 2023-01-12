@@ -1,52 +1,67 @@
 // import './css/style.css';
-import { listRef, formRef, loginBtnRef, signOutBtnRef } from './refs';
-import { sendData, getData, setCoctails, setIngrid, deleteIngrid } from './api';
-import { oNsignInWithPopup, signOutUser } from './api/auth';
+import {
+  listRef,
+  formRef,
+  loginBtnRef,
+  signOutBtnRef,
+  addLikeBtn,
+} from './refs';
+import { getData, setCoctail, setIngrid, deleteIngrid } from './api';
+import { auth } from './api/auth';
+import Notiflix from 'notiflix';
 
 // Сабмит получение данных
-async function oNaddClick(e) {
-  const value = e.target.message.value.trim();
-  if (!value) return;
+export function oNaddClick(e) {
+  if (!e.target.classList.contains('btn__add')) return;
+  if (!auth) {
+    // return Notiflix.Notify('Log in, please!');
+    return;
+  }
   try {
-    const data = createDataObj(value);
-    console.log(data);
+    const coctailId = e.target.previousElementSibling.dataset.cocktailid;
+    console.log(coctailId);
+
+    setCoctail(coctailId);
+    // const data = createDataObj(value);
+    // console.log(data);
     //   передаем данные отправляем в базу данных
-    sendData(data);
+    // sendData(data);
   } catch (error) {
     console.log(error);
   }
-  e.target.reset();
+  // e.target.reset();
 }
+
 // создание обьекта
-function createDataObj(value) {
-  return { value, checked: false };
-}
+// function createDataObj(value) {
+//   return { value, checked: false };
+// }
 // Возвращение данных (промис)
-setTimeout(() => {
-  getData()
-    .then(response => {
-      const array = [];
-      //  Получаем массив масива, destryktyruzacuya
-      Object.entries(response).forEach(([key, value]) => {
-        //Добавить key from firebase
-        console.log(value);
-        value.id = key;
-        array.push(value);
-        console.log(key);
-      });
-
-      // получаем массив
-      console.log(array);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  setCoctails(Date.now());
-  setIngrid(Date.now());
-  deleteIngrid(1673444181120);
-}, 2000);
-
+// setTimeout(() => {
+//   getData()
+//     .then(response => {
+//       const array = [];
+//       //  Получаем массив масива, destryktyruzacuya
+//       Object.entries(response).forEach(([key, value]) => {
+//         //Добавить key from firebase
+//         console.log(value);
+//         value.id = key;
+//         array.push(value);
+//         console.log(key);
+//       });
+//       // получаем массив
+//       console.log(array);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+//   setCoctail(Date.now());
+//   setIngrid(Date.now());
+//   deleteIngrid(1673444181120);
+// }, 2000);
+// addBtn.addEventListener('click', oNaddClick);
 // formRef.addEventListener('submit', onSubmit);
-loginBtnRef.addEventListener('click', oNsignInWithPopup);
+
+// loginBtnRef.addEventListener('click', oNsignInWithPopup);
 // addLikeBtn.addEventListener('click', oNaddClick);
 // signOutBtnRef.addEventListener('click', signOutUser);

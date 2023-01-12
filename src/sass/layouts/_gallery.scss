@@ -48,10 +48,13 @@
 
         @include tablet {
             width: calc((100% - 32px) / 2);
+            height: 541px;
         }
 
        @include desktop {
             width: calc((100% - 64px) / 3);
+            height: 556px;
+
         }
     }
 
@@ -62,6 +65,7 @@
 
         @include tablet {
             margin-bottom: 20px;
+            height: 395px;
         }
     }
 
@@ -167,4 +171,7 @@
     top: 50%;
     transform: translate(0, -50%);
     right: 20%;
+}
+.coctails-section__coctails-img-div{
+    margin: 0 auto;
 }

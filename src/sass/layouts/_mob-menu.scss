@@ -1,130 +1,176 @@
 .mob-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20px;
+  overflow-y: scroll;
+
+  background-color: $light-primary-color;
+
+  & .container {
+    position: relative;
+    height: 100%;
+    display: flex;
     overflow-y: scroll;
 
-    background-color: $light-primary-color;
-
-     & .container {
-        position: relative;
-        height: 100%;
-        display: flex;
-        overflow-y: scroll;
-        
-
-        @include tablet {
-            flex-direction: row;
-        }
-
-        & .logo {
-          display: none;
-
-          @include tablet {
-            display: block;
-            margin-right: 150px;
-          }
-        }
-    }
-
-   & .container-menu {
-    display: flex;
-    flex-direction: column;
-    
     @include tablet {
-      margin-right: 246px;
-      padding-top: 13px;
-    }        
-   }
-
-    & .switcher-container {
-        @include flex(space-between);
-
-        @include tablet {
-            align-items: flex-start
-        }
+      flex-direction: row;
     }
 
-    & .search-form {
-        @include flex(center);
-        width: 280px;
-        height: 40px;
-        margin-bottom: 40px;
-        padding: 0;
-            
-        border: 1px solid $accent-color;
-        border-radius: 4px;
-
-        @include tablet {
-            display: none;
-        }
-    }
-
-    &.is-hidden {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;        
-    }
-
-    &__list {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-
-        @include tablet {
-            gap: 40px;
-        }
-
-        & button {
-          display: flex;
-          align-items: flex-end;
-          padding: 0;
-
-          background-color: inherit;
-          border: none;
-          outline: none;
-        }
-    }
-    
-    &__item {
-        color: $dark-primary-color;
-        font-size: 28px;
-        line-height: 24px;
-        letter-spacing: 0.02em;
-
-        &:hover,
-        &:focus {
-            color: $accent-color;
-            outline: none;
-        }
-
-    &.is-open .favorites-list {
-      display: block;
-    }
-    }
-
-    @include desktop {
-        display: none;
-    }
-
-    & .close-btn {
-        position: absolute;
-        top: 0;
-        right: 20px;
-
-        @include tablet {
-            position: static;
-        }
-    }
-    & .footer {
+    & .logo {
       display: none;
 
       @include tablet {
         display: block;
+        margin-right: 150px;
       }
     }
-   }
+  }
 
+  & .container-menu {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      margin-right: 246px;
+      padding-top: 13px;
+    }
+  }
+
+  & .switcher-container {
+    @include flex(space-between);
+
+    @include tablet {
+      align-items: flex-start;
+    }
+  }
+
+  & .search-form {
+    @include flex(center);
+    width: 280px;
+    height: 40px;
+    margin-bottom: 40px;
+    padding: 0;
+
+    border: 1px solid $accent-color;
+    border-radius: 4px;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include tablet {
+      gap: 40px;
+    }
+
+    & button {
+      display: flex;
+      align-items: flex-end;
+      padding: 0;
+
+      background-color: inherit;
+      border: none;
+      outline: none;
+    }
+  }
+
+  &__item {
+    color: $dark-primary-color;
+    font-size: 28px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+
+    &:hover,
+    &:focus {
+      color: $accent-color;
+      outline: none;
+    }
+  }
+
+  & .favorites {
+    position: relative;
+  }
+
+  & .favorites-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 210px;
+    margin: 0;
+
+    border: 1px solid $accent-color;
+    border-radius: 4px;
+
+    & li {
+      margin: 0;
+      padding: 12px;
+
+      font-family: $main-font;
+      font-size: 18px;
+      line-height: 1.33;
+      color: $dark-primary-color;
+
+      &:hover,
+      &:focus {
+        color: $light-primary-color;
+        background-color: $accent-color;
+      }
+    }
+
+    & a {
+      width: 100%;
+      // padding: 0;
+      outline: none;
+
+      &:hover,
+      &:focus {
+        color: $light-primary-color;
+        background-color: $accent-color;
+      }
+    }
+
+    & button:focus {
+      color: $light-accent-color;
+    }
+  }
+
+  & .favorites.is-open .favorites-list {
+    display: block;
+  }
+
+  @include desktop {
+    display: none;
+  }
+
+  & .close-btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+
+    @include tablet {
+      position: static;
+    }
+  }
+  & .footer {
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+  }
+}

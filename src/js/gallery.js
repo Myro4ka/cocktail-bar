@@ -2,6 +2,7 @@ import { refs } from './gallery/refs/refs';
 import { coctailCardMarkup } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
 import { onLoadMoreClick } from './modal-cocktail';
+import { oNaddClick } from './auth';
 
 let coctailsAmount = 0;
 // переменная для идентификации кнопок коктейля
@@ -11,7 +12,7 @@ let storageKey = 0;
 
 let searchIn = 0;
 
-const getCocktailsAmount = section => {
+export const getCocktailsAmount = section => {
   if (!section) return;
   const coctailsSectionStyles = getComputedStyle(section);
   if (coctailsSectionStyles.width === '320px') {
@@ -22,7 +23,6 @@ const getCocktailsAmount = section => {
     coctailsAmount = 9;
   }
 };
-
 getCocktailsAmount(refs.coctailsSection);
 
 export default function mainFunction(
@@ -35,7 +35,6 @@ export default function mainFunction(
   if (searchIn < 2 && mainMarkupPlace) {
     mainMarkupPlace.innerHTML = '';
   }
-
   for (let i = 0; i < amount; i += 1) {
     // забираем у бекенда рандомный коктейль
     fetchProductsRandom(searchLink)
@@ -45,7 +44,6 @@ export default function mainFunction(
             coctailsAmount = newData.drinks.length;
           });
         }
-
         // увеличиваем счетчик коклейлей на 1
         coctailNumber += 1;
         let coctailIterationNumber = 0;
@@ -53,9 +51,11 @@ export default function mainFunction(
         if (searchIn) {
           coctailIterationNumber = i;
         }
-        const {strDrinkThumb = '', strDrink = '', idDrink = '',
+        const {
+          strDrinkThumb = '',
+          strDrink = '',
+          idDrink = '',
         } = newData.drinks[coctailIterationNumber];
-
         // создаем разметку карточки
         coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb, idDrink);
       })
@@ -70,3 +70,4 @@ mainFunction(
 );
 
 refs.coctailsList.addEventListener('click', onLoadMoreClick);
+refs.coctailsList.addEventListener('click', oNaddClick);

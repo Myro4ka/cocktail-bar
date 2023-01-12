@@ -25,26 +25,23 @@ export function main(postsData) {
     const start = rowPerPage * page;
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
-    paginatedData.forEach(
-      ({ strDrink, strDrinkThumb, idDrink, coctailNumber }) => {
-        coctailNumber = 0;
-        postsEl.innerHTML += `<li class="gallery__item">
+    paginatedData.forEach(({ strDrink, strDrinkThumb, idDrink }) => {
+      postsEl.innerHTML += `<li class="gallery__item">
                 <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}" width="280" height="280" />
                 <div class="gallery__card">
                     <h3 class="gallery__card-title">${strDrink}</h3>
                     <div class="gallery__card-btns">
                         <button class="btn__learn coctails-section__learn-button" type="button" data-cocktailId = ${idDrink}>Learn more</button>
-                        <button class="btn__add coctails-section__like-button" type="button" id="likeBtn${coctailNumber}">
+                        <button class="btn__add coctails-section__like-button" type="button">
                             Add to
                             <svg class="btn__svg" width="18" height="18">
-                                <use href="./images/symbol-defs.svg#icon-Heart-mobile"></use>
+                                <use href="${sprite}#icon-heart"></use>
                             </svg>
                         </button>
                     </div>
                 </div>
             </li> `;
-      }
-    );
+    });
   }
   function displayPagination(arrData, rowPerPage) {
     const paginationEl = document.querySelector('.pagination');
@@ -104,15 +101,14 @@ export function main(postsData) {
     ulList.append(libtnElForward);
     libtnElBack.classList.add('pagination-nav-btn--back');
     libtnElForward.classList.add('pagination-nav-btn--forward');
-    liElBtnSvgBack = `<svg class="search-icon" width="24" height="24">
+    const liElBtnSvgBack = `<svg class="search-icon" width="24" height="24">
         <use href="${sprite + '#icon-arrow_left'}"></use>
       </svg>`;
-    liElBtnSvgForward = `<svg class="search-icon" width="24" height="24">
+    const liElBtnSvgForward = `<svg class="search-icon" width="24" height="24">
         <use href="${sprite + '#icon-arrow_right'}"></use>
       </svg>`;
     btnElBack.innerHTML += liElBtnSvgBack;
     btnElForward.innerHTML += liElBtnSvgForward;
-    liElBtnSvgBack.href = sprite + '#icon-arrow_left';
   }
   function setActiveEl(page) {
     const children = refs.pagination.firstElementChild.children;
