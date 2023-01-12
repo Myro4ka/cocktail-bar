@@ -44,9 +44,13 @@ export function main(postsData) {
     });
   }
   function displayPagination(arrData, rowPerPage) {
+    const pagesCount = Math.ceil(arrData.length / rowPerPage);
     const paginationEl = document.querySelector('.pagination');
     paginationEl.innerHTML = '';
-    const pagesCount = Math.ceil(arrData.length / rowPerPage);
+    if (pagesCount === 1) {
+      return;
+    }
+
     const ulEl = document.createElement('ul');
     ulEl.classList.add('pagination-list');
     // firstpage
