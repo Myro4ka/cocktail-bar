@@ -8,25 +8,30 @@ const app = initializeApp(firebaseConfig);
 const COCTAILS_KEY = 'coctails';
 const INGRID_KEY = 'ingrid';
 const db = getDatabase();
+
 export const getUserId = () => {
   const auth = getAuth();
   console.log(auth);
   return auth.currentUser.uid;
 };
+
 // Принимает обьект и пушить необходимые данные
-export const sendData = (data = {}) => {
-  try {
-    // Сохраняем данные
-    push(ref(db, 'userdata'), data);
-  } catch (error) {
-    console.log(error);
-  }
-};
+// На основі неї робили set
+// export const sendData = (data = {}) => {
+//   try {
+//     // Сохраняем данные
+//     push(ref(db, 'userdata'), data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 // Получение данных
-export const getData = () => {
+export const getCocktails = () => {
   return get(ref(db, `${getUserId()}/${COCTAILS_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
+        console.log(snapshot);
         return snapshot.val();
       } else {
         console.log('No data available');
@@ -36,6 +41,7 @@ export const getData = () => {
       console.error(error);
     });
 };
+
 export const getIngrid = () => {
   return get(ref(db, `${getUserId()}/${INGRID_KEY}`))
     .then(snapshot => {
@@ -49,6 +55,7 @@ export const getIngrid = () => {
       console.error(error);
     });
 };
+
 export const setCoctails = id => {
   return push(ref(db, `${getUserId()}/${COCTAILS_KEY}`), id)
     .then(() => {

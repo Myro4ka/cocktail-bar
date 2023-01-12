@@ -22,31 +22,30 @@ function createDataObj(value) {
   return { value, checked: false };
 }
 // Возвращение данных (промис)
-setTimeout(() => {
-  getData()
-    .then(response => {
-      const array = [];
-      //  Получаем массив масива, destryktyruzacuya
-      Object.entries(response).forEach(([key, value]) => {
-        //Добавить key from firebase
-        console.log(value);
-        value.id = key;
-        array.push(value);
-        console.log(key);
-      });
-
-      // получаем массив
-      console.log(array);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  setCoctails(Date.now());
-  setIngrid(Date.now());
-  deleteIngrid(1673444181120);
-}, 2000);
+// setTimeout(() => {
+//   getData()
+//     .then(response => {
+//       const array = [];
+//       //  Получаем массив масива, destryktyruzacuya
+//       Object.entries(response).forEach(([key, value]) => {
+//         //Добавить key from firebase
+//         console.log(value);
+//         value.id = key;
+//         array.push(value);
+//         console.log(key);
+//       });
+//       // получаем массив
+//       console.log(array);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+//   setCoctails(Date.now());
+//   setIngrid(Date.now());
+//   deleteIngrid(1673444181120);
+// }, 2000);
 
 // formRef.addEventListener('submit', onSubmit);
-loginBtnRef.addEventListener('click', oNsignInWithPopup);
+// loginBtnRef.addEventListener('click', oNsignInWithPopup);
 // addLikeBtn.addEventListener('click', oNaddClick);
 // signOutBtnRef.addEventListener('click', signOutUser);
