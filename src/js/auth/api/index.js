@@ -2,9 +2,9 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, push, get, remove } from 'firebase/database';
 import { firebaseConfig } from '../firebase-conf';
 import { getAuth } from 'firebase/auth';
-// инициализация приложения
+
 const app = initializeApp(firebaseConfig);
-// создаем новую базу данных
+
 const COCTAILS_KEY = 'coctails';
 const INGRID_KEY = 'ingrid';
 const db = getDatabase();
@@ -26,8 +26,8 @@ export const getUserId = () => {
 //   }
 // };
 
-// Получение данных
-export const getCocktails = () => {
+// Получение коктейля
+export const getCoctail = () => {
   return get(ref(db, `${getUserId()}/${COCTAILS_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
@@ -42,6 +42,7 @@ export const getCocktails = () => {
     });
 };
 
+// Получение ингрид
 export const getIngrid = () => {
   return get(ref(db, `${getUserId()}/${INGRID_KEY}`))
     .then(snapshot => {
@@ -56,7 +57,8 @@ export const getIngrid = () => {
     });
 };
 
-export const setCoctails = id => {
+// Добавление Коктейля
+export const setCoctail = id => {
   return push(ref(db, `${getUserId()}/${COCTAILS_KEY}`), id)
     .then(() => {
       // Data saved successfully!
@@ -65,6 +67,7 @@ export const setCoctails = id => {
       // The write failed...
     });
 };
+// Добавление Ингридиента
 export const setIngrid = id => {
   return push(ref(db, `${getUserId()}/${INGRID_KEY}`), id)
     .then(() => {
@@ -74,7 +77,7 @@ export const setIngrid = id => {
       // The write failed...
     });
 };
-
+// Удаление
 export const deleteIngrid = id => {
   getIngrid().then(response => {
     Object.entries(response).forEach(([key, value]) => {

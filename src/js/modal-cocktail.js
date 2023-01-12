@@ -16,7 +16,6 @@ import { renderModalIngredient } from './modal-ingredient/render/render';
 
 export async function onLoadMoreClick(event) {
   try {
-    // console.log(event.target.classList);
     if (!event.target.classList.contains('btn__learn')) return;
     const id = event.target.dataset.cocktailid;
     // console.log(id);
