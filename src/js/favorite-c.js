@@ -4,6 +4,10 @@ import { main } from './pagination';
 import { refs } from './gallery/refs/refs';
 import { getCocktails } from './auth/api';
 import { getCocktailById } from './modal-cocktail/api/api';
+import './gallery';
+import './modal-cocktail';
+import './header/mob-menu.js';
+// import './modal-ingredient';
 
 onAuthStateChanged(auth, () => {
   getCocktails()
@@ -20,17 +24,19 @@ onAuthStateChanged(auth, () => {
       //  Получаем массив масива
       Object.entries(response).forEach(([key, value]) => {
         //Добавить key from firebase
-        value.id = key;
-        array.push(value);
+        array.push(+value);
+        console.log(array);
       });
       // получаем массив
       const arrayDrinks = [];
-      array.map(id => {
-        getCocktailById(id).then(({ drinks }) => {
+      array.map(idEl => {
+        console.log(idEl);
+        getCocktailById(idEl).then(({ drinks }) => {
           for (const el of drinks) {
             arrayDrinks.push(el);
           }
           main(arrayDrinks);
+          refs.coctailTitel.textContent = 'Favorite cocktails';
         });
       });
     })

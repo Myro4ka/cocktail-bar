@@ -1,8 +1,11 @@
 import { refs } from './gallery/refs/refs';
-import { coctailCardMarkup } from './gallery/render/render';
+import { coctailCardMarkup, addBtn, removeBtn } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
 import { onLoadMoreClick } from './modal-cocktail';
 import { oNaddClick } from './auth';
+import { getCocktails } from './auth/api';
+import { onAuthStateChanged } from '@firebase/auth';
+import { auth } from './auth/api/auth';
 
 let coctailsAmount = 0;
 // переменная для идентификации кнопок коктейля
@@ -35,6 +38,7 @@ export default function mainFunction(
   if (searchIn < 2 && mainMarkupPlace) {
     mainMarkupPlace.innerHTML = '';
   }
+  const arrayRandomDrinks = [];
   for (let i = 0; i < amount; i += 1) {
     // забираем у бекенда рандомный коктейль
     fetchProductsRandom(searchLink)
@@ -51,16 +55,42 @@ export default function mainFunction(
         if (searchIn) {
           coctailIterationNumber = i;
         }
-        const {
-          strDrinkThumb = '',
-          strDrink = '',
-          idDrink = '',
-        } = newData.drinks[coctailIterationNumber];
-        // создаем разметку карточки
-        coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb, idDrink);
+        arrayRandomDrinks.push(newData.drinks[coctailIterationNumber]);
       })
       .catch(alert.log);
   }
+  console.log(arrayRandomDrinks);
+  // создаем разметку карточки
+  onAuthStateChanged(auth, () => {
+    let arrayFavorId = [];
+    getCocktails().then(response => {
+      arrayFavorId = Object.values(response);
+      console.log(arrayFavorId);
+    });
+    for (let elem of arrayRandomDrinks) {
+      console.log(elem);
+      const { strDrinkThumb = '', strDrink = '', idDrink = '' } = elem;
+      const uniq = arrayFavorId.find(value => idDrink === value);
+      console.log(uniq);
+      if (uniq) {
+        coctailCardMarkup(
+          mainMarkupPlace,
+          strDrink,
+          strDrinkThumb,
+          idDrink,
+          removeBtn
+        );
+      } else {
+        coctailCardMarkup(
+          mainMarkupPlace,
+          strDrink,
+          strDrinkThumb,
+          idDrink,
+          addBtn
+        );
+      }
+    }
+  });
 }
 mainFunction(
   0,
