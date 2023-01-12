@@ -31,7 +31,7 @@ export async function onLoadMoreClick(event) {
 
 async function openCocktailModal(response) {
   modalCocktailRef.classList.remove('is-hidden');
-  modalCocktailRef.body.body.classList.toggle('no-scroll');
+  document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', onEscKeyPress);
 
   // console.log(response);
@@ -87,7 +87,7 @@ async function onListClick(event) {
   }
 
   modalIngredientRef.classList.remove('is-hidden');
-  modalIngredientRef.body.classList.toggle('no-scroll');
+  document.body.style.overflow = 'hidden';
 
   backdropIngredientRef.innerHTML = renderModalIngredient(
     ingredientTitle,
@@ -170,21 +170,18 @@ export async function insertMarkup(id, title, instructions, image, list) {
 }
 
 function onCloseModalIngredient() {
-  modalCocktailRef.classList.contains('is-hidden')
-    ? (document.body.style.overflow = 'hidden')
-    : (document.body.style.overflow = 'visible');
-  modalIngredientRef.body.classList.toggle('no-scroll');
+  modalIngredientRef.classList.add('is-hidden');
 }
 
 function onCloseModalCocktail() {
   modalCocktailRef.classList.add('is-hidden');
 
-  modalCocktailRef.body.classList.toggle('no-scroll');
+  document.body.style.overflow = 'visible';
 }
 
 function toggleModal() {
   modalCocktailRef.classList.toggle('is-hidden');
-  modalCocktailRef.body.classList.toggle('no-scroll');
+  document.body.style.overflow = 'visible';
 }
 
 backdropCocktailRef.addEventListener('click', event => {
@@ -204,4 +201,3 @@ backdropCocktailRef.addEventListener('click', event => {
     window.removeEventListener('keydown', onEscKeyPress);
   }
 });
-
