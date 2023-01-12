@@ -41,32 +41,32 @@ export default function mainFunction(
   const arrayRandomDrinks = [];
   for (let i = 0; i < amount; i += 1) {
     // забираем у бекенда рандомный коктейль
-    fetchProductsRandom(searchLink)
-      .then(newData => {
-        if (searchIn === 1) {
-          fetchProductsRandom(searchLink).then(newData => {
-            coctailsAmount = newData.drinks.length;
-          });
-        }
-        // увеличиваем счетчик коклейлей на 1
-        coctailNumber += 1;
-        let coctailIterationNumber = 0;
+    fetchProductsRandom(searchLink).then(newData => {
+      if (searchIn === 1) {
+        fetchProductsRandom(searchLink).then(newData => {
+          coctailsAmount = newData.drinks.length;
+        });
+      }
+      // увеличиваем счетчик коклейлей на 1
+      coctailNumber += 1;
+      let coctailIterationNumber = 0;
 
-        if (searchIn) {
-          coctailIterationNumber = i;
-        }
-        arrayRandomDrinks.push(newData.drinks[coctailIterationNumber]);
-      })
-      .catch(alert.log);
+      if (searchIn) {
+        coctailIterationNumber = i;
+      }
+      arrayRandomDrinks.push(newData.drinks[coctailIterationNumber]);
+    });
   }
   console.log(arrayRandomDrinks);
   // создаем разметку карточки
   onAuthStateChanged(auth, () => {
     let arrayFavorId = [];
-    getCocktails().then(response => {
-      arrayFavorId = Object.values(response);
-      console.log(arrayFavorId);
-    });
+    getCocktails()
+      .then(response => {
+        arrayFavorId = Object.values(response);
+        console.log(arrayFavorId);
+      })
+      .catch(alert.log);
     for (let elem of arrayRandomDrinks) {
       console.log(elem);
       const { strDrinkThumb = '', strDrink = '', idDrink = '' } = elem;
