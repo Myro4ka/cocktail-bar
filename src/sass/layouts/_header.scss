@@ -33,6 +33,7 @@
 
 .nav {
   @include flex(space-between);
+  margin-right: 100px;
 }
 
 .search-wrap {
