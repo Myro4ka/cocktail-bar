@@ -44,7 +44,6 @@ export default function mainFunction(
             coctailsAmount = newData.drinks.length;
           });
         }
-
         // увеличиваем счетчик коклейлей на 1
         coctailNumber += 1;
         let coctailIterationNumber = 0;
@@ -57,16 +56,8 @@ export default function mainFunction(
           strDrink = '',
           idDrink = '',
         } = newData.drinks[coctailIterationNumber];
-
         // создаем разметку карточки
         coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb, idDrink);
-
-        // выбираем все созданные карточки коктейлей(вне зависимости от итерации)
-        // const coctailCards = refs.coctailContainer;
-        // refs.addLikeBtn.addEventListener('click', event => {
-        //   event.target.textContent = 'Remove'
-        // })
-
       })
       .catch(alert.log);
   }
