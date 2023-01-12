@@ -1,6 +1,6 @@
 import sprite from '../images/symbol-defs.svg';
 
-refs = {
+const refs = {
   pagination: document.querySelector('.pagination'),
 };
 
