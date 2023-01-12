@@ -60,7 +60,7 @@ export async function onCloseIngredientModal(event) {
     event.target.classList.contains('js-backdrop-ingredient')
   ) {
     modalIngredientRef.classList.add('is-hidden');
-    document.body.style.overflow = "visible";
+    // document.body.style.overflow = "visible";
   }
 }
 

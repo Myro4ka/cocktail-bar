@@ -30,9 +30,9 @@ export async function onLoadMoreClick(event) {
 
 async function openCocktailModal(response) {
   modalCocktailRef.classList.remove('is-hidden');
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', onEscKeyPress);
- document.body
+
   // console.log(response);
 
   let cocktailTitle = response.drinks[0].strDrink;
@@ -44,8 +44,10 @@ async function openCocktailModal(response) {
 
   insertMarkup(cocktailTitle, cocktailInstructions, cocktailImage, listMarkup);
 
-  const modalCloseBtn = document.querySelector('.js-modal-close-cocktail');
-  modalCloseBtn.addEventListener('click', onCloseModalCocktail);
+  const modalCloseCocktailBtn = document.querySelector(
+    '.js-modal-close-cocktail'
+  );
+  modalCloseCocktailBtn.addEventListener('click', onCloseModalCocktail);
 
   const modalCocktailList = document.querySelector(
     '.js-modal-list-ingredients'
@@ -54,7 +56,7 @@ async function openCocktailModal(response) {
 }
 
 async function onListClick(event) {
- if (!event.target.classList.contains('js-modal-link')) return;
+  if (!event.target.classList.contains('js-modal-link')) return;
   // console.log(event.target);
   let el = await event.target.closest('[data-ingredient]');
   // console.log(el);
@@ -84,6 +86,7 @@ async function onListClick(event) {
   }
 
   modalIngredientRef.classList.remove('is-hidden');
+  document.body.style.overflow = 'hidden';
 
   backdropIngredientRef.innerHTML = renderModalIngredient(
     ingredientTitle,
@@ -91,6 +94,10 @@ async function onListClick(event) {
     ingredientDescription,
     ingredientAlcohol
   );
+  const modalCloseIngredientBtn = document.querySelector(
+    '.js-modal-close-ingredient'
+  );
+  modalCloseIngredientBtn.addEventListener('click', onCloseModalIngredient);
 }
 
 export function makeList(cocktail) {
@@ -167,11 +174,13 @@ function onCloseModalIngredient() {
 
 function onCloseModalCocktail() {
   modalCocktailRef.classList.add('is-hidden');
-  document.body.style.overflow = "visible";
+
+  document.body.style.overflow = 'visible';
 }
 
 function toggleModal() {
   modalCocktailRef.classList.toggle('is-hidden');
+  document.body.style.overflow = 'visible';
 }
 
 backdropCocktailRef.addEventListener('click', event => {

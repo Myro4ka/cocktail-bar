@@ -23,11 +23,13 @@
 
 .modal {
   position: absolute;
-  top: 8%;
+  top: 10%;
   left: 50%;
 
   width: 320px;
-  /* height: 956px; */
+  // height: 956px;
+  // max-height: 100%;
+  overflow: auto;
   padding: 40px 20px;
 
   display: flex;
@@ -39,10 +41,12 @@
   transform: translateX(-50%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
+    // top: 8%;
     width: 100vw;
     max-width: 822px;
-    min-height: 598px;
+    // height: 598px;
+    // max-height: 100%;
     padding: 40px 28px;
 
     &--ingredient {
@@ -61,23 +65,25 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 32px;
-  height: 32px;
-
-  /* background: #ffffff; */
+  background: #fcfcfc;
   border: none;
   cursor: pointer;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     top: 12px;
     right: 12px;
   }
 }
 
-.modal .icon {
-  z-index: 2;
+.modal__icon {
+  z-index: 1000;
   fill: #000000;
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    fill: $accent-color;
+  }
 }
 
 .modal__title {
@@ -88,7 +94,7 @@
   line-height: 38px;
   color: $dark-primary-color;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     margin-left: 292px;
     margin-bottom: 28px;
     &--ingredient {
@@ -98,7 +104,7 @@
 }
 
 .modal__content {
-  @media screen and (min-width: 768px) {
+  @include tablet {
     display: flex;
     flex-wrap: wrap;
     row-gap: 26px;
@@ -115,7 +121,7 @@
   text-transform: uppercase;
   color: $dark-primary-color;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     &--ingredient {
       margin-bottom: 68px;
     }
@@ -142,7 +148,7 @@
     margin-bottom: 32px;
     padding-right: 5px;
 
-    @media screen and (min-width: 768px) {
+    @include tablet {
       width: 615px;
       margin-bottom: 40px;
     }
@@ -160,7 +166,7 @@
   height: auto;
   border-radius: 4px;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     display: flex;
     // align-self: start;
     // align-items: start;
@@ -175,7 +181,7 @@
 }
 
 .modal__info {
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: calc(100% - 40px - 288px); // 280
     order: 2;
   }
@@ -206,9 +212,6 @@
   margin-bottom: 32px;
   /* margin-left: -5px; */
   padding-left: 0px;
-
-  @media screen and (min-width: 768px) {
-  }
 }
 
 .modal__item {
@@ -218,7 +221,10 @@
 }
 
 .modal__link {
+  background-color: transparent;
+  border: none;
   color: rgb(0, 9, 23);
+  line-height: 1.62;
   &:hover,
   &:focus {
     color: $accent-color;
@@ -262,12 +268,12 @@
     width: 248px;
   }
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     margin-left: auto;
   }
 }
 
-@media screen and (min-width: 768px) {
+@include tablet {
   .modal__instructions {
     order: 3;
   }
