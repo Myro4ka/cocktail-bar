@@ -23,7 +23,6 @@ export const getCocktailsAmount = section => {
     coctailsAmount = 9;
   }
 };
-
 getCocktailsAmount(refs.coctailsSection);
 
 export default function mainFunction(
@@ -36,7 +35,6 @@ export default function mainFunction(
   if (searchIn < 2 && mainMarkupPlace) {
     mainMarkupPlace.innerHTML = '';
   }
-
   for (let i = 0; i < amount; i += 1) {
     // забираем у бекенда рандомный коктейль
     fetchProductsRandom(searchLink)
@@ -58,7 +56,6 @@ export default function mainFunction(
           strDrink = '',
           idDrink = '',
         } = newData.drinks[coctailIterationNumber];
-
         // создаем разметку карточки
         coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb, idDrink);
       })

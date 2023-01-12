@@ -64,11 +64,13 @@ button {
   height: auto;
 }
 
+
 .section {
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 60px;
   padding-bottom: 60px;
+
 
   @include tablet {
     padding-top: 100px;

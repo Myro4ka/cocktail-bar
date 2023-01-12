@@ -3,6 +3,7 @@ export function responseNull() {
   refs.coctailTitel.textContent = `Sorry, we didn't find any cocktail for you`;
   refs.coctailsList.innerHTML = createMarkupNullCocktail();
   refs.paginationDiv.classList.add('visually-hidden');
+  
 }
 
 function createMarkupNullCocktail() {
