@@ -104,15 +104,14 @@ export function main(postsData) {
     ulList.append(libtnElForward);
     libtnElBack.classList.add('pagination-nav-btn--back');
     libtnElForward.classList.add('pagination-nav-btn--forward');
-    liElBtnSvgBack = `<svg class="search-icon" width="24" height="24">
+    const liElBtnSvgBack = `<svg class="search-icon" width="24" height="24">
         <use href="${sprite + '#icon-arrow_left'}"></use>
       </svg>`;
-    liElBtnSvgForward = `<svg class="search-icon" width="24" height="24">
+    const liElBtnSvgForward = `<svg class="search-icon" width="24" height="24">
         <use href="${sprite + '#icon-arrow_right'}"></use>
       </svg>`;
     btnElBack.innerHTML += liElBtnSvgBack;
     btnElForward.innerHTML += liElBtnSvgForward;
-    liElBtnSvgBack.href = sprite + '#icon-arrow_left';
   }
   function setActiveEl(page) {
     const children = refs.pagination.firstElementChild.children;
