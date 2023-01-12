@@ -7,7 +7,8 @@ export const coctailCardMarkup = (
   cocktailId = '',
   coctailNumber = 0,
 ) => {
-  markupPlace.innerHTML += `<li class="gallery__item">
+    markupPlace.innerHTML += `<li class="gallery__item">
+            <div class='coctail-container'>
                 <img class="gallery__img" src="${cocktailImgLink}" alt="${cocktailName}" width="280" height="280" />
                 <div class="gallery__card">
                     <h3 class="gallery__card-title">${cocktailName}</h3>
@@ -19,8 +20,10 @@ export const coctailCardMarkup = (
                         </button>
                     </div>
                 </div>
+            </div>
             </li> `
 }
+
 
 export const svgHeart = `  <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-heart"></use> </svg>`;
 export const svgHeartFull = `  <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-addheart"></use> </svg>`;

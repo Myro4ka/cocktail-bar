@@ -22,10 +22,7 @@ const getCocktailsAmount = section => {
     coctailsAmount = 9;
   }
 };
-
 getCocktailsAmount(refs.coctailsSection);
-
-
 
 export default function mainFunction(
   searchIn,
@@ -37,7 +34,6 @@ export default function mainFunction(
   if (searchIn < 2 && mainMarkupPlace) {
     mainMarkupPlace.innerHTML = '';
   }
-
   for (let i = 0; i < amount; i += 1) {
     // забираем у бекенда рандомный коктейль
     fetchProductsRandom(searchLink)
@@ -60,6 +56,13 @@ export default function mainFunction(
 
         // создаем разметку карточки
         coctailCardMarkup(mainMarkupPlace, strDrink, strDrinkThumb, idDrink);
+
+        // выбираем все созданные карточки коктейлей(вне зависимости от итерации)
+        // const coctailCards = refs.coctailContainer;
+        // refs.addLikeBtn.addEventListener('click', event => {
+        //   event.target.textContent = 'Remove'
+        // })
+
       })
       .catch(alert.log);
   }
