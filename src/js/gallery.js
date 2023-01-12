@@ -46,7 +46,6 @@ export default function mainFunction(
             coctailsAmount = newData.drinks.length;
           });
         }
-
         // увеличиваем счетчик коклейлей на 1
         coctailNumber += 1;
         let coctailIterationNumber = 0;

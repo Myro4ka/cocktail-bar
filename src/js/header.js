@@ -1,7 +1,7 @@
 import { refsSearch } from './header/refs/search';
 import { searchCocktailsInput } from './header/api/search';
 import { getUserId } from './auth/api';
-import { oNsignInWithPopup } from './auth/api/auth';
+import { auth, oNsignInWithPopup, signOutUser } from './auth/api/auth';
 
 refsSearch.form.addEventListener('submit', onSubmit);
 
@@ -14,11 +14,15 @@ function onSubmit(e) {
 }
 
 refsSearch.authBtn.addEventListener('click', onClickAuthBtn);
-refsSearch.authBtn.addEventListener('click', oNsignInWithPopup);
 
 function onClickAuthBtn(e) {
   e.currentTarget.classList.add('is-active');
   if (e.currentTarget.classList.contains('is-active')) {
     e.currentTarget.classList.remove('is-active');
+  }
+  if (auth.currentUser) {
+    signOutUser();
+  } else {
+    oNsignInWithPopup();
   }
 }

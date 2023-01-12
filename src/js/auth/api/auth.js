@@ -9,7 +9,7 @@ import {
 import { firebaseConfig } from '../firebase-conf';
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
-const auth = getAuth();
+export const auth = getAuth();
 
 export const oNsignInWithPopup = () => {
   signInWithPopup(auth, provider)
@@ -44,5 +44,8 @@ export const signOutUser = () => {
     });
 };
 onAuthStateChanged(auth, user => {
+  if (!user) {
+    return;
+  }
   console.log('user :>> ', user.uid);
 });

@@ -9,4 +9,4 @@ import './js/modal-cocktail';
 import './js/modal-ingredient';
 import './js/gallery/render/response_null';
 import './js/pagination';
-import './js/auth/index';
+// import './js/auth/index';

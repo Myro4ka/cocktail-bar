@@ -1,33 +1,40 @@
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './auth/api/auth';
 import { main } from './pagination';
 import { refs } from './gallery/refs/refs';
 import { getCocktails } from './auth/api';
-// import mainFunction from './gallery';
-// import { getCocktailsAmount } from './gallery';
+import { getCocktailById } from './modal-cocktail/api/api';
 
-(() => {
-  //   const amount = getCocktailsAmount(document.querySelector(section));
-  //   mainFunction(
-  //     0,
-  //     'https://www.thecocktaildb.com/api/json/v1/1/random.php',
-  //     amount,
-  //     refs.coctailsList
-  //   );
+onAuthStateChanged(auth, () => {
   getCocktails()
     .then(response => {
+      console.log('response', response);
+      if (!response) {
+        const markup = `<p>You haven't added any favorite cocktails yet</p>`;
+        document
+          .querySelector('.gallery.container')
+          .insertAdjacentHTML('beforeend', markup);
+        return;
+      }
       const array = [];
-      //  Получаем массив масива, destryktyruzacuya
+      //  Получаем массив масива
       Object.entries(response).forEach(([key, value]) => {
         //Добавить key from firebase
-        console.log(value);
         value.id = key;
         array.push(value);
-        console.log(key);
       });
       // получаем массив
-      console.log(array);
+      const arrayDrinks = [];
+      array.map(id => {
+        getCocktailById(id).then(({ drinks }) => {
+          for (const el of drinks) {
+            arrayDrinks.push(el);
+          }
+          main(arrayDrinks);
+        });
+      });
     })
     .catch(error => {
       console.log(error);
     });
-  main();
-})();
+});
