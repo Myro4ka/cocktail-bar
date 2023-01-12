@@ -15,3 +15,8 @@ export const refs = {
   mobMenuForm: document.querySelector('.mob-menu .search-form'),
   mobInputForm: document.querySelector('.mob-menu .searchQuery'),
 };
+
+export const favorMobMenuRefs = {
+  favorMobBtn: document.querySelector('.mob-menu .mob-favor-btn'),
+  favorMobMenu: document.querySelector('.mob-menu .favorites-list'),
+};
