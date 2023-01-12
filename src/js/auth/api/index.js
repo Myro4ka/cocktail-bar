@@ -27,7 +27,7 @@ export const getUserId = () => {
 // };
 
 // Получение коктейля
-export const getCoctail = () => {
+export const getCocktails = () => {
   return get(ref(db, `${getUserId()}/${COCTAILS_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
