@@ -1,4 +1,4 @@
-import * as iconModalClose from '../../../images/symbol-defs.svg'
+import * as iconModalClose from '../../../images/symbol-defs.svg';
 export function renderModalCocktail(
   strDrink,
   strInstructions,
@@ -49,7 +49,7 @@ export function renderList(resultList, ingredientList) {
     // console.log(ingredient);
     markup += `
         <li class="modal__item" data-ingredient='${ingredient}'>
-          <button class="modal__link js-modal-link" href="#">&sext;&#160;${resultList[i]}</button>
+            <button class="modal__link js-modal-link" href="#">&sext;&#160;${resultList[i]}</button>
         </li>
       `;
   }

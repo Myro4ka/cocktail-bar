@@ -20,10 +20,10 @@ export function renderModalIngredient(
               <ul class="modal__list">
 
                 <li class="modal__item">
-                    <a class="modal__link js-modal-link" href="#">&sext; Type: ${type}</a>
+                    <p>&sext; Type: ${type}</p>
                 </li>
                 <li class="modal__item">
-                    <a class="modal__link js-modal-link" href="#">&sext; Alcohol: ${alcohol} </a>
+                    <p>&sext; Alcohol: ${alcohol} </p>
                 </li>
             
               </ul>
