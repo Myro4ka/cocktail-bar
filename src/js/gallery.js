@@ -2,6 +2,7 @@ import { refs } from './gallery/refs/refs';
 import { coctailCardMarkup } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
 import { onLoadMoreClick } from './modal-cocktail';
+import { oNaddClick } from './auth';
 
 let coctailsAmount = 0;
 // переменная для идентификации кнопок коктейля
@@ -53,7 +54,10 @@ export default function mainFunction(
         if (searchIn) {
           coctailIterationNumber = i;
         }
-        const {strDrinkThumb = '', strDrink = '', idDrink = '',
+        const {
+          strDrinkThumb = '',
+          strDrink = '',
+          idDrink = '',
         } = newData.drinks[coctailIterationNumber];
 
         // создаем разметку карточки
@@ -70,3 +74,4 @@ mainFunction(
 );
 
 refs.coctailsList.addEventListener('click', onLoadMoreClick);
+refs.coctailsList.addEventListener('click', oNaddClick);
