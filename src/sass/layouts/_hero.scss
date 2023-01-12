@@ -68,7 +68,7 @@
       width: 501px;
       height: 450px;
       background-image: url(../images/hero_desc@2x.png);
-      transform: matrix(1, 0, 0, 1, 0, -60);
+      // transform: matrix(1, 0, 0, 1, 0, -60);
       background-size: contain;
     }
 
@@ -139,13 +139,13 @@
       height: 245px;
       background-size: cover;
       background-image: url(../images/hero_tab@2x.png);
-      transform: matrix(1, 0, 0, 1, 0, -65);
+      // transform: matrix(1, 0, 0, 1, 0, -65);
       background-repeat: no-repeat;
       background-size: contain;
 
       @include tablet {
         width: 336px;
-          height: 294px;
+        height: 294px;
       }
 
       @include desktop {
@@ -238,7 +238,7 @@
       background-repeat: no-repeat;
       background-size: contain;
       background-image: url(../images/hero_mob@2x.png);
-      transform: matrix(1, 0, 0, 1, 0, 0);
+      // transform: matrix(1, 0, 0, 1, 0, 0);
     }
 
     &-div {

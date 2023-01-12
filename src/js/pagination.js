@@ -25,10 +25,9 @@ export function main(postsData) {
     const start = rowPerPage * page;
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
-    paginatedData.forEach(
-      ({ strDrink, strDrinkThumb, idDrink, coctailNumber }) => {
-        coctailNumber = 0;
-        postsEl.innerHTML += `<li class="gallery__item">
+    paginatedData.forEach(({ strDrink, strDrinkThumb, idDrink }) => {
+      coctailNumber = 0;
+      postsEl.innerHTML += `<li class="gallery__item">
                 <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}" width="280" height="280" />
                 <div class="gallery__card">
                     <h3 class="gallery__card-title">${strDrink}</h3>
@@ -37,14 +36,13 @@ export function main(postsData) {
                         <button class="btn__add coctails-section__like-button" type="button" id="likeBtn${coctailNumber}">
                             Add to
                             <svg class="btn__svg" width="18" height="18">
-                                <use href="./images/symbol-defs.svg#icon-Heart-mobile"></use>
+                                <use href="${sprite + '#icon-heart'}"></use>
                             </svg>
                         </button>
                     </div>
                 </div>
             </li> `;
-      }
-    );
+    });
   }
   function displayPagination(arrData, rowPerPage) {
     const paginationEl = document.querySelector('.pagination');

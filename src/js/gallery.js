@@ -12,7 +12,7 @@ let storageKey = 0;
 
 let searchIn = 0;
 
-const getCocktailsAmount = section => {
+export const getCocktailsAmount = section => {
   if (!section) return;
   const coctailsSectionStyles = getComputedStyle(section);
   if (coctailsSectionStyles.width === '320px') {

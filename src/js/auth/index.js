@@ -47,7 +47,6 @@ function createDataObj(value) {
 //         array.push(value);
 //         console.log(key);
 //       });
-
 //       // получаем массив
 //       console.log(array);
 //     })
@@ -60,5 +59,7 @@ function createDataObj(value) {
 // }, 2000);
 // addBtn.addEventListener('click', oNaddClick);
 // formRef.addEventListener('submit', onSubmit);
-loginBtnRef.addEventListener('click', oNsignInWithPopup);
+
+// loginBtnRef.addEventListener('click', oNsignInWithPopup);
+// addLikeBtn.addEventListener('click', oNaddClick);
 // signOutBtnRef.addEventListener('click', signOutUser);

@@ -14,7 +14,9 @@ export const getUserId = () => {
   console.log(auth);
   return auth.currentUser.uid;
 };
+
 // Принимает обьект и пушить необходимые данные
+// На основі неї робили set
 // export const sendData = (data = {}) => {
 //   try {
 //     // Сохраняем данные
@@ -23,11 +25,13 @@ export const getUserId = () => {
 //     console.log(error);
 //   }
 // };
+
 // Получение коктейля
 export const getCoctail = () => {
   return get(ref(db, `${getUserId()}/${COCTAILS_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
+        console.log(snapshot);
         return snapshot.val();
       } else {
         console.log('No data available');
@@ -37,6 +41,7 @@ export const getCoctail = () => {
       console.error(error);
     });
 };
+
 // Получение ингрид
 export const getIngrid = () => {
   return get(ref(db, `${getUserId()}/${INGRID_KEY}`))
@@ -51,6 +56,7 @@ export const getIngrid = () => {
       console.error(error);
     });
 };
+
 // Добавление Коктейля
 export const setCoctail = id => {
   return push(ref(db, `${getUserId()}/${COCTAILS_KEY}`), id)

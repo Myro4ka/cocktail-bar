@@ -1,5 +1,5 @@
 import { mobMenuRefs, favorMenuRefs } from './refs/mob-menu.js';
-import { refs } from './refs/mob-menu';
+import { refs, favorMenuRefs, favorMobMenuRefs } from './refs/mob-menu';
 import { searchCocktailsInput } from './api/search';
 
 (() => {
@@ -25,6 +25,20 @@ import { searchCocktailsInput } from './api/search';
     favorMenuRefs.favorBtn.setAttribute('aria-expanded', !expanded);
 
     favorMenuRefs.favorMenu.classList.toggle('is-open');
+  });
+})();
+
+(() => {
+  favorMobMenuRefs.favorMobBtn.addEventListener('click', () => {
+    const expanded =
+      favorMobMenuRefs.favorMobBtn.getAttribute('aria-expanded') === 'true' ||
+      false;
+    favorMobMenuRefs.favorMobBtn
+      .closest('.favorites')
+      .classList.toggle('is-open');
+    favorMobMenuRefs.favorMobBtn.setAttribute('aria-expanded', !expanded);
+
+    favorMobMenuRefs.favorMobMenu.classList.toggle('is-open');
   });
 })();
 
