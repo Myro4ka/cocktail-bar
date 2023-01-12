@@ -1,4 +1,5 @@
 import sprite from '../images/symbol-defs.svg';
+import { coctailCardMarkup } from './gallery/render/render';
 
 const refs = {
   pagination: document.querySelector('.pagination'),
@@ -26,27 +27,17 @@ export function main(postsData) {
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
     paginatedData.forEach(({ strDrink, strDrinkThumb, idDrink }) => {
-      postsEl.innerHTML += `<li class="gallery__item">
-                <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}" width="280" height="280" />
-                <div class="gallery__card">
-                    <h3 class="gallery__card-title">${strDrink}</h3>
-                    <div class="gallery__card-btns">
-                        <button class="btn__learn coctails-section__learn-button" type="button" data-cocktailId = ${idDrink}>Learn more</button>
-                        <button class="btn__add coctails-section__like-button" type="button">
-                            Add to
-                            <svg class="btn__svg" width="18" height="18">
-                                <use href="${sprite}#icon-heart"></use>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </li> `;
+      coctailCardMarkup(postsEl, strDrink, strDrinkThumb, idDrink);
     });
   }
   function displayPagination(arrData, rowPerPage) {
+    const pagesCount = Math.ceil(arrData.length / rowPerPage);
     const paginationEl = document.querySelector('.pagination');
     paginationEl.innerHTML = '';
-    const pagesCount = Math.ceil(arrData.length / rowPerPage);
+    if (pagesCount === 1) {
+      return;
+    }
+
     const ulEl = document.createElement('ul');
     ulEl.classList.add('pagination-list');
     // firstpage
