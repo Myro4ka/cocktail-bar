@@ -48,10 +48,6 @@ export function main(postsData) {
   }
   function displayPagination(arrData, rowPerPage) {
     const paginationEl = document.querySelector('.pagination');
-    if (arrData.length <= 9) {
-      paginationEl.classList.add('visually-hidden');
-      return;
-    }
     paginationEl.innerHTML = '';
     const pagesCount = Math.ceil(arrData.length / rowPerPage);
     const ulEl = document.createElement('ul');
