@@ -20,7 +20,8 @@ export function oNaddClick(e) {
   try {
     const coctailId = e.target.previousElementSibling.dataset.cocktailid;
     console.log(coctailId);
-
+    e.target.closest('.gallery__item').dataset.isFavorite = true;
+    console.log(e.target.closest('.gallery__item'));
     setCoctail(coctailId);
     // const data = createDataObj(value);
     // console.log(data);
