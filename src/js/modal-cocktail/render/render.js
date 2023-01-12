@@ -48,9 +48,9 @@ export function renderList(resultList, ingredientList) {
     ingredient = ingredientList[i];
     // console.log(ingredient);
     markup += `
-       <li class="modal__item" data-ingredient='${ingredient}'>
-         <a class="modal__link js-modal-link" href="#">&sext;${resultList[i]}</a>
-      </li>
+        <li class="modal__item" data-ingredient='${ingredient}'>
+          <button class="modal__link js-modal-link" href="#">&sext;&#160;${resultList[i]}</button>
+        </li>
       `;
   }
   //console.log(markup);

@@ -24,7 +24,7 @@
 .modal {
   position: absolute;
   top: 10%;
-    left: 50%;
+  left: 50%;
 
   width: 320px;
   // height: 956px;
@@ -224,7 +224,10 @@
 }
 
 .modal__link {
+  background-color: transparent;
+  border: none;
   color: rgb(0, 9, 23);
+  line-height: 1.62;
   &:hover,
   &:focus {
     color: $accent-color;
