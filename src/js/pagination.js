@@ -1,5 +1,5 @@
 import sprite from '../images/symbol-defs.svg';
-import { coctailCardMarkup, addBtn, removeBtn } from './gallery/render/render';
+import { addBtn, removeBtn } from './gallery/render/render';
 import { getUser } from './gallery';
 
 const refs = {
@@ -20,6 +20,7 @@ export function main(postsData) {
     rows = 9;
   }
   const pagesCount = Math.ceil(postsData.length / rows);
+
   function displayList(arrData, rowPerPage, page) {
     const postsEl = document.querySelector('.gallery__list');
     postsEl.innerHTML = '';

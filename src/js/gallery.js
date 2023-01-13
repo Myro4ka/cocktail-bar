@@ -1,9 +1,14 @@
 import { refs } from './gallery/refs/refs';
-import { coctailCardMarkup, addBtn, removeBtn } from './gallery/render/render';
+import {
+  coctailCardMarkup,
+  addBtn,
+  removeBtn,
+  ingredientCardMarkup,
+} from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
 import { onLoadMoreClick } from './modal-cocktail';
 import { oNaddClick } from './auth';
-import { getCocktails } from './auth/api';
+import { getCocktails, getIngrids } from './auth/api';
 import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
 
@@ -49,12 +54,29 @@ export default function mainFunction(
 export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
     if (user) {
-      getCocktails()
-        .then(response => {
-          const arrayFavorId = Object.values(response);
-          addMarkup(data, mainMarkupPlace, arrayFavorId);
-        })
-        .catch(alert.log);
+      if (data.idIngredient) {
+        getIngrids()
+          .then(response => {
+            if (response) {
+              const arrayFavorId = Object.values(response);
+              addMarkup(data, mainMarkupPlace, arrayFavorId);
+            } else {
+              addMarkup(data, mainMarkupPlace);
+            }
+          })
+          .catch(alert.log);
+      } else if (data.idDrink) {
+        getCocktails()
+          .then(response => {
+            if (response) {
+              const arrayFavorId = Object.values(response);
+              addMarkup(data, mainMarkupPlace, arrayFavorId);
+            } else {
+              addMarkup(data, mainMarkupPlace);
+            }
+          })
+          .catch(alert.log);
+      }
     } else {
       addMarkup(data, mainMarkupPlace);
     }
@@ -69,6 +91,19 @@ function addMarkup(data, mainMarkupPlace, idC = []) {
       strDrink,
       strDrinkThumb,
       idDrink,
+      btn
+    );
+  });
+}
+
+function addIngridMarkup(data, mainMarkupPlace, idC = []) {
+  data.forEach(({ strIngredient, strType, idIngredient }) => {
+    const btn = idC.includes(strIngredient) ? removeBtn : addBtn;
+    return ingredientCardMarkup(
+      mainMarkupPlace,
+      strIngredient,
+      strType,
+      idIngredient,
       btn
     );
   });

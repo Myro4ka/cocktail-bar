@@ -22,6 +22,7 @@ function onClickAuthBtn(e) {
   }
   if (auth.currentUser) {
     signOutUser();
+    location.reload();
   } else {
     oNsignInWithPopup();
   }
