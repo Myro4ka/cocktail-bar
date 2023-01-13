@@ -14,6 +14,8 @@ import {
 
 import { renderModalIngredient } from './modal-ingredient/render/render';
 
+import { onAddIngridClick } from './auth';
+
 export async function onLoadMoreClick(event) {
   try {
     if (!event.target.classList.contains('btn__learn')) return;
@@ -58,7 +60,7 @@ async function openCocktailModal(response) {
 async function onListClick(event) {
   if (!event.target.classList.contains('js-modal-link')) return;
   // console.log(event.target);
-  let el = await event.target.closest('[data-ingredient]');
+  let el = event.target.closest('[data-ingredient]');
   // console.log(el);
   let dataIngredient = el.dataset.ingredient;
   // console.log('datIngredient:', dataIngredient);
@@ -98,7 +100,27 @@ async function onListClick(event) {
     '.js-modal-close-ingredient'
   );
   modalCloseIngredientBtn.addEventListener('click', onCloseModalIngredient);
+
+
+
+  const addToFavorBtn = document.querySelector(
+    '.modal__button--add-ingredient'
+  );
+  addToFavorBtn.addEventListener('click', onAddIngridClick);
 }
+
+
+// function onAddIngridClickNew(event) {
+//   console.log(event.target);
+//   const el = event.target.closest('[data-ingredient-name]');
+//   console.log(el);
+//   let ingredientName = el.dataset.ingredientName;
+//   console.log(ingredientName);
+
+// }
+
+
+
 
 export function makeList(cocktail) {
   let quantityList = [];

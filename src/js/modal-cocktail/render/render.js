@@ -30,7 +30,7 @@ export function renderModalCocktail(
                 </div>
 
 
-                <button class="modal__button modal__button--add" type="button">
+                <button class="modal__button modal__button--add-cocktail" type="button">
                     Add to favorite
                 </button>
             </div>

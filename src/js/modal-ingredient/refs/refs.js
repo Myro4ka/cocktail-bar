@@ -6,7 +6,7 @@ export const testButtonRef = document.querySelector('.test-button');
 export const backdropIngredientRef = document.querySelector(
   '.js-backdrop-ingredient'
 );
-export const addToFavorBtn = document.querySelector('.button_modal--add');
+// export const addToFavorBtn = document.querySelector('.button_modal--add');
 export const modalIngredientRef = document.querySelector(
   '[data-modal-ingredient]'
 );

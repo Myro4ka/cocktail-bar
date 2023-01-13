@@ -32,18 +32,21 @@ export function oNaddClick(e) {
 }
 
 export function onAddIngridClick(e) {
-  if (!e.target.classList.contains('button_modal--add')) return;
+  if (!e.target.classList.contains('modal__button--add-ingredient')) return;
   if (!auth) {
     // return Notiflix.Notify('Log in, please!');
     return;
   }
   try {
-    const ingredient = document.querySelector(
-      '.modal__title--ingredient'
-    ).textContent;
-    console.log(ingredient);
+    const el = e.target.closest('[data-ingredient-name]').dataset
+      .ingredientName;
+    console.log('el', el);
+    // const ingredient = document.querySelector(
+    //   '.modal__title--ingredient'
+    // ).textContent;
+    // console.log(ingredient);
 
-    setIngrid(ingredient);
+    setIngrid(el);
     // const data = createDataObj(value);
     // console.log(data);
     //   передаем данные отправляем в базу данных

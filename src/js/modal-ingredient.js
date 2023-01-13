@@ -50,6 +50,8 @@ async function onOpenIngredientModal(event) {
       ingredientDescription,
       ingredientAlcohol
     );
+
+
   } catch (error) {
     console.log(error.message);
   }
@@ -68,4 +70,8 @@ export async function onCloseIngredientModal(event) {
 
 modalIngredientRef.addEventListener('click', onCloseIngredientModal);
 
+<<<<<<< HEAD
+//addToFavorBtn.addEventListener('click', onAddIngridClick);
+=======
 // addToFavorBtn.addEventListener('click', onAddIngridClick);
+>>>>>>> dev

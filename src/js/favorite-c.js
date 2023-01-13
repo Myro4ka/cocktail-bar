@@ -43,6 +43,7 @@ onAuthStateChanged(auth, user => {
           }
           console.log(arrayDrinks);
           main(arrayDrinks);
+          refs.coctailTitel.textContent = 'Favorite cocktails';
         });
         // array.map(idEl => {
         //   console.log(idEl);
