@@ -20,8 +20,7 @@ export function oNaddClick(e) {
   try {
     const coctailId = e.target.previousElementSibling.dataset.cocktailid;
     console.log(coctailId);
-    e.target.closest('.gallery__item').dataset.isFavorite = true;
-    console.log(e.target.closest('.gallery__item'));
+
     setCoctail(coctailId);
     // const data = createDataObj(value);
     // console.log(data);
@@ -30,7 +29,28 @@ export function oNaddClick(e) {
   } catch (error) {
     console.log(error);
   }
-  // e.target.reset();
+}
+
+export function onAddIngridClick(e) {
+  if (!e.target.classList.contains('button_modal--add')) return;
+  if (!auth) {
+    // return Notiflix.Notify('Log in, please!');
+    return;
+  }
+  try {
+    const ingredient = document.querySelector(
+      '.modal__title--ingredient'
+    ).textContent;
+    console.log(ingredient);
+
+    setIngrid(ingredient);
+    // const data = createDataObj(value);
+    // console.log(data);
+    //   передаем данные отправляем в базу данных
+    // sendData(data);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // создание обьекта
@@ -56,8 +76,6 @@ export function oNaddClick(e) {
 //     .catch(error => {
 //       console.log(error);
 //     });
-//   setCoctail(Date.now());
-//   setIngrid(Date.now());
 //   deleteIngrid(1673444181120);
 // }, 2000);
 // addBtn.addEventListener('click', oNaddClick);
