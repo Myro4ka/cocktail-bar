@@ -8,10 +8,6 @@ import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
 
 let coctailsAmount = 0;
-// переменная для идентификации кнопок коктейля
-let coctailNumber = 0;
-// переменная для определения типа добавляемого в избранное(коктейль или ингредиент)
-let storageKey = 0;
 
 let searchIn = 0;
 
@@ -40,58 +36,44 @@ export default function mainFunction(
   }
   const arrayRandomDrinks = [];
   for (let i = 0; i < amount; i += 1) {
-    // забираем у бекенда рандомный коктейль
-    fetchProductsRandom(searchLink).then(newData => {
-      if (searchIn === 1) {
-        fetchProductsRandom(searchLink).then(newData => {
-          coctailsAmount = newData.drinks.length;
-        });
-      }
-      // увеличиваем счетчик коклейлей на 1
-      coctailNumber += 1;
-      let coctailIterationNumber = 0;
-
-      if (searchIn) {
-        coctailIterationNumber = i;
-      }
-      arrayRandomDrinks.push(newData.drinks[coctailIterationNumber]);
-    });
+    arrayRandomDrinks.push(fetchProductsRandom(searchLink));
   }
-  console.log(arrayRandomDrinks);
-  // создаем разметку карточки
-  onAuthStateChanged(auth, () => {
-    let arrayFavorId = [];
-    getCocktails()
-      .then(response => {
-        arrayFavorId = Object.values(response);
-        console.log(arrayFavorId);
-      })
-      .catch(alert.log);
-    for (let elem of arrayRandomDrinks) {
-      console.log(elem);
-      const { strDrinkThumb = '', strDrink = '', idDrink = '' } = elem;
-      const uniq = arrayFavorId.find(value => idDrink === value);
-      console.log(uniq);
-      if (uniq) {
-        coctailCardMarkup(
-          mainMarkupPlace,
-          strDrink,
-          strDrinkThumb,
-          idDrink,
-          removeBtn
-        );
-      } else {
-        coctailCardMarkup(
-          mainMarkupPlace,
-          strDrink,
-          strDrinkThumb,
-          idDrink,
-          addBtn
-        );
-      }
+  Promise.all(arrayRandomDrinks)
+    .then(r => {
+      const result = r.map(d => d.drinks[0]);
+      getUser(result, mainMarkupPlace);
+    })
+    .catch(console.log);
+}
+
+function getUser(data, mainMarkupPlace) {
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      getCocktails()
+        .then(response => {
+          const arrayFavorId = Object.values(response);
+          addMarkup(data, mainMarkupPlace, arrayFavorId);
+        })
+        .catch(alert.log);
+    } else {
+      addMarkup(data, mainMarkupPlace);
     }
   });
 }
+
+function addMarkup(data, mainMarkupPlace, idC = []) {
+  data.forEach(({ strDrink, strDrinkThumb, idDrink }) => {
+    const btn = idC.includes(idDrink) ? removeBtn : addBtn;
+    return coctailCardMarkup(
+      mainMarkupPlace,
+      strDrink,
+      strDrinkThumb,
+      idDrink,
+      btn
+    );
+  });
+}
+
 mainFunction(
   0,
   'https://www.thecocktaildb.com/api/json/v1/1/random.php',
