@@ -54,7 +54,9 @@ export default function mainFunction(
 export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
     if (user) {
-      if (data.idIngredient) {
+      console.log('data.idIngredient',data[0].idIngredient);
+      console.log('data.idDrink',data[0].idDrink);
+      if (data[0].idIngredient) {
         getIngrids()
           .then(response => {
             if (response) {
@@ -65,7 +67,7 @@ export function getUser(data, mainMarkupPlace) {
             }
           })
           .catch(alert.log);
-      } else if (data.idDrink) {
+      } else if (data[0].idDrink) {
         getCocktails()
           .then(response => {
             if (response) {
