@@ -2,12 +2,14 @@ import {
   testButtonRef,
   modalIngredientRef,
   backdropIngredientRef,
+  addToFavorBtn,
 } from './modal-ingredient/refs/refs.js';
 
 import { getIngredientByID } from './modal-ingredient/api/api';
 
 import { renderModalIngredient } from './modal-ingredient/render/render';
-import {onEscKeyPress} from './modal-cocktail'
+import { onEscKeyPress } from './modal-cocktail';
+import { onAddIngridClick } from './auth/index.js';
 
 // TODO======== delete testButtonRef, only for modal test run
 
@@ -19,7 +21,7 @@ testButtonRef.addEventListener('click', onOpenIngredientModal);
 async function onOpenIngredientModal(event) {
   window.addEventListener('keydown', onEscKeyPress);
   modalIngredientRef.classList.remove('is-hidden');
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = 'hidden';
 
   try {
     let el = await event.target.closest('[data-ingredientId]');
@@ -65,3 +67,5 @@ export async function onCloseIngredientModal(event) {
 }
 
 modalIngredientRef.addEventListener('click', onCloseIngredientModal);
+
+addToFavorBtn.addEventListener('click', onAddIngridClick);
