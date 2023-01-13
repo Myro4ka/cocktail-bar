@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
 import { main } from './pagination';
 import { refs } from './gallery/refs/refs';

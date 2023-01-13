@@ -43,10 +43,11 @@ export const getCocktails = () => {
 };
 
 // Получение ингрид
-export const getIngrid = () => {
+export const getIngrids = () => {
   return get(ref(db, `${getUserId()}/${INGRID_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
+        console.log(snapshot.val());
         return snapshot.val();
       } else {
         console.log('No data available');
