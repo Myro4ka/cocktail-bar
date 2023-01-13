@@ -25,7 +25,7 @@ export const addBtn = `<button class="btn__add coctails-section__like-button" ty
                             Add to <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-heart"></use> </svg>
                         </button>`;
 export const removeBtn = `<button class="btn__add coctails-section__like-button" type="button">
-                            Remove <svg class="btn__svg" width="18" height="18"> <use href="${sprite}##icon-addheart"></use> </svg>
+                            Remove <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-addheart"></use> </svg>
                         </button>`;
 
 // export const svgHeart = `  <svg class="btn__svg" width="18" height="18"> <use href="${sprite}#icon-heart"></use> </svg>`;
