@@ -1,6 +1,6 @@
 import sprite from '../images/symbol-defs.svg';
-import { coctailCardMarkup } from './gallery/render/render';
-import { addBtn, removeBtn } from './gallery/render/render';
+import { coctailCardMarkup, addBtn, removeBtn } from './gallery/render/render';
+import { getUser } from './gallery';
 
 const refs = {
   pagination: document.querySelector('.pagination'),
@@ -27,10 +27,9 @@ export function main(postsData) {
     const start = rowPerPage * page;
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
-    paginatedData.forEach(({ strDrink, strDrinkThumb, idDrink }) => {
-      coctailCardMarkup(postsEl, strDrink, strDrinkThumb, idDrink, addBtn);
-    });
+    getUser(paginatedData, postsEl);
   }
+
   function displayPagination(arrData, rowPerPage) {
     const pagesCount = Math.ceil(arrData.length / rowPerPage);
     const paginationEl = document.querySelector('.pagination');
