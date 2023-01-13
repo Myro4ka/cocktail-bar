@@ -46,7 +46,7 @@ export default function mainFunction(
     .catch(console.log);
 }
 
-function getUser(data, mainMarkupPlace) {
+export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
     if (user) {
       getCocktails()
