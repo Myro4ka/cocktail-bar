@@ -6,7 +6,7 @@ export function renderModalIngredient(
   alcohol = ''
 ) {
   const markup = `
-            <div class="modal modal--ingredient ">
+            <div class="modal modal--ingredient" data-ingredient-name = '${ingredient}'>
               <button class="modal__close-button modal__close-button-ingredient js-modal-close-ingredient" data-modal-ingredient-close>
                   <svg class="modal__icon js-modal-icon-ingredient" width="32" height="32">
                       <use href="${iconModalClose}#icon-close-line" />
@@ -28,7 +28,7 @@ export function renderModalIngredient(
             
               </ul>
   
-              <button class="modal__button modal__button--add" type="button">
+              <button class="modal__button modal__button--add-ingredient" type="button">
                   Add to favorite
               </button>
             </div>

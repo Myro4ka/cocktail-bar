@@ -10,6 +10,7 @@ import './header/mob-menu.js';
 // import './modal-ingredient';
 
 onAuthStateChanged(auth, () => {
+  refs.coctailTitel.textContent = 'Favorite cocktails';
   getCocktails()
     .then(response => {
       console.log('response', response);
@@ -36,7 +37,7 @@ onAuthStateChanged(auth, () => {
             arrayDrinks.push(el);
           }
           main(arrayDrinks);
-          refs.coctailTitel.textContent = 'Favorite cocktails';
+
         });
       });
     })
