@@ -70,4 +70,8 @@ export async function onCloseIngredientModal(event) {
 
 modalIngredientRef.addEventListener('click', onCloseIngredientModal);
 
+<<<<<<< HEAD
 //addToFavorBtn.addEventListener('click', onAddIngridClick);
+=======
+// addToFavorBtn.addEventListener('click', onAddIngridClick);
+>>>>>>> dev

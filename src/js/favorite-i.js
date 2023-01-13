@@ -8,12 +8,16 @@ import { auth } from './auth/api/auth';
 import { refs } from './gallery/refs/refs';
 import { getIngrids } from './auth/api';
 import { getIngredientByName } from './modal-ingredient/api/api';
+import { main } from './pagination';
 
-onAuthStateChanged(auth, () => {
-  refs.coctailTitel.textContent = 'Favorite ingredients';
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    location.replace('/');
+  } else
   getIngrids()
     .then(response => {
       console.log('response', response);
+      refs.coctailTitel.textContent = 'Favorite ingredients';
       if (!response) {
         const markup = `<p>You haven't added any favorite ingredients yet</p>`;
         document
@@ -25,24 +29,22 @@ onAuthStateChanged(auth, () => {
       //       //  Получаем массив масива
       Object.entries(response).forEach(([key, value]) => {
         //         //Добавить key from firebase
-        array.push(+value);
+        array.push(value);
         console.log(array);
       });
-      //       // получаем массив
-      //       const arrayIngr = [];
-      //       array.map(idEl => {
-      //         console.log(idEl);
-      //         getIngredientByName(idEl).then(({ drinks }) => {
-      //           for (const el of drinks) {
-      //             arrayIngr.push(el);
-      //           }
-      //   main(arrayIngr);
-      //   refs.coctailTitel.textContent = 'Favorite ingredients';
-      //   });
-      //   });
+      const arrayIngrids = [];
+      const promises = array.map(name => getIngredientByName(name));
+      // console.log(promises);
+      Promise.all(promises).then(data => {
+         console.log(data);
+        for (const { ingredients } of data) {
+          arrayIngrids.push(ingredients[0]);
+        }
+        console.log(arrayIngrids);
+        main(arrayIngrids);
+      });
     })
     .catch(error => {
       console.log(error);
     });
 });
-// });
