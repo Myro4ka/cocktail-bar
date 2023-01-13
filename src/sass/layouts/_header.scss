@@ -33,6 +33,7 @@
 
 .nav {
   @include flex(space-between);
+  margin-right: 100px;
 }
 
 .search-wrap {
@@ -164,18 +165,18 @@
       color: $light-primary-color;
       background-color: $accent-color;
     }
+    &:hover a,
+    &:focus a{
+      color: $light-primary-color;
+      background-color: $accent-color;
+    } 
   }
 
   & a {
     width: 100%;
     // padding: 0;
     outline: none;
-
-    &:hover,
-    &:focus {
-      color: $light-primary-color;
-      background-color: $accent-color;
-    }
+    color: #000000;
   }
 
   & button:focus {
