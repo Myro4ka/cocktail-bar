@@ -51,8 +51,12 @@ export function getUser(data, mainMarkupPlace) {
     if (user) {
       getCocktails()
         .then(response => {
-          const arrayFavorId = Object.values(response);
-          addMarkup(data, mainMarkupPlace, arrayFavorId);
+          if (response) {
+            const arrayFavorId = Object.values(response);
+            addMarkup(data, mainMarkupPlace, arrayFavorId);
+          } else {
+            addMarkup(data, mainMarkupPlace);
+          }
         })
         .catch(alert.log);
     } else {
