@@ -13,9 +13,7 @@ import {
 } from './modal-cocktail/render/render';
 
 import { renderModalIngredient } from './modal-ingredient/render/render';
-
 import { onAddIngridClick } from './auth';
-
 import { openIngredientModal } from './modal-ingredient';
 
 export async function onLearnMoreClick(event) {
@@ -97,6 +95,14 @@ async function onListClick(event) {
   );
   addToFavorBtn.addEventListener('click', onAddIngridClick);
 }
+
+// function onAddIngridClickNew(event) {
+//   console.log(event.target);
+//   const el = event.target.closest('[data-ingredient-name]');
+//   console.log(el);
+//   let ingredientName = el.dataset.ingredientName;
+//   console.log(ingredientName);
+// }
 
 export function makeList(cocktail) {
   let quantityList = [];

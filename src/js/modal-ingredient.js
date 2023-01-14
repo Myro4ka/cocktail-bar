@@ -34,16 +34,13 @@ import { onAddIngridClick } from './auth/index.js';
 //   }
 // }
 
-export async function onCloseIngredientModal(event) {
-   
+export async function onCloseIngredientModal(event) {   
     modalIngredientRef.classList.add('is-hidden');
     // document.body.style.overflow = "visible";
     window.removeEventListener('keydown', onEscKeyPress);
   }
 
-
 export async function openIngredientModal(response) {
-
   const ingredientTitle = response.ingredients[0].strIngredient;
   const ingredientType = response.ingredients[0].strType || 'no information';
   const ingredientDescription =
@@ -88,5 +85,6 @@ export async function openIngredientModal(response) {
 }
 
 modalIngredientRef.addEventListener('click', onCloseIngredientModal);
+
 
 //addToFavorBtn.addEventListener('click', onAddIngridClick);
