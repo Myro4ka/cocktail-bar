@@ -6,7 +6,7 @@ import {
   ingredientCardMarkup,
 } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
-import { onLoadMoreClick } from './modal-cocktail';
+import { onLearnMoreClick } from './modal-cocktail';
 import { oNaddClick } from './auth';
 import { getCocktails, getIngrids } from './auth/api';
 import { onAuthStateChanged } from '@firebase/auth';
@@ -54,20 +54,22 @@ export default function mainFunction(
 export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log('data.idIngredient',data[0].idIngredient);
-      console.log('data.idDrink',data[0].idDrink);
       if (data[0].idIngredient) {
+        console.log('data.idIngredient', data[0].idIngredient);
+
         getIngrids()
           .then(response => {
             if (response) {
               const arrayFavorId = Object.values(response);
-              addMarkup(data, mainMarkupPlace, arrayFavorId);
+              addIngridMarkup(data, mainMarkupPlace, arrayFavorId);
             } else {
-              addMarkup(data, mainMarkupPlace);
+              addIngridMarkup(data, mainMarkupPlace);
             }
           })
           .catch(alert.log);
       } else if (data[0].idDrink) {
+        console.log('data.idDrink', data[0].idDrink);
+
         getCocktails()
           .then(response => {
             if (response) {
@@ -118,5 +120,5 @@ mainFunction(
   refs.coctailsList
 );
 
-refs.coctailsList.addEventListener('click', onLoadMoreClick);
+refs.coctailsList.addEventListener('click', onLearnMoreClick);
 refs.coctailsList.addEventListener('click', oNaddClick);

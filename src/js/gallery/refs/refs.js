@@ -5,5 +5,7 @@ export const refs = {
   coctailContainer:document.querySelectorAll('.coctail-container'),
   addLikeBtn: document.querySelector('.coctails-section__like-button'),
   paginationDiv: document.querySelector('.pagination'),
+
+  learmMoreBtn: document.querySelector('.btn__learn'),
 };
 
