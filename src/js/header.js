@@ -16,14 +16,14 @@ function onSubmit(e) {
 refsSearch.authBtn.addEventListener('click', onClickAuthBtn);
 
 function onClickAuthBtn(e) {
-  e.currentTarget.classList.add('is-active');
-  if (e.currentTarget.classList.contains('is-active')) {
-    e.currentTarget.classList.remove('is-active');
-  }
   if (auth.currentUser) {
+    if (e.currentTarget.classList.contains('is-active')) {
+      e.currentTarget.classList.remove('is-active');
+    }
     signOutUser();
     location.reload();
   } else {
+    e.currentTarget.classList.add('is-active');
     oNsignInWithPopup();
   }
 }
