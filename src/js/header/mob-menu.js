@@ -1,17 +1,22 @@
+import '../header';
+import '../switcher';
 import {
   refs,
   mobMenuRefs,
   favorMenuRefs,
   favorMobMenuRefs,
 } from './refs/mob-menu';
-import { searchCocktailsInput } from './api/search';
 import { auth } from '../auth/api/auth.js';
 import { onAuthStateChanged } from '@firebase/auth';
+import { searchCocktailsInput } from './api/search';
+import { onChecked } from '../switcher';
 
 (() => {
+  console.log(mobMenuRefs.switcher);
   mobMenuRefs.menuBtn.addEventListener('click', toggleMenu);
   mobMenuRefs.closeMenuBtn.addEventListener('click', toggleMenu);
   mobMenuRefs.menuList.addEventListener('click', removeMenu);
+  mobMenuRefs.switcher.addEventListener('change', onChecked);
 
   function toggleMenu() {
     mobMenuRefs.mobileMenu.classList.toggle('is-hidden');

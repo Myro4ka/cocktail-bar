@@ -3,7 +3,7 @@ function setTheme(themeName) {
   document.documentElement.className = themeName;
 }
 
-function toggleTheme() {
+export function onChecked(e) {
   if (localStorage.getItem('theme') === 'theme-dark') {
     setTheme('theme-light');
   } else {
@@ -14,9 +14,9 @@ function toggleTheme() {
 (function () {
   if (localStorage.getItem('theme') === 'theme-dark') {
     setTheme('theme-dark');
-    document.getElementById('slider').checked = false;
+    document.getElementById('slider').checked = true;
   } else {
     setTheme('theme-light');
-    document.getElementById('slider').checked = true;
+    document.getElementById('slider').checked = false;
   }
 })();

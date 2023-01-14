@@ -6,15 +6,16 @@
   &-title {
     font-family: $main-font;
     font-style: normal;
-
-    color: $second-text-color;
+    color: $accent-color;
   }
 
   &-text {
     display: block;
+
     font-family: 'Poppins';
     font-style: normal;
-    color: $dark-primary-color;
+    color: var(--color-text);
+    opacity: 0.8;
   }
 
   &-list {
@@ -113,6 +114,7 @@
   }
 }
 
+// ==============================================================================================
 @include tablet-only {
   .coctails-section-coctailTitel {
     margin-bottom: 62px;
@@ -192,6 +194,7 @@
   }
 }
 
+// =====================================================================================================
 @include mobile-only {
   .coctails-section-coctailTitel {
     margin-bottom: 63px;
@@ -270,8 +273,8 @@
 
       &:hover {
         background-color: $accent-color;
-        fill: $light-primary-color;
-        color: $light-primary-color;
+        fill: var(--color-primary);
+        color: var(--color-primary);
       }
     }
 
@@ -285,11 +288,11 @@
       display: none;
     }
 
-    .is-hden {
+    .is-hiden {
       display: none;
     }
 
-    .is-hden-select_display {
+    .is-hiden-select_display {
       display: flex;
     }
 
@@ -337,7 +340,7 @@
       height: 20px;
 
       &:hover {
-        fill: $light-primary-color;
+        fill: var(--color-primary);
       }
     }
   }

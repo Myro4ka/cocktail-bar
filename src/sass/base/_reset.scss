@@ -2,6 +2,20 @@ html {
   box-sizing: border-box;
 }
 
+.theme-light {
+  --color-primary: rgb(255, 255, 255);
+  --color-text: rgb(32, 32, 37);
+  --color-accent: rgb(253, 81, 3);
+  --color-switch-dark: rgb(32, 32, 37);
+}
+
+.theme-dark {
+  --color-primary: rgb(32, 32, 37);
+  --color-text: rgb(255, 255, 255);
+  --color-accent: rgb(255, 255, 255);
+  --color-switch-dark: rgb(253, 81, 3);
+}
+
 *,
 *::before,
 *::after {
@@ -13,19 +27,11 @@ body {
   color: $dark-primary-color;
   margin: 0;
 
-  background-color: $light-primary-color;
+  background-color: var(--color-primary);
 
   &.no-scroll {
     overflow: hidden;
   }
-}
-
-.theme-light {
-  --color-primary: $light-primary-color;
-}
-
-.theme-dark {
-  --color-primary: $dark-primary-color;
 }
 
 h1,
@@ -64,13 +70,11 @@ button {
   height: auto;
 }
 
-
 .section {
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 60px;
   padding-bottom: 60px;
-
 
   @include tablet {
     padding-top: 100px;

@@ -39,6 +39,10 @@
 .search-wrap {
   @include flex(space-between);
   gap: 40px;
+
+  & .menu-btn {
+    fill: var(--color-text);
+  }
 }
 
 .search-form {
@@ -56,6 +60,7 @@
 }
 
 .searchQuery {
+  background-color: transparent;
   color: $second-text-color;
   width: 100%;
   height: 100%;
@@ -104,7 +109,7 @@
     font-family: $main-font;
     font-size: 18px;
     line-height: 1.33;
-    color: $dark-primary-color;
+    color: var(--color-text);
 
     &:focus {
       color: $accent-color;
@@ -131,7 +136,7 @@
   font-family: $main-font;
   font-size: 18px;
   line-height: 1.33;
-  color: $dark-primary-color;
+  color: var(--color-text);
 
   &:hover,
   &:focus {
@@ -148,6 +153,7 @@
   width: 210px;
   margin: 0;
 
+  background-color: var(--color-primary);
   border: 1px solid $accent-color;
   border-radius: 4px;
 
@@ -158,28 +164,24 @@
     font-family: $main-font;
     font-size: 18px;
     line-height: 1.33;
-    color: $dark-primary-color;
+    color: var(--color-text);
 
     &:hover,
     &:focus {
-      color: $light-primary-color;
+      color: var(--color-primary);
       background-color: $accent-color;
     }
-    &:hover a,
-    &:focus a{
-      color: $light-primary-color;
-      background-color: $accent-color;
-    } 
   }
 
   & a {
     width: 100%;
-    // padding: 0;
     outline: none;
-    color: #000000;
-  }
+    color: var(--color-text);
 
-  & button:focus {
-    color: $light-accent-color;
+    &:hover,
+    &:focus {
+      color: var(--color-primary);
+      background-color: $accent-color;
+    }
   }
 }
