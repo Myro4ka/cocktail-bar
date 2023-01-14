@@ -65,6 +65,11 @@
     justify-content: space-between;
   }
 
+  &__item--ingredient {
+    height: 205px;
+    padding-top: 30px ;
+  }
+
   &__img {
     margin-bottom: 48px;
     width: 100%;
@@ -100,6 +105,11 @@
     @include desktop {
       margin-bottom: 27px;
       font-size: 32px;
+    }
+
+    &--ingredient {
+      margin-left: 20px;
+      text-align-last: left;
     }
   }
 
@@ -181,4 +191,16 @@
 
 .coctails-section__coctails-img-div {
   margin: 0 auto;
+}
+
+.ingredient-type {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  text-align-last: left;
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #5f6775;
 }
