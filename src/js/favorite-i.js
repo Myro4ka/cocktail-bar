@@ -1,6 +1,7 @@
 // import './gallery';
 import './modal-cocktail';
 // import './modal-ingredient';
+import './header';
 import './header/mob-menu.js';
 import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';

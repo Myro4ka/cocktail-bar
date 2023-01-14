@@ -29,12 +29,7 @@ export const getCocktailsAmount = section => {
 };
 getCocktailsAmount(refs.coctailsSection);
 
-export default function mainFunction(
-  searchIn,
-  searchLink,
-  amount,
-  mainMarkupPlace
-) {
+export function mainFunction(searchIn, searchLink, amount, mainMarkupPlace) {
   if (!mainMarkupPlace) return;
   if (searchIn < 2 && mainMarkupPlace) {
     mainMarkupPlace.innerHTML = '';
@@ -43,8 +38,10 @@ export default function mainFunction(
   for (let i = 0; i < amount; i += 1) {
     arrayRandomDrinks.push(fetchProductsRandom(searchLink));
   }
+
   Promise.all(arrayRandomDrinks)
     .then(r => {
+      console.log(r);
       const result = r.map(d => d.drinks[0]);
       getUser(result, mainMarkupPlace);
     })

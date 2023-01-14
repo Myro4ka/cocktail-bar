@@ -7,7 +7,7 @@
   padding-top: 20px;
   overflow-y: scroll;
 
-  background-color: $light-primary-color;
+  background-color: var(--color-primary);
 
   & .container {
     position: relative;
@@ -85,11 +85,15 @@
       background-color: inherit;
       border: none;
       outline: none;
+
+      & svg {
+        fill: var(--color-text);
+      }
     }
   }
 
   &__item {
-    color: $dark-primary-color;
+    color: var(--color-text);
     font-size: 28px;
     line-height: 24px;
     letter-spacing: 0.02em;
@@ -98,6 +102,11 @@
     &:focus {
       color: $accent-color;
       outline: none;
+    }
+
+    &:hover svg,
+    &:focus svg {
+      fill: $accent-color;
     }
   }
 
@@ -123,23 +132,22 @@
       font-family: $main-font;
       font-size: 18px;
       line-height: 1.33;
-      color: $dark-primary-color;
+      color: var(--color-text);
 
       &:hover,
       &:focus {
-        color: $light-primary-color;
+        color: var(--color-primary);
         background-color: $accent-color;
       }
     }
 
     & a {
       width: 100%;
-      // padding: 0;
       outline: none;
 
       &:hover,
       &:focus {
-        color: $light-primary-color;
+        color: var(--color-primary);
         background-color: $accent-color;
       }
     }
@@ -161,6 +169,8 @@
     position: absolute;
     top: 0;
     right: 20px;
+
+    fill: var(--color-text);
 
     @include tablet {
       position: static;

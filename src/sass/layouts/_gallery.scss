@@ -8,7 +8,7 @@
   &__title {
     margin: 0 auto 60px;
     width: 100%;
-    color: #202025;
+    color: var(--color-text);
     font-size: 22px;
     line-height: 1.9;
     font-weight: 600;
@@ -90,7 +90,7 @@
 
   &__card-title {
     margin-bottom: 16px;
-    color: #202025;
+    color: var(--color-text);
     font-family: 'Roboto';
     font-size: 26px;
     line-height: 1.6;
@@ -117,6 +117,7 @@
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 24px;
+
     @include tablet {
       margin-bottom: 20px;
     }
@@ -131,11 +132,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fcfcfc;
+  color: $light-primary-color;
   min-width: 108px;
   min-height: 39px;
   border: none;
-  background-color: #fe7031;
+  background-color: $light-accent-color;
   border-radius: 4px;
   font-family: 'Roboto';
 
@@ -143,6 +144,12 @@
   line-height: 1.14;
   font-weight: 400;
   letter-spacing: 0.02em;
+
+  &:hover,
+  &:focus {
+    background-color: $accent-color;
+    outline: 1px solid $accent-color;
+  }
 
   @include tablet {
     width: 160px;
@@ -169,11 +176,16 @@
   border: 1px solid $accent-color;
   border-radius: 4px;
   color: $accent-color;
-  background: #fcfcfc;
+  background: var(--color-primary);
   font-family: 'Roboto';
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
+
+  &:hover,
+  &:focus {
+    outline: 1px solid $accent-color;
+  }
 
   @include tablet {
     width: 123px;

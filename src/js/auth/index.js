@@ -22,6 +22,7 @@ export function oNaddClick(e) {
     console.log(coctailId);
 
     setCoctail(coctailId);
+
     // const data = createDataObj(value);
     // console.log(data);
     //   передаем данные отправляем в базу данных
