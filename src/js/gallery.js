@@ -112,12 +112,14 @@ function addIngridMarkup(data, mainMarkupPlace, idC = []) {
   });
 }
 
-mainFunction(
-  0,
-  'https://www.thecocktaildb.com/api/json/v1/1/random.php',
-  coctailsAmount,
-  refs.coctailsList
-);
+if (!window.location.href.includes('favorites')) {
+  mainFunction(
+    0,
+    'https://www.thecocktaildb.com/api/json/v1/1/random.php',
+    coctailsAmount,
+    refs.coctailsList
+  );
+}
 
 refs.coctailsList.addEventListener('click', onLearnMoreClick);
 refs.coctailsList.addEventListener('click', oNaddClick);
