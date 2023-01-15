@@ -8,7 +8,7 @@
   &__title {
     margin: 0 auto 60px;
     width: 100%;
-    color: #202025;
+    color: var(--color-text);
     font-size: 22px;
     line-height: 1.9;
     font-weight: 600;
@@ -52,17 +52,21 @@
 
     @include tablet {
       width: calc((100% - 32px) / 2);
-
     }
     @include desktop {
       width: calc((100% - 64px) / 3);
     }
   }
- .coctail-container{
+  .coctail-container {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__item--ingredient {
+    height: 205px;
+    padding-top: 30px;
   }
 
   &__img {
@@ -76,7 +80,7 @@
     }
   }
 
-  &__card{
+  &__card {
     display: flex;
     flex-grow: 2;
     flex-direction: column;
@@ -85,7 +89,7 @@
 
   &__card-title {
     margin-bottom: 16px;
-    color: #202025;
+    color: var(--color-text);
     font-family: 'Roboto';
     font-size: 26px;
     line-height: 1.6;
@@ -101,12 +105,18 @@
       margin-bottom: 27px;
       font-size: 32px;
     }
+
+    &--ingredient {
+      margin-left: 20px;
+      text-align-last: left;
+    }
   }
 
   &__card-btns {
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 24px;
+
     @include tablet {
       margin-bottom: 20px;
     }
@@ -121,11 +131,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fcfcfc;
+  color: $light-primary-color;
   min-width: 108px;
   min-height: 39px;
   border: none;
-  background-color: #fe7031;
+  background-color: $light-accent-color;
   border-radius: 4px;
   font-family: 'Roboto';
 
@@ -133,6 +143,12 @@
   line-height: 1.14;
   font-weight: 400;
   letter-spacing: 0.02em;
+
+  &:hover,
+  &:focus {
+    background-color: $accent-color;
+    outline: 1px solid $accent-color;
+  }
 
   @include tablet {
     width: 160px;
@@ -152,18 +168,57 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-left: 16px;
   min-width: 108px;
   min-height: 39px;
   text-align: start;
   border: 1px solid $accent-color;
   border-radius: 4px;
   color: $accent-color;
-  background: #fcfcfc;
+  background: var(--color-primary);
   font-family: 'Roboto';
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
+
+  &:hover,
+  &:focus {
+    outline: 1px solid $accent-color;
+  }
+
+  @include tablet {
+    width: 123px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+
+  @include desktop {
+    width: 141px;
+    height: 48px;
+  }
+}
+
+.btn__remove {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 108px;
+  min-height: 39px;
+  text-align: start;
+  border: 1px solid $accent-color;
+  border-radius: 4px;
+  color: $accent-color;
+  background: var(--color-primary);
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+
+  &:hover,
+  &:focus {
+    outline: 1px solid $accent-color;
+  }
 
   @include tablet {
     width: 123px;
@@ -181,4 +236,16 @@
 
 .coctails-section__coctails-img-div {
   margin: 0 auto;
+}
+
+.ingredient-type {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  text-align-last: left;
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #5f6775;
 }

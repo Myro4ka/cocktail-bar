@@ -6,25 +6,40 @@ import {
 } from './modal-cocktail/refs/refs';
 
 import { getCocktailById, getIngredientByName } from './modal-cocktail/api/api';
-
+import { getIngredientByID } from './modal-ingredient/api/api';
 import {
   renderList,
   renderModalCocktail,
 } from './modal-cocktail/render/render';
 
 import { renderModalIngredient } from './modal-ingredient/render/render';
-
 import { onAddIngridClick } from './auth';
+import { openIngredientModal } from './modal-ingredient';
 
-export async function onLoadMoreClick(event) {
+export async function onLearnMoreClick(activeBtn) {
+  if (
+    !activeBtn.classList.contains('btn__learn') &&
+    !activeBtn.classList.contains('btn__learn--ingredient')
+  )
+    return;
   try {
-    if (!event.target.classList.contains('btn__learn')) return;
-    const id = event.target.dataset.cocktailid;
-    // console.log(id);
+    if (activeBtn.classList.contains('btn__learn--cocktail')) {
+      const id = activeBtn.dataset.cocktailid;
+      // console.log(id);
+      const response = await getCocktailById(id);
+      openCocktailModal(response);
+    }
 
-    const response = await getCocktailById(id);
+    if (activeBtn.classList.contains('btn__learn--ingredient')) {
+      const id = activeBtn.dataset.ingredientid;
 
-    openCocktailModal(response);
+      //console.log(id);
+
+      const response = await getIngredientByID(id);
+      //console.log(response);
+
+      openIngredientModal(response);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -67,41 +82,12 @@ async function onListClick(event) {
   const response = await getIngredientByName(dataIngredient);
   // console.log('response ingredient', response.ingredients[0]);
 
-  const ingredientTitle = response.ingredients[0].strIngredient;
-  const ingredientType = response.ingredients[0].strType || 'no information';
-  const ingredientDescription =
-    response.ingredients[0].strDescription || 'no information';
+  openIngredientModal(response);
 
-  let ingredientAlcohol = '';
-  response.ingredients[0].strABV + ' %' || 'no information';
-  if (
-    response.ingredients[0].strAlcohol.toLowerCase() === 'yes' &&
-    response.ingredients[0].strABV
-  ) {
-    ingredientAlcohol = `${response.ingredients[0].strABV} %`;
-  } else {
-    ingredientAlcohol = 'no information';
-  }
-
-  if (response.ingredients[0].strAlcohol.toLowerCase() === 'no') {
-    ingredientAlcohol = `no alcohol`;
-  }
-
-  modalIngredientRef.classList.remove('is-hidden');
-  document.body.style.overflow = 'hidden';
-
-  backdropIngredientRef.innerHTML = renderModalIngredient(
-    ingredientTitle,
-    ingredientType,
-    ingredientDescription,
-    ingredientAlcohol
-  );
   const modalCloseIngredientBtn = document.querySelector(
     '.js-modal-close-ingredient'
   );
   modalCloseIngredientBtn.addEventListener('click', onCloseModalIngredient);
-
-
 
   const addToFavorBtn = document.querySelector(
     '.modal__button--add-ingredient'
@@ -109,18 +95,13 @@ async function onListClick(event) {
   addToFavorBtn.addEventListener('click', onAddIngridClick);
 }
 
-
 // function onAddIngridClickNew(event) {
 //   console.log(event.target);
 //   const el = event.target.closest('[data-ingredient-name]');
 //   console.log(el);
 //   let ingredientName = el.dataset.ingredientName;
 //   console.log(ingredientName);
-
 // }
-
-
-
 
 export function makeList(cocktail) {
   let quantityList = [];
@@ -172,6 +153,8 @@ export function onEscKeyPress(event) {
     !modalCocktailRef.classList.contains('is-hidden')
   ) {
     modalCocktailRef.classList.add('is-hidden');
+    document.body.style.overflow = 'visible';
+
     return;
   }
 }
@@ -200,10 +183,10 @@ function onCloseModalCocktail() {
   document.body.style.overflow = 'visible';
 }
 
-function toggleModal() {
-  modalCocktailRef.classList.toggle('is-hidden');
-  document.body.style.overflow = 'visible';
-}
+// function toggleModal() {
+//   modalCocktailRef.classList.toggle('is-hidden');
+//   document.body.style.overflow = 'visible';
+// }
 
 backdropCocktailRef.addEventListener('click', event => {
   if (

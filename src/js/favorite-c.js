@@ -5,7 +5,7 @@ import { refs } from './gallery/refs/refs';
 import { getCocktails } from './auth/api';
 import { getCocktailById } from './modal-cocktail/api/api';
 import './header';
-import './gallery';
+// import './gallery';
 import './modal-cocktail';
 import './header/mob-menu.js';
 // import './modal-ingredient';

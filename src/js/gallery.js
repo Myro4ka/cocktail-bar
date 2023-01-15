@@ -6,8 +6,8 @@ import {
   ingredientCardMarkup,
 } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
-import { onLoadMoreClick } from './modal-cocktail';
-import { oNaddClick } from './auth';
+import { onLearnMoreClick } from './modal-cocktail';
+import { onActionStorageBtnClick } from './auth';
 import { getCocktails, getIngrids } from './auth/api';
 import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
@@ -29,12 +29,7 @@ export const getCocktailsAmount = section => {
 };
 getCocktailsAmount(refs.coctailsSection);
 
-export default function mainFunction(
-  searchIn,
-  searchLink,
-  amount,
-  mainMarkupPlace
-) {
+export function mainFunction(searchIn, searchLink, amount, mainMarkupPlace) {
   if (!mainMarkupPlace) return;
   if (searchIn < 2 && mainMarkupPlace) {
     mainMarkupPlace.innerHTML = '';
@@ -43,8 +38,10 @@ export default function mainFunction(
   for (let i = 0; i < amount; i += 1) {
     arrayRandomDrinks.push(fetchProductsRandom(searchLink));
   }
+
   Promise.all(arrayRandomDrinks)
     .then(r => {
+      console.log(r);
       const result = r.map(d => d.drinks[0]);
       getUser(result, mainMarkupPlace);
     })
@@ -54,20 +51,21 @@ export default function mainFunction(
 export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log('data.idIngredient',data[0].idIngredient);
-      console.log('data.idDrink',data[0].idDrink);
       if (data[0].idIngredient) {
+        console.log('data.idIngredient', data[0].idIngredient);
         getIngrids()
           .then(response => {
             if (response) {
               const arrayFavorId = Object.values(response);
-              addMarkup(data, mainMarkupPlace, arrayFavorId);
+
+              addIngridMarkup(data, mainMarkupPlace, arrayFavorId);
             } else {
-              addMarkup(data, mainMarkupPlace);
+              addIngridMarkup(data, mainMarkupPlace);
             }
           })
           .catch(alert.log);
       } else if (data[0].idDrink) {
+        console.log('data.idDrink', data[0].idDrink);
         getCocktails()
           .then(response => {
             if (response) {
@@ -111,12 +109,16 @@ function addIngridMarkup(data, mainMarkupPlace, idC = []) {
   });
 }
 
-mainFunction(
-  0,
-  'https://www.thecocktaildb.com/api/json/v1/1/random.php',
-  coctailsAmount,
-  refs.coctailsList
-);
+if (!window.location.href.includes('favorites')) {
+  mainFunction(
+    0,
+    'https://www.thecocktaildb.com/api/json/v1/1/random.php',
+    coctailsAmount,
+    refs.coctailsList
+  );
+}
 
-refs.coctailsList.addEventListener('click', onLoadMoreClick);
-refs.coctailsList.addEventListener('click', oNaddClick);
+// refs.coctailsList.addEventListener('click', onLearnMoreClick);
+// refs.addLikeBtn.addEventListener('click', onAddClick);
+
+refs.coctailsList.addEventListener('click', onActionStorageBtnClick);

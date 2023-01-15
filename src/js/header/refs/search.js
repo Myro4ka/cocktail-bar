@@ -5,6 +5,7 @@ export const refsSearch = {
   mobInputForm: document.querySelector('.mob-menu .searchQuery'),
 
   authBtn: document.querySelector('.auth'),
+  switchBtn: document.querySelector('#slider'),
 
   cocktailsTitle: document.querySelector('.gallery__title'),
   cocktailsList: document.querySelector('.gallery__list'),
