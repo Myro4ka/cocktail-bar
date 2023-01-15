@@ -11,7 +11,9 @@ const db = getDatabase();
 
 export const getUserId = () => {
   const auth = getAuth();
-  console.log(auth);
+  // console.log(auth);
+  console.log(auth.currentUser.displayName);
+
   return auth.currentUser.uid;
 };
 
@@ -20,7 +22,7 @@ export const getCocktails = () => {
   return get(ref(db, `${getUserId()}/${COCKTAIL_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        console.log(snapshot);
+        // console.log(snapshot);
         return snapshot.val();
       } else {
         console.log('No data available');
@@ -36,7 +38,7 @@ export const getIngrids = () => {
   return get(ref(db, `${getUserId()}/${INGRID_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         return snapshot.val();
       } else {
         console.log('No data available');
@@ -69,7 +71,7 @@ export const setIngrid = id => {
 };
 // Удаление
 export const deleteCocktail = id => {
-  console.log(id);
+  // console.log(id);
   getCocktails().then(response => {
     Object.entries(response).forEach(([key, value]) => {
       if (value === id) {
@@ -87,6 +89,6 @@ export const deleteIngrid = id => {
         remove(ref(db, `${getUserId()}/${INGRID_KEY}/${key}`));
       }
     });
-    console.log(response);
+    // console.log(response);
   });
 };
