@@ -19,7 +19,9 @@ onAuthStateChanged(auth, () => {
 refsSearch.switchBtn.addEventListener('change', onChecked);
 
 refsSearch.form.addEventListener('submit', onSubmit);
-
+if (window.location.href.includes('favorites')) {
+  refsSearch.form.removeEventListener('submit', onSubmit);
+}
 function onSubmit(e) {
   e.preventDefault();
 

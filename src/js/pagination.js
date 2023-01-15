@@ -8,7 +8,7 @@ const refs = {
 
 export function main(postsData) {
   refs.pagination.classList.remove('visually-hidden');
-  console.log(postsData);
+
   let currentPage = 1;
   let page = 1;
   let rows;
@@ -28,6 +28,7 @@ export function main(postsData) {
     const start = rowPerPage * page;
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
+
     getUser(paginatedData, postsEl);
   }
 
