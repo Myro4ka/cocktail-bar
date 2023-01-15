@@ -28,7 +28,6 @@ export function main(postsData) {
     const start = rowPerPage * page;
     const end = start + rowPerPage;
     const paginatedData = arrData.slice(start, end);
-
     getUser(paginatedData, postsEl);
   }
 

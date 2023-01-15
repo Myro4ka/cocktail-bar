@@ -6,7 +6,7 @@ import { searchCocktailsInput } from './header/api/search';
 // import { getUserId } from './auth/api';
 import { auth, oNsignInWithPopup, signOutUser } from './auth/api/auth';
 import { onChecked } from './switcher';
-
+import { Block } from 'notiflix/build/notiflix-block-aio';
 onAuthStateChanged(auth, () => {
   if (auth.currentUser) {
     if (refsSearch.authBtn.classList.contains('is-active')) {
@@ -48,4 +48,8 @@ function onClickAuthBtn(e) {
     e.currentTarget.classList.add('is-active');
     oNsignInWithPopup();
   }
+  Block.arrows('.gallery', {
+    svgSize: '200px',
+  });
+  Block.remove('.gallery', 2000);
 }

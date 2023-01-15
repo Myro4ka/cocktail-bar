@@ -12,7 +12,7 @@ import { getCocktails, getIngrids } from './auth/api';
 import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
 import { responseNull } from './gallery/render/response_null';
-
+import { Block } from 'notiflix/build/notiflix-block-aio';
 let coctailsAmount = 0;
 
 let searchIn = 0;
@@ -127,3 +127,7 @@ if (!window.location.href.includes('favorites')) {
 // refs.addLikeBtn.addEventListener('click', onAddClick);
 
 refs.coctailsList.addEventListener('click', onActionStorageBtnClick);
+Block.arrows('.gallery', {
+  svgSize: '200px',
+});
+Block.remove('.gallery', 1000);

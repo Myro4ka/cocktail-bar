@@ -1,6 +1,6 @@
 import { refst } from './hero/refs/refs';
 import { cocktalis } from './hero/api/api';
-
+import { Block } from 'notiflix/build/notiflix-block-aio';
 let arrayLength = 0;
 
 const {
@@ -94,6 +94,11 @@ function clickHeroTitel(e) {
     });
     hover.classList.add('is-hover');
     cocktalis(target);
+    Block.arrows('.gallery', {
+      cssAnimationDuration: 1881,
+      svgSize: '200px',
+    });
+    Block.remove('.gallery', 2000);
   }
 }
 
