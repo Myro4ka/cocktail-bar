@@ -171,6 +171,11 @@
       color: var(--color-primary);
       background-color: $accent-color;
     }
+    &:hover a,
+    &:focus a {
+      color: $light-primary-color;
+      background-color: $accent-color;
+    }
   }
 
   & a {
