@@ -43,6 +43,7 @@ function onFavorBtn(e) {
   favorMenuRefs.favorBtn.setAttribute('aria-expanded', !expanded);
 
   favorMenuRefs.favorMenu.classList.toggle('is-open');
+  window.addEventListener('keydown', onEscKeyPress);
 }
 
 (() => {
@@ -69,4 +70,18 @@ function onMobSubmit(e) {
   mobMenuRefs.mobileMenu.classList.add('is-hidden');
   mobMenuRefs.body.classList.toggle('no-scroll');
   refs.mobMenuForm.reset();
+}
+
+function onEscKeyPress(event) {
+  if (event.code === 'Escape') {
+    console.log('escape');
+    const expanded =
+      favorMenuRefs.favorBtn.getAttribute('aria-expanded') === 'true' || false;
+    favorMenuRefs.favorBtn.closest('.nav-item').classList.toggle('is-open');
+    favorMenuRefs.favorBtn.setAttribute('aria-expanded', !expanded);
+
+    favorMenuRefs.favorMenu.classList.toggle('is-open');
+  }
+  window.removeEventListener('keydown', onEscKeyPress);
+
 }
