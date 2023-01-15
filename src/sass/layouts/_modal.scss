@@ -261,11 +261,19 @@
     color: var(--color-primary);
   }
 
-  &--add {
+  &--add-ingredient {
     width: 185px;
   }
 
-  &--remove {
+  &--remove-ingredient {
+    width: 248px;
+  }
+
+  &--add-cocktail {
+    width: 185px;
+  }
+
+  &--remove-cocktail {
     width: 248px;
   }
 
