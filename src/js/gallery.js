@@ -118,7 +118,4 @@ if (!window.location.href.includes('favorites')) {
   );
 }
 
-// refs.coctailsList.addEventListener('click', onLearnMoreClick);
-// refs.addLikeBtn.addEventListener('click', onAddClick);
-
 refs.coctailsList.addEventListener('click', onActionStorageBtnClick);
