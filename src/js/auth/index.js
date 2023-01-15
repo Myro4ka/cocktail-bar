@@ -3,6 +3,7 @@ import { refs } from '../gallery/refs/refs';
 import { setCoctail, setIngrid, deleteIngrid, deleteCocktail } from './api';
 import { auth } from './api/auth';
 import { onAuthStateChanged } from '@firebase/auth';
+import { onLearnMoreClick } from '../modal-cocktail';
 import Notiflix from 'notiflix';
 import { type } from 'os';
 import { isAbsolute } from 'path';
@@ -12,37 +13,44 @@ export function onActionStorageBtnClick(e) {
     !e.target.classList.contains('btn__add') &&
     !e.target.classList.contains('btn__remove') &&
     !e.target.classList.contains('btn__svg') &&
-    !e.target.hasAttribute('href')
+    !e.target.hasAttribute('href') &&
+    !e.target.classList.contains('btn__learn')
   )
     return;
-  const actionCard = [...e.currentTarget.children].find(childNode =>
-    childNode.contains(e.target)
-  );
-  const idCocktail = actionCard.querySelector('.btn__learn').dataset.cocktailid;
-  if (actionCard.querySelector('.btn__add')) {
-    onAuthStateChanged(auth, user => {
-      if (!user) {
-        // return Notiflix.Notify('Log in, please!');
-        return;
-      }
-      if (actionCard.querySelector('.btn__remove')) {
-        actionCard
-          .querySelector('.btn__remove')
-          .classList.add('visually-hidden');
-        actionCard
-          .querySelector('.btn__add')
-          .classList.remove('visually-hidden');
-        deleteCocktail(idCocktail);
-        return;
-      } else {
-        onAddClick(idCocktail, actionCard);
-      }
-    });
-  } else if (actionCard.querySelector('.btn__remove')) {
-    onRemoveClick(idCocktail, actionCard);
+  else if (e.target.classList.contains('btn__learn')) {
+    console.log(e.target);
+    onLearnMoreClick(e.target);
+  } else {
+    const actionCard = [...e.currentTarget.children].find(childNode =>
+      childNode.contains(e.target)
+    );
+    const idCocktail =
+      actionCard.querySelector('.btn__learn').dataset.cocktailid;
+    if (actionCard.querySelector('.btn__add')) {
+      onAuthStateChanged(auth, user => {
+        if (!user) {
+          // return Notiflix.Notify('Log in, please!');
+          return;
+        }
+        if (actionCard.querySelector('.btn__remove')) {
+          actionCard
+            .querySelector('.btn__remove')
+            .classList.add('visually-hidden');
+          actionCard
+            .querySelector('.btn__add')
+            .classList.remove('visually-hidden');
+          deleteCocktail(idCocktail);
+          return;
+        } else {
+          onAddClick(idCocktail, actionCard);
+        }
+      });
+    } else if (actionCard.querySelector('.btn__remove')) {
+      onRemoveClick(idCocktail, actionCard);
+    }
+    // }
+    return;
   }
-  // }
-  return;
 }
 
 // Сабмит получение данных
