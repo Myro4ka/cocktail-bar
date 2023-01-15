@@ -20,7 +20,7 @@ onAuthStateChanged(auth, (user) => {
       console.log('response', response);
       refs.coctailTitel.textContent = 'Favorite ingredients';
       if (!response) {
-        const markup = `<p>You haven't added any favorite ingredients yet</p>`;
+        const markup = `<p class="no-added-message__text">You haven't added any favorite ingredients yet</p>`;
         document
           .querySelector('.gallery.container')
           .insertAdjacentHTML('beforeend', markup);
