@@ -5,7 +5,7 @@ import { getAuth } from 'firebase/auth';
 
 const app = initializeApp(firebaseConfig);
 
-const COCTAILS_KEY = 'coctails';
+const COCKTAIL_KEY = 'coctails';
 const INGRID_KEY = 'ingrid';
 const db = getDatabase();
 
@@ -15,20 +15,9 @@ export const getUserId = () => {
   return auth.currentUser.uid;
 };
 
-// Принимает обьект и пушить необходимые данные
-// На основі неї робили set
-// export const sendData = (data = {}) => {
-//   try {
-//     // Сохраняем данные
-//     push(ref(db, 'userdata'), data);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 // Получение коктейля
 export const getCocktails = () => {
-  return get(ref(db, `${getUserId()}/${COCTAILS_KEY}`))
+  return get(ref(db, `${getUserId()}/${COCKTAIL_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
         console.log(snapshot);
@@ -60,12 +49,12 @@ export const getIngrids = () => {
 
 // Добавление Коктейля
 export const setCoctail = id => {
-  return push(ref(db, `${getUserId()}/${COCTAILS_KEY}`), id)
+  return push(ref(db, `${getUserId()}/${COCKTAIL_KEY}`), id)
     .then(() => {
       // Data saved successfully!
     })
     .catch(error => {
-      // The write failed...
+      console.error(error);
     });
 };
 // Добавление Ингридиента
@@ -75,10 +64,22 @@ export const setIngrid = id => {
       // Data saved successfully!
     })
     .catch(error => {
-      // The write failed...
+      console.error(error);
     });
 };
 // Удаление
+export const deleteCocktail = id => {
+  console.log(id);
+  getCocktails().then(response => {
+    Object.entries(response).forEach(([key, value]) => {
+      if (value === id) {
+        remove(ref(db, `${getUserId()}/${COCKTAIL_KEY}/${key}`));
+      }
+    });
+    console.log(response);
+  });
+};
+
 export const deleteIngrid = id => {
   getIngrid().then(response => {
     Object.entries(response).forEach(([key, value]) => {

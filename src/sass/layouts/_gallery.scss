@@ -52,13 +52,12 @@
 
     @include tablet {
       width: calc((100% - 32px) / 2);
-
     }
     @include desktop {
       width: calc((100% - 64px) / 3);
     }
   }
- .coctail-container{
+  .coctail-container {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -67,7 +66,7 @@
 
   &__item--ingredient {
     height: 205px;
-    padding-top: 30px ;
+    padding-top: 30px;
   }
 
   &__img {
@@ -81,7 +80,7 @@
     }
   }
 
-  &__card{
+  &__card {
     display: flex;
     flex-grow: 2;
     flex-direction: column;
@@ -169,7 +168,41 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-left: 16px;
+  min-width: 108px;
+  min-height: 39px;
+  text-align: start;
+  border: 1px solid $accent-color;
+  border-radius: 4px;
+  color: $accent-color;
+  background: var(--color-primary);
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+
+  &:hover,
+  &:focus {
+    outline: 1px solid $accent-color;
+  }
+
+  @include tablet {
+    width: 123px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+
+  @include desktop {
+    width: 141px;
+    height: 48px;
+  }
+}
+
+.btn__remove {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   min-width: 108px;
   min-height: 39px;
   text-align: start;

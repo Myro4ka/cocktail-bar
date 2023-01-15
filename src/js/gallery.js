@@ -7,7 +7,7 @@ import {
 } from './gallery/render/render';
 import { fetchProductsRandom } from './gallery/api/api';
 import { onLearnMoreClick } from './modal-cocktail';
-import { oNaddClick } from './auth';
+import { onActionStorageBtnClick } from './auth';
 import { getCocktails, getIngrids } from './auth/api';
 import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
@@ -118,5 +118,7 @@ if (!window.location.href.includes('favorites')) {
   );
 }
 
-refs.coctailsList.addEventListener('click', onLearnMoreClick);
-refs.coctailsList.addEventListener('click', oNaddClick);
+// refs.coctailsList.addEventListener('click', onLearnMoreClick);
+// refs.addLikeBtn.addEventListener('click', onAddClick);
+
+refs.coctailsList.addEventListener('click', onActionStorageBtnClick);
