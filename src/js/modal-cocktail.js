@@ -16,22 +16,22 @@ import { renderModalIngredient } from './modal-ingredient/render/render';
 import { onAddIngridClick } from './auth';
 import { openIngredientModal } from './modal-ingredient';
 
-export async function onLearnMoreClick(event) {
+export async function onLearnMoreClick(activeBtn) {
   if (
-    !event.target.classList.contains('btn__learn') &&
-    !event.target.classList.contains('btn__learn--ingredient')
+    !activeBtn.classList.contains('btn__learn') &&
+    !activeBtn.classList.contains('btn__learn--ingredient')
   )
     return;
   try {
-    if (event.target.classList.contains('btn__learn--cocktail')) {
-      const id = event.target.dataset.cocktailid;
+    if (activeBtn.classList.contains('btn__learn--cocktail')) {
+      const id = activeBtn.dataset.cocktailid;
       // console.log(id);
       const response = await getCocktailById(id);
       openCocktailModal(response);
     }
 
-    if (event.target.classList.contains('btn__learn--ingredient')) {
-      const id = event.target.dataset.ingredientid;
+    if (activeBtn.classList.contains('btn__learn--ingredient')) {
+      const id = activeBtn.dataset.ingredientid;
 
       //console.log(id);
 
@@ -83,7 +83,6 @@ async function onListClick(event) {
   // console.log('response ingredient', response.ingredients[0]);
 
   openIngredientModal(response);
-  
 
   const modalCloseIngredientBtn = document.querySelector(
     '.js-modal-close-ingredient'
