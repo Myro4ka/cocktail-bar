@@ -1,12 +1,14 @@
 import * as iconModalClose from '../../../images/symbol-defs.svg';
 export function renderModalCocktail(
+  idDrink,
   strDrink,
   strInstructions,
   strDrinkThumb,
-  list
+  list,
+  btn
 ) {
   const markup = `
-            <div class="modal js-modal-cocktail">
+            <div class="modal js-modal-cocktail" data-cocktailId =${idDrink}>
                 <button class="modal__close-button js-modal-close-cocktail" data-modal-cocktail-close>
                     <svg class="modal__icon js-modal-icon-cocktail" width="32" height="32">
                         <use href="${iconModalClose}#icon-close-line" />
@@ -28,12 +30,7 @@ export function renderModalCocktail(
                         </ul>
                     </div>
                 </div>
-
-
-                <button class="modal__button modal__button--add-cocktail" type="button">
-                    Add to favorite
-                </button>
-            </div>
+                ${btn}
     `;
   return markup;
 }
@@ -56,3 +53,12 @@ export function renderList(resultList, ingredientList) {
   //console.log(markup);
   return markup;
 }
+
+export const addCocktailBtn = `
+                        <button class="modal__button modal__button--add-cocktail" type="button">
+                            Add to favorite
+                        </button>`;
+export const removeCocktailBtn = `
+                        <button class="modal__button modal__button--add-cocktail" type="button">
+                            Remove from favorite
+                        </button>`;

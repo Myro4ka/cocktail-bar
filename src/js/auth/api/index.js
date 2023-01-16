@@ -83,7 +83,7 @@ export const deleteCocktail = id => {
 };
 
 export const deleteIngrid = id => {
-  getIngrid().then(response => {
+  getIngrids().then(response => {
     Object.entries(response).forEach(([key, value]) => {
       if (value === id) {
         remove(ref(db, `${getUserId()}/${INGRID_KEY}/${key}`));

@@ -15,6 +15,11 @@ import {
 import { renderModalIngredient } from './modal-ingredient/render/render';
 import { onAddIngridClick } from './auth';
 import { openIngredientModal } from './modal-ingredient';
+import {
+  addCocktailBtn,
+  removeCocktailBtn,
+} from './modal-cocktail/render/render';
+import { getCocktails, setCoctail, deleteCocktail } from './auth/api';
 
 export async function onLearnMoreClick(activeBtn) {
   if (
@@ -25,19 +30,12 @@ export async function onLearnMoreClick(activeBtn) {
   try {
     if (activeBtn.classList.contains('btn__learn--cocktail')) {
       const id = activeBtn.dataset.cocktailid;
-      // console.log(id);
       const response = await getCocktailById(id);
       openCocktailModal(response);
     }
-
     if (activeBtn.classList.contains('btn__learn--ingredient')) {
       const id = activeBtn.dataset.ingredientid;
-
-      //console.log(id);
-
       const response = await getIngredientByID(id);
-      //console.log(response);
-
       openIngredientModal(response);
     }
   } catch (error) {
@@ -50,58 +48,78 @@ async function openCocktailModal(response) {
   document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', onEscKeyPress);
 
-  // console.log(response);
-
   let cocktailTitle = response.drinks[0].strDrink;
   let cocktailInstructions = response.drinks[0].strInstructions;
   let cocktailImage = response.drinks[0].strDrinkThumb;
 
   let list = makeList(response);
   let listMarkup = renderList(list.resultList, list.modIngredientsList);
+  let cocktailId = response.drinks[0].idDrink;
 
-  insertMarkup(cocktailTitle, cocktailInstructions, cocktailImage, listMarkup);
+  getCocktails().then(response => {
+    if (response) {
+      const arrayFavorId = Object.values(response);
+      const button = arrayFavorId.includes(cocktailId)
+        ? removeCocktailBtn
+        : addCocktailBtn;
 
-  const modalCloseCocktailBtn = document.querySelector(
-    '.js-modal-close-cocktail'
-  );
-  modalCloseCocktailBtn.addEventListener('click', onCloseModalCocktail);
+      insertMarkup(
+        cocktailId,
+        cocktailTitle,
+        cocktailInstructions,
+        cocktailImage,
+        listMarkup,
+        button
+      );
 
-  const modalCocktailList = document.querySelector(
-    '.js-modal-list-ingredients'
-  );
-  modalCocktailList.addEventListener('click', onListClick);
+      const modalCloseCocktailBtn = document.querySelector(
+        '.js-modal-close-cocktail'
+      );
+      modalCloseCocktailBtn.addEventListener('click', onCloseModalCocktail);
+
+      const modalCocktailList = document.querySelector(
+        '.js-modal-list-ingredients'
+      );
+      modalCocktailList.addEventListener('click', onListClick);
+
+      const modalAddCocktailBtn = document.querySelector(
+        '.modal__button--add-cocktail'
+      );
+      modalAddCocktailBtn.addEventListener('click', onAddButtonClick);
+    } else {
+      //addMarkup(data, mainMarkupPlace);
+    }
+  });
+}
+
+function onAddButtonClick(event) {
+  const idDrink = event.target.closest('.js-modal-cocktail').dataset.cocktailid;
+
+  if (event.target.classList.contains('modal__button--add-cocktail')) {
+    event.target.textContent = 'Remove from favorite';
+    event.target.classList.remove('modal__button--add-cocktail');
+    event.target.classList.add('modal__button--remove-cocktail');
+
+    setCoctail(idDrink);
+  } else if (
+    event.target.classList.contains('modal__button--remove-cocktail')
+  ) {
+    event.target.textContent = 'Add to favorite';
+    event.target.classList.remove('modal__button--remove-cocktail');
+    event.target.classList.add('modal__button--add-cocktail');
+
+    deleteCocktail(idDrink);
+  }
 }
 
 async function onListClick(event) {
   if (!event.target.classList.contains('js-modal-link')) return;
-  // console.log(event.target);
   let el = event.target.closest('[data-ingredient]');
-  // console.log(el);
   let dataIngredient = el.dataset.ingredient;
-  // console.log('datIngredient:', dataIngredient);
   const response = await getIngredientByName(dataIngredient);
-  // console.log('response ingredient', response.ingredients[0]);
 
   openIngredientModal(response);
-
-  const modalCloseIngredientBtn = document.querySelector(
-    '.js-modal-close-ingredient'
-  );
-  modalCloseIngredientBtn.addEventListener('click', onCloseModalIngredient);
-
-  const addToFavorBtn = document.querySelector(
-    '.modal__button--add-ingredient'
-  );
-  addToFavorBtn.addEventListener('click', onAddIngridClick);
 }
-
-// function onAddIngridClickNew(event) {
-//   console.log(event.target);
-//   const el = event.target.closest('[data-ingredient-name]');
-//   console.log(el);
-//   let ingredientName = el.dataset.ingredientName;
-//   console.log(ingredientName);
-// }
 
 export function makeList(cocktail) {
   let quantityList = [];
@@ -133,10 +151,6 @@ export function makeList(cocktail) {
     resultList.push(b + ' ' + a);
   }
 
-  // console.log(modQuantityList);
-  // console.log(modIngredientsList);
-  // console.log(resultList);
-
   return { resultList: resultList, modIngredientsList: modIngredientsList };
 }
 
@@ -159,10 +173,11 @@ export function onEscKeyPress(event) {
   }
 }
 
-export async function insertMarkup(id, title, instructions, image, list) {
+export async function insertMarkup(id, name, title, instructions, image, list) {
   try {
     backdropCocktailRef.innerHTML = renderModalCocktail(
       id,
+      name,
       title,
       instructions,
       image,

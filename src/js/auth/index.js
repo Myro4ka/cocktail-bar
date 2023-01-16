@@ -82,27 +82,3 @@ export function onRemoveClick(id, card) {
   }
 }
 
-export function onAddIngridClick(e) {
-  if (!e.target.classList.contains('modal__button--add-ingredient')) return;
-  if (!auth) {
-    // return Notiflix.Notify('Log in, please!');
-    return;
-  }
-  try {
-    const el = e.target.closest('[data-ingredient-name]').dataset
-      .ingredientName;
-    console.log('el', el);
-    // const ingredient = document.querySelector(
-    //   '.modal__title--ingredient'
-    // ).textContent;
-    // console.log(ingredient);
-
-    setIngrid(el);
-    // const data = createDataObj(value);
-    // console.log(data);
-    //   передаем данные отправляем в базу данных
-    // sendData(data);
-  } catch (error) {
-    console.log(error);
-  }
-}
