@@ -41,7 +41,6 @@ onAuthStateChanged(auth, user => {
 
           if (window.location.href.includes('favorites')) {
             refsSearch.form.addEventListener('submit', onChangeFavInput);
-
             function onChangeFavInput(e) {
               e.preventDefault();
               let searchQuery = e.currentTarget.elements[1].value
