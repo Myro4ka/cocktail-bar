@@ -29,7 +29,7 @@ export function onActionStorageBtnClick(e) {
     if (actionCard.querySelector('.btn__add')) {
       onAuthStateChanged(auth, user => {
         if (!user) {
-          // return Notiflix.Notify('Log in, please!');
+         Notiflix.Notify.failure('Please, LOG IN');
           return;
         }
         if (actionCard.querySelector('.btn__remove')) {

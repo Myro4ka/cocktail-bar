@@ -10,7 +10,7 @@ import { auth } from '../auth/api/auth.js';
 import { onAuthStateChanged } from '@firebase/auth';
 import { searchCocktailsInput } from './api/search';
 import { onChecked } from '../switcher';
-
+import Notiflix from 'notiflix';
 (() => {
   console.log(mobMenuRefs.switcher);
   mobMenuRefs.menuBtn.addEventListener('click', toggleMenu);
@@ -28,11 +28,17 @@ import { onChecked } from '../switcher';
   }
 })();
 
+export function noUserLogin(){
+Notiflix.Notify.failure('Please, LOG IN');
+}
+
 onAuthStateChanged(auth, user => {
   if (!user) {
-    favorMenuRefs.favorBtn.removeEventListener('click', onFavorBtn);
+favorMenuRefs.favorBtn.addEventListener('click', noUserLogin);
+favorMenuRefs.favorBtn.removeEventListener('click', onFavorBtn);
     return;
   }
+  favorMenuRefs.favorBtn.removeEventListener('click', noUserLogin);
   favorMenuRefs.favorBtn.addEventListener('click', onFavorBtn);
 });
 
