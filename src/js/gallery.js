@@ -43,7 +43,6 @@ export function mainFunction(searchIn, searchLink, amount, mainMarkupPlace) {
 
   Promise.all(arrayRandomDrinks)
     .then(r => {
-      console.log(r);
       const result = r.map(d => d.drinks[0]);
       getUser(result, mainMarkupPlace);
     })
