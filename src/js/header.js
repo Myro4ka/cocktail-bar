@@ -3,7 +3,6 @@ import './switcher';
 import { onAuthStateChanged } from '@firebase/auth';
 import { refsSearch } from './header/refs/search';
 import { searchCocktailsInput } from './header/api/search';
-// import { getUserId } from './auth/api';
 import { auth, oNsignInWithPopup, signOutUser } from './auth/api/auth';
 import { onChecked } from './switcher';
 
@@ -15,16 +14,14 @@ onAuthStateChanged(auth, () => {
     refsSearch.authBtn.classList.add('is-active');
   }
   return;
-  // if (!user) {
-  // }
-  // console.log('user :>> ', user.uid);
 });
 
-console.log(refsSearch.switchBtn);
 refsSearch.switchBtn.addEventListener('change', onChecked);
 
 refsSearch.form.addEventListener('submit', onSubmit);
-
+if (window.location.href.includes('favorites')) {
+  refsSearch.form.removeEventListener('submit', onSubmit);
+}
 function onSubmit(e) {
   e.preventDefault();
 
