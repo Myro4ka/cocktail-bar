@@ -14,7 +14,7 @@ import { refsSearch } from './header/refs/search';
 
 onAuthStateChanged(auth, user => {
   if (!user) {
-    location.replace('/');
+    location.replace('/cocktail-bar/');
   } else
     getIngrids()
       .then(response => {

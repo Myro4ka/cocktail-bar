@@ -14,7 +14,7 @@ import { responseNull } from './gallery/render/response_null';
 
 onAuthStateChanged(auth, user => {
   if (!user) {
-    location.replace('/');
+    location.replace('/cocktail-bar/');
   } else
     getCocktails()
       .then(response => {
