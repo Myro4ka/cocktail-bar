@@ -17,21 +17,19 @@ onAuthStateChanged(auth, () => {
 });
 
 refsSearch.switchBtn.addEventListener('change', onChecked);
-
 refsSearch.form.addEventListener('submit', onSubmit);
+
 if (window.location.href.includes('favorites')) {
   refsSearch.form.removeEventListener('submit', onSubmit);
 }
 function onSubmit(e) {
   e.preventDefault();
-
   let searchQuery = e.target.elements[1].value.trim();
   searchCocktailsInput(searchQuery);
   refsSearch.form.reset();
 }
 
 refsSearch.authBtn.addEventListener('click', onClickAuthBtn);
-
 function onClickAuthBtn(e) {
   if (auth.currentUser) {
     if (e.currentTarget.classList.contains('is-active')) {

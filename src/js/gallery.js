@@ -13,6 +13,7 @@ import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
 import { responseNull } from './gallery/render/response_null';
 import { Block } from 'notiflix/build/notiflix-block-aio';
+import { noCoctailsResponse } from './gallery/render/response_null';
 let coctailsAmount = 0;
 
 let searchIn = 0;
@@ -52,7 +53,13 @@ export function mainFunction(searchIn, searchLink, amount, mainMarkupPlace) {
 export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
     if (data.length === 0) {
-      responseNull();
+      if (window.location.href.includes('favorites-c')) {
+        const coctailElem = 'coctails';
+        noCoctailsResponse(coctailElem);
+      } else if (window.location.href.includes('favorites-i')) {
+        const ingridElem = 'ingridients';
+        noCoctailsResponse(ingridElem);
+      }
       return;
     }
     if (user) {
@@ -74,9 +81,11 @@ export function getUser(data, mainMarkupPlace) {
         getCocktails()
           .then(response => {
             if (response) {
+              console.log(777777);
               const arrayFavorId = Object.values(response);
               addMarkup(data, mainMarkupPlace, arrayFavorId);
             } else {
+              console.log(777777);
               addMarkup(data, mainMarkupPlace);
             }
           })
