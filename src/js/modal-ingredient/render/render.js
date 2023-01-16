@@ -3,7 +3,8 @@ export function renderModalIngredient(
   ingredient = '',
   type = '',
   description = '',
-  alcohol = ''
+  alcohol = '',
+  btn
 ) {
   const markup = `
             <div class="modal modal--ingredient" data-ingredient-name = '${ingredient}'>
@@ -28,10 +29,19 @@ export function renderModalIngredient(
             
               </ul>
   
-              <button class="modal__button modal__button--add-ingredient" type="button">
-                  Add to favorite
-              </button>
+              ${btn}
             </div>
           `;
   return markup;
 }
+
+export const addIngridBtn = `
+                          <button class="modal__button-ingr modal__button--add-ingredient" type="button">
+                          Add to favorite
+                          </button>
+                          `;
+export const removeIngridBtn = `
+                          <button class="modal__button-ingr modal__button--remove-ingredient" type="button">
+                          Remove from favorite
+                          </button>
+                          `;
