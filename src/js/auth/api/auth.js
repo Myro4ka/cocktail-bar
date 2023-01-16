@@ -161,5 +161,4 @@ onAuthStateChanged(auth, user => {
   if (!user) {
     return;
   }
-  console.log('user :>> ', user.uid);
 });
