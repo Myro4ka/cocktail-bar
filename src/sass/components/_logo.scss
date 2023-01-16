@@ -1,0 +1,9 @@
+.logo {
+    width: 123px;
+    height: 34px;
+    
+    @include tablet {
+        width: 156px;
+        height: 43px;
+        }
+}

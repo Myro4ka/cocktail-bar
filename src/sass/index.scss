@@ -1,2 +1,18 @@
-@import './common';
-@import './example';
+@import '~node_modules/modern-normalize/modern-normalize.css';
+
+@import './utils/mixin';
+@import './utils/vars';
+@import './base/reset';
+@import './base/container';
+
+@import './layouts/header';
+@import './layouts/mob-menu';
+@import './layouts/hero';
+@import './layouts/gallery';
+@import './layouts/footer';
+@import './layouts/modal'; 
+
+@import './components/button';
+@import './components/logo';
+@import './components/switcher';
+@import './components/pagination';

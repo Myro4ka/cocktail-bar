@@ -1,0 +1,97 @@
+html {
+  box-sizing: border-box;
+}
+
+.theme-light {
+  --color-primary: rgb(255, 255, 255);
+  --color-text: rgb(32, 32, 37);
+  --color-accent: rgb(253, 81, 3);
+  --color-switch-dark: rgb(32, 32, 37);
+  --color-backdrop-bg: rgb(32, 32, 37, 0.2);
+}
+
+.theme-dark {
+  --color-primary: rgb(32, 32, 37);
+  --color-text: rgb(255, 255, 255);
+  --color-accent: rgb(255, 255, 255);
+  --color-switch-dark: rgb(253, 81, 3);
+  --color-backdrop-bg: rgb(255, 255, 255, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $main-font;
+  color: $dark-primary-color;
+  margin: 0;
+
+  background-color: var(--color-primary);
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.section {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  @include tablet {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
