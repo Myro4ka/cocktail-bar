@@ -8,7 +8,7 @@ const refs = {
 
 export function main(postsData) {
   refs.pagination.classList.remove('visually-hidden');
-  console.log(postsData);
+
   let currentPage = 1;
   let page = 1;
   let rows;

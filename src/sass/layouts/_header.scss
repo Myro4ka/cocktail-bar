@@ -1,5 +1,11 @@
 .header-section {
+  position: fixed;
+  width: 100%;
   padding-top: 20px;
+  padding-bottom: 7px;
+
+  background-color: var(--color-primary);
+  border-bottom: 1px solid var(--color-backdrop-bg);
 }
 
 .header-wrap {
@@ -169,6 +175,11 @@
     &:hover,
     &:focus {
       color: var(--color-primary);
+      background-color: $accent-color;
+    }
+    &:hover a,
+    &:focus a {
+      color: $light-primary-color;
       background-color: $accent-color;
     }
   }

@@ -11,7 +11,8 @@ import { onActionStorageBtnClick } from './auth';
 import { getCocktails, getIngrids } from './auth/api';
 import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth';
-
+import { responseNull } from './gallery/render/response_null';
+import { Block } from 'notiflix/build/notiflix-block-aio';
 let coctailsAmount = 0;
 
 let searchIn = 0;
@@ -50,9 +51,13 @@ export function mainFunction(searchIn, searchLink, amount, mainMarkupPlace) {
 
 export function getUser(data, mainMarkupPlace) {
   onAuthStateChanged(auth, user => {
+    if (data.length === 0) {
+      responseNull();
+      return;
+    }
     if (user) {
       if (data[0].idIngredient) {
-        console.log('data.idIngredient', data[0].idIngredient);
+        // console.log('data.idIngredient', data[0].idIngredient);
         getIngrids()
           .then(response => {
             if (response) {
@@ -65,7 +70,7 @@ export function getUser(data, mainMarkupPlace) {
           })
           .catch(alert.log);
       } else if (data[0].idDrink) {
-        console.log('data.idDrink', data[0].idDrink);
+        // console.log('data.idDrink', data[0].idDrink);
         getCocktails()
           .then(response => {
             if (response) {
@@ -118,7 +123,8 @@ if (!window.location.href.includes('favorites')) {
   );
 }
 
-// refs.coctailsList.addEventListener('click', onLearnMoreClick);
-// refs.addLikeBtn.addEventListener('click', onAddClick);
-
 refs.coctailsList.addEventListener('click', onActionStorageBtnClick);
+Block.arrows('.gallery', {
+  svgSize: '200px',
+});
+Block.remove('.gallery', 1000);

@@ -9,36 +9,18 @@ import { getIngredientByID } from './modal-ingredient/api/api';
 
 import { renderModalIngredient } from './modal-ingredient/render/render';
 import { onEscKeyPress } from './modal-cocktail';
-import { onAddIngridClick } from './auth/index.js';
+import { auth } from './auth/api/auth.js';
+import { setIngrid, deleteIngrid, getIngrids } from './auth/api/index.js';
+import {
+  addIngridBtn,
+  removeIngridBtn,
+} from './modal-ingredient/render/render';
 
-
-// export async function onOpenIngredientModal(event) {
-//   window.addEventListener('keydown', onEscKeyPress);
-//   modalIngredientRef.classList.remove('is-hidden');
-//   document.body.style.overflow = 'hidden';
-
-//   try {
-//     console.log('33333333333333333333333');
-//     let el = await event.target.closest('[data-ingredientId]');
-
-//     getIngredientData(el);
-  
-//     backdropIngredientRef.innerHTML = renderModalIngredient(
-//       ingredientTitle,
-//       ingredientType,
-//       ingredientDescription,
-//       ingredientAlcohol
-//     );
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
-
-export async function onCloseIngredientModal(event) {   
-    modalIngredientRef.classList.add('is-hidden');
-    // document.body.style.overflow = "visible";
-    window.removeEventListener('keydown', onEscKeyPress);
-  }
+export async function onCloseIngredientModal(event) {
+  if (event.target.classList.contains('modal__button--add-ingredient')) return;
+  modalIngredientRef.classList.add('is-hidden');
+  window.removeEventListener('keydown', onEscKeyPress);
+}
 
 export async function openIngredientModal(response) {
   const ingredientTitle = response.ingredients[0].strIngredient;
@@ -64,27 +46,58 @@ export async function openIngredientModal(response) {
   modalIngredientRef.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
-  backdropIngredientRef.innerHTML = renderModalIngredient(
-    ingredientTitle,
-    ingredientType,
-    ingredientDescription,
-    ingredientAlcohol
-  );
+  getIngrids().then(response => {
+    if (response) {
+      const arrayFavorId = Object.values(response);
+      const button = arrayFavorId.includes(ingredientTitle)
+        ? removeIngridBtn
+        : addIngridBtn;
 
-  const modalCloseIngredientBtn = document.querySelector(
-    '.js-modal-close-ingredient'
-  );
-  
-  // modalCloseIngredientBtn.addEventListener('click', onCloseModalIngredient); //!+++++++
+      backdropIngredientRef.innerHTML = renderModalIngredient(
+        ingredientTitle,
+        ingredientType,
+        ingredientDescription,
+        ingredientAlcohol,
+        button
+      );
 
-  const addToFavorBtn = document.querySelector(
-    '.modal__button--add-ingredient'
-  );
-  addToFavorBtn.addEventListener('click', onAddIngridClick);
-  window.addEventListener('keydown', onEscKeyPress);
+      const modalCloseIngredientBtn = document.querySelector(
+        '.js-modal-close-ingredient'
+      );
+
+      modalCloseIngredientBtn.addEventListener('click', onCloseIngredientModal); //!+++++++
+
+      const addToFavorBtn = document.querySelector('.modal__button-ingr');
+      addToFavorBtn.addEventListener('click', onAddIngridClick);
+      window.addEventListener('keydown', onEscKeyPress);
+    }
+  });
 }
 
-modalIngredientRef.addEventListener('click', onCloseIngredientModal);
+function onAddIngridClick(e) {
+  if (!auth) {
+    // return Notiflix.Notify('Log in, please!');
+    return;
+  }
+  try {
+    const el = e.target.closest('[data-ingredient-name]').dataset
+      .ingredientName;
+    if (e.target.classList.contains('modal__button--add-ingredient')) {
+      e.target.textContent = 'Remove from favorite';
+      e.target.classList.remove('modal__button--add-ingredient');
+      e.target.classList.add('modal__button--remove-ingredient');
 
+      setIngrid(el);
+    } else if (
+      e.target.classList.contains('modal__button--remove-ingredient')
+    ) {
+      e.target.textContent = 'Add to favorite';
+      e.target.classList.remove('modal__button--remove-ingredient');
+      e.target.classList.add('modal__button--add-ingredient');
 
-//addToFavorBtn.addEventListener('click', onAddIngridClick);
+      deleteIngrid(el);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
