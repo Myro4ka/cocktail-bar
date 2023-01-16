@@ -6,11 +6,8 @@ import { getCocktails } from './auth/api';
 import { getCocktailById } from './modal-cocktail/api/api';
 import { refsSearch } from './header/refs/search';
 import './header';
-// import './gallery';
 import './modal-cocktail';
 import './header/mob-menu.js';
-// import './modal-ingredient';
-import { responseNull } from './gallery/render/response_null';
 
 onAuthStateChanged(auth, user => {
   if (!user) {

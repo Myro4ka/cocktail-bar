@@ -22,13 +22,10 @@ export const getUsersId = () => {
   });
 };
 
-// getUsersId();
-// Получение коктейля
 export const getCocktails = () => {
   return get(ref(db, `${getUserId()}/${COCKTAIL_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        // console.log(snapshot);
         return snapshot.val();
       } else {
         console.log('No data available');
@@ -45,7 +42,6 @@ export const getIngrids = () => {
   return get(ref(db, `${getUserId()}/${INGRID_KEY}`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        // console.log(snapshot.val());
         return snapshot.val();
       } else {
         console.log('No data available');
@@ -61,7 +57,6 @@ export const getIngrids = () => {
 export const setCoctail = id => {
   return push(ref(db, `${getUserId()}/${COCKTAIL_KEY}`), id)
     .then(() => {
-      console.log(db);
       // Data saved successfully!
     })
     .catch(error => {
@@ -80,14 +75,12 @@ export const setIngrid = id => {
 };
 // Удаление
 export const deleteCocktail = id => {
-  // console.log(id);
   getCocktails().then(response => {
     Object.entries(response).forEach(([key, value]) => {
       if (value === id) {
         remove(ref(db, `${getUserId()}/${COCKTAIL_KEY}/${key}`));
       }
     });
-    console.log(response);
   });
 };
 
@@ -98,7 +91,6 @@ export const deleteIngrid = id => {
         remove(ref(db, `${getUserId()}/${INGRID_KEY}/${key}`));
       }
     });
-    // console.log(response);
   });
 };
 export const setAdult = isAdult => {
@@ -114,9 +106,7 @@ export const getAdult = () => {
   return get(ref(db, `${getUserId()}/${ISADULT}`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
         return snapshot.val();
-        // console.log(snapshot.val());
       } else {
         console.log('No data available');
       }

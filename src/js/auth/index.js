@@ -18,7 +18,6 @@ export function onActionStorageBtnClick(e) {
   )
     return;
   else if (e.target.classList.contains('btn__learn')) {
-    console.log(e.target);
     onLearnMoreClick(e.target);
   } else {
     const actionCard = [...e.currentTarget.children].find(childNode =>
@@ -29,7 +28,7 @@ export function onActionStorageBtnClick(e) {
     if (actionCard.querySelector('.btn__add')) {
       onAuthStateChanged(auth, user => {
         if (!user) {
-         Notiflix.Notify.failure('Please, LOG IN');
+          Notiflix.Notify.failure('Please, LOG IN');
           return;
         }
         if (actionCard.querySelector('.btn__remove')) {
@@ -60,7 +59,6 @@ export function onAddClick(id, card) {
     if (card.classList.contains('btn__remove'))
       card.querySelector('.btn__remove').classList.remove('visually-hidden');
     card.querySelector('.gallery__card-btns').innerHTML += removeBtn;
-    console.log(id);
     setCoctail(id);
   } catch (error) {
     console.log(error);
@@ -75,10 +73,8 @@ export function onRemoveClick(id, card) {
     card.querySelector('.gallery__card-btns').innerHTML += addBtn;
     card.classList.add('visually-hidden');
     card.style.position = 'absolute';
-    console.log(id);
     deleteCocktail(id);
   } catch (error) {
     console.log(error);
   }
 }
-

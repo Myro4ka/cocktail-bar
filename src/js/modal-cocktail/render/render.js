@@ -36,21 +36,16 @@ export function renderModalCocktail(
 }
 
 export function renderList(resultList, ingredientList) {
-  // console.log(resultList);
-  // console.log(ingredientList);
-
   let ingredient = '';
   let markup = '';
   for (let i = 0; i < ingredientList.length; i += 1) {
     ingredient = ingredientList[i];
-    // console.log(ingredient);
     markup += `
         <li class="modal__item" data-ingredient='${ingredient}'>
             <button class="modal__link js-modal-link" href="#">&sext;&#160;${resultList[i]}</button>
         </li>
       `;
   }
-  //console.log(markup);
   return markup;
 }
 

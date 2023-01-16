@@ -23,8 +23,6 @@ const heroTitleImg = () => {
 </div>`;
 };
 
-// createMarkup;
-
 function createMarkupArr(e) {
   return e.map(e => {
     return `<li class=hero-item >

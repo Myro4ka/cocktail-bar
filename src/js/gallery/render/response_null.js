@@ -11,7 +11,6 @@ function createMarkupNullCocktail() {
   </div>`;
 }
 export function noCoctailsResponse(elem) {
-  // refs.coctailTitel.textContent = `Sorry, we didn't find any cocktail for you`;
   refs.coctailsList.innerHTML = createMarkupNoFavoriteCocktail(elem);
   refs.paginationDiv.classList.add('visually-hidden');
 }

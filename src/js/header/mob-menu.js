@@ -1,4 +1,3 @@
-// import '../header';
 import '../switcher';
 import {
   refs,
@@ -27,14 +26,14 @@ import Notiflix from 'notiflix';
   }
 })();
 
-export function noUserLogin(){
-Notiflix.Notify.failure('Please, LOG IN');
+export function noUserLogin() {
+  Notiflix.Notify.failure('Please, LOG IN');
 }
 
 onAuthStateChanged(auth, user => {
   if (!user) {
-favorMenuRefs.favorBtn.addEventListener('click', noUserLogin);
-favorMenuRefs.favorBtn.removeEventListener('click', onFavorBtn);
+    favorMenuRefs.favorBtn.addEventListener('click', noUserLogin);
+    favorMenuRefs.favorBtn.removeEventListener('click', onFavorBtn);
     return;
   }
   favorMenuRefs.favorBtn.removeEventListener('click', noUserLogin);
@@ -67,8 +66,6 @@ function onFavorBtn(e) {
 })();
 
 refs.mobMenuForm.addEventListener('submit', onMobSubmit);
-
-console.log(refs.mobMenuForm);
 
 function onMobSubmit(e) {
   e.preventDefault();

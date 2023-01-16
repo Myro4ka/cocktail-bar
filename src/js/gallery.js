@@ -64,7 +64,6 @@ export function getUser(data, mainMarkupPlace) {
     }
     if (user) {
       if (data[0].idIngredient) {
-        // console.log('data.idIngredient', data[0].idIngredient);
         getIngrids()
           .then(response => {
             if (response) {
@@ -77,7 +76,6 @@ export function getUser(data, mainMarkupPlace) {
           })
           .catch(alert.log);
       } else if (data[0].idDrink) {
-        // console.log('data.idDrink', data[0].idDrink);
         getCocktails()
           .then(response => {
             if (response) {
