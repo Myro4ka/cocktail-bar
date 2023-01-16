@@ -14,6 +14,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 export const auth = getAuth();
+
 Confirm.init({
   className: 'notiflix-confirm',
   width: '600px',
@@ -99,6 +100,7 @@ Report.init({
     backOverlayColor: 'rgba(32, 32, 37, 0.2)',
   },
 });
+
 export const oNsignInWithPopup = () => {
   signInWithPopup(auth, provider)
     .then(result => {
@@ -152,6 +154,7 @@ export const oNsignInWithPopup = () => {
 export const signOutUser = () => {
   signOut(auth)
     .then(() => {
+
       // Sign-out successful.
       // console.log(auth);
     })

@@ -4,11 +4,9 @@ import {
   backdropIngredientRef,
   addToFavorBtn,
 } from './modal-ingredient/refs/refs.js';
-
-import { getIngredientByID } from './modal-ingredient/api/api';
-
 import { renderModalIngredient } from './modal-ingredient/render/render';
 import { onEscKeyPress } from './modal-cocktail';
+import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from './auth/api/auth.js';
 import { setIngrid, deleteIngrid, getIngrids } from './auth/api/index.js';
 import {
@@ -65,23 +63,25 @@ export async function openIngredientModal(response) {
         '.js-modal-close-ingredient'
       );
 
-      modalCloseIngredientBtn.addEventListener('click', onCloseIngredientModal); //!+++++++
+      modalCloseIngredientBtn.addEventListener('click', onCloseIngredientModal);
 
       const addToFavorBtn = document.querySelector('.modal__button-ingr');
       addToFavorBtn.addEventListener('click', onAddIngridClick);
       window.addEventListener('keydown', onEscKeyPress);
+      backdropIngredientRef.addEventListener('click', onCloseIngredientModal);
     }
   });
 }
 
 function onAddIngridClick(e) {
-  if (!auth) {
-    // return Notiflix.Notify('Log in, please!');
-    return;
-  }
-  try {
+  onAuthStateChanged(auth, user => {
+    if (!user) {
+      // Notiflix
+      return;
+    }
     const el = e.target.closest('[data-ingredient-name]').dataset
       .ingredientName;
+
     if (e.target.classList.contains('modal__button--add-ingredient')) {
       e.target.textContent = 'Remove from favorite';
       e.target.classList.remove('modal__button--add-ingredient');
@@ -97,7 +97,5 @@ function onAddIngridClick(e) {
 
       deleteIngrid(el);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  });
 }

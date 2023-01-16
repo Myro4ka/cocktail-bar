@@ -2,9 +2,7 @@ import {
   modalCocktailRef,
   backdropCocktailRef,
   modalIngredientRef,
-  backdropIngredientRef,
 } from './modal-cocktail/refs/refs';
-
 import { getCocktailById, getIngredientByName } from './modal-cocktail/api/api';
 import { getIngredientByID } from './modal-ingredient/api/api';
 import {
@@ -12,14 +10,14 @@ import {
   renderModalCocktail,
 } from './modal-cocktail/render/render';
 
-import { renderModalIngredient } from './modal-ingredient/render/render';
-import { onAddIngridClick } from './auth';
 import { openIngredientModal } from './modal-ingredient';
 import {
   addCocktailBtn,
   removeCocktailBtn,
 } from './modal-cocktail/render/render';
 import { getCocktails, setCoctail, deleteCocktail } from './auth/api';
+import { onAuthStateChanged } from '@firebase/auth';
+import { auth } from './auth/api/auth';
 
 export async function onLearnMoreClick(activeBtn) {
   if (
@@ -93,23 +91,32 @@ async function openCocktailModal(response) {
 }
 
 function onAddButtonClick(event) {
-  const idDrink = event.target.closest('.js-modal-cocktail').dataset.cocktailid;
+  onAuthStateChanged(auth, user => {
+    if (!user) {
+      // Notiflix
+      return;
+    }
+    console.log('user :>> ', user.uid);
 
-  if (event.target.classList.contains('modal__button--add-cocktail')) {
-    event.target.textContent = 'Remove from favorite';
-    event.target.classList.remove('modal__button--add-cocktail');
-    event.target.classList.add('modal__button--remove-cocktail');
+    const idDrink =
+      event.target.closest('.js-modal-cocktail').dataset.cocktailid;
 
-    setCoctail(idDrink);
-  } else if (
-    event.target.classList.contains('modal__button--remove-cocktail')
-  ) {
-    event.target.textContent = 'Add to favorite';
-    event.target.classList.remove('modal__button--remove-cocktail');
-    event.target.classList.add('modal__button--add-cocktail');
+    if (event.target.classList.contains('modal__button--add-cocktail')) {
+      event.target.textContent = 'Remove from favorite';
+      event.target.classList.remove('modal__button--add-cocktail');
+      event.target.classList.add('modal__button--remove-cocktail');
 
-    deleteCocktail(idDrink);
-  }
+      setCoctail(idDrink);
+    } else if (
+      event.target.classList.contains('modal__button--remove-cocktail')
+    ) {
+      event.target.textContent = 'Add to favorite';
+      event.target.classList.remove('modal__button--remove-cocktail');
+      event.target.classList.add('modal__button--add-cocktail');
+
+      deleteCocktail(idDrink);
+    }
+  });
 }
 
 async function onListClick(event) {
@@ -197,11 +204,6 @@ function onCloseModalCocktail() {
 
   document.body.style.overflow = 'visible';
 }
-
-// function toggleModal() {
-//   modalCocktailRef.classList.toggle('is-hidden');
-//   document.body.style.overflow = 'visible';
-// }
 
 backdropCocktailRef.addEventListener('click', event => {
   if (
