@@ -262,6 +262,22 @@
     color: var(--color-primary);
   }
 
+  &--add-ingredient {
+    width: 185px;
+  }
+
+  &--remove-ingredient {
+    width: 248px;
+  }
+
+  &--add-cocktail {
+    width: 185px;
+  }
+
+  &--remove-cocktail {
+    width: 248px;
+  }
+
   @include tablet {
     margin-left: auto;
   }
