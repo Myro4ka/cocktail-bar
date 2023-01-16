@@ -13,7 +13,7 @@ import { getUsersId } from '.';
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 export const auth = getAuth();
-
+import Notiflix from 'notiflix';
 export const oNsignInWithPopup = () => {
   signInWithPopup(auth, provider)
     .then(result => {
@@ -64,6 +64,7 @@ export const oNsignInWithPopup = () => {
 export const signOutUser = () => {
   signOut(auth)
     .then(() => {
+
       // Sign-out successful.
       // console.log(auth);
     })
