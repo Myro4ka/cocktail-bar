@@ -65,11 +65,12 @@ export async function openIngredientModal(response) {
         '.js-modal-close-ingredient'
       );
 
-      modalCloseIngredientBtn.addEventListener('click', onCloseIngredientModal); //!+++++++
+      modalCloseIngredientBtn.addEventListener('click', onCloseIngredientModal); 
 
       const addToFavorBtn = document.querySelector('.modal__button-ingr');
       addToFavorBtn.addEventListener('click', onAddIngridClick);
       window.addEventListener('keydown', onEscKeyPress);
+      backdropIngredientRef.addEventListener('click', onCloseIngredientModal);
     }
   });
 }

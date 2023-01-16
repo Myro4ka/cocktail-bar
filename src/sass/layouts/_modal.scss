@@ -232,7 +232,8 @@
   }
 }
 
-.modal__button {
+.modal__button,
+.modal__button-ingr {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -260,22 +261,6 @@
     background-color: $accent-color;
     color: var(--color-primary);
   }
-
-  // &--add-ingredient {
-  //   width: 185px;
-  // }
-
-  // &--remove-ingredient {
-  //   width: 248px;
-  // }
-
-  // &--add-cocktail {
-  //   width: 185px;
-  // }
-
-  // &--remove-cocktail {
-  //   width: 248px;
-  // }
 
   @include tablet {
     margin-left: auto;
