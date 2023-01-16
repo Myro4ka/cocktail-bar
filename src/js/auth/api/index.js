@@ -9,17 +9,14 @@ const COCKTAIL_KEY = 'coctails';
 const INGRID_KEY = 'ingrid';
 const ISADULT = 'isadult';
 const db = getDatabase();
-// console.log(getDatabase());
 export const getUserId = () => {
   const auth = getAuth();
 
-  return auth.currentUser.uid;
+  return auth?.currentUser?.uid;
 };
 export const getUsersId = () => {
   return get(ref(db)).then(snapshot => {
     if (snapshot.exists()) {
-      // console.log(snapshot.val());
-
       return snapshot.val();
     }
   });
@@ -35,6 +32,7 @@ export const getCocktails = () => {
         return snapshot.val();
       } else {
         console.log('No data available');
+        return [];
       }
     })
     .catch(error => {
@@ -51,6 +49,7 @@ export const getIngrids = () => {
         return snapshot.val();
       } else {
         console.log('No data available');
+        return [];
       }
     })
     .catch(error => {
