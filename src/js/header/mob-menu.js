@@ -1,4 +1,4 @@
-import '../header';
+// import '../header';
 import '../switcher';
 import {
   refs,
@@ -12,7 +12,6 @@ import { searchCocktailsInput } from './api/search';
 import { onChecked } from '../switcher';
 
 (() => {
-  console.log(mobMenuRefs.switcher);
   mobMenuRefs.menuBtn.addEventListener('click', toggleMenu);
   mobMenuRefs.closeMenuBtn.addEventListener('click', toggleMenu);
   mobMenuRefs.menuList.addEventListener('click', removeMenu);
@@ -62,6 +61,8 @@ function onFavorBtn(e) {
 })();
 
 refs.mobMenuForm.addEventListener('submit', onMobSubmit);
+
+console.log(refs.mobMenuForm);
 
 function onMobSubmit(e) {
   e.preventDefault();

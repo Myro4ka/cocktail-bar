@@ -4,7 +4,7 @@ export const mobMenuRefs = {
   mobileMenu: document.querySelector('[data-menu]'),
   body: document.querySelector('body'),
   menuList: document.querySelector('.mob-menu__list'),
-  switcher: document.querySelector('#slider'),
+  switcher: document.querySelector('#slider-mob'),
 };
 
 export const favorMenuRefs = {

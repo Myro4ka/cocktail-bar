@@ -1,9 +1,10 @@
 function setTheme(themeName) {
   localStorage.setItem('theme', themeName);
   document.documentElement.className = themeName;
+  setChecked(themeName !== 'theme-light');
 }
 
-export function onChecked(e) {
+export function onChecked() {
   if (localStorage.getItem('theme') === 'theme-dark') {
     setTheme('theme-light');
   } else {
@@ -11,12 +12,15 @@ export function onChecked(e) {
   }
 }
 
+function setChecked(checked) {
+  document.getElementById('slider').checked = checked;
+  document.getElementById('slider-mob').checked = checked;
+}
+
 (function () {
   if (localStorage.getItem('theme') === 'theme-dark') {
     setTheme('theme-dark');
-    document.getElementById('slider').checked = true;
   } else {
     setTheme('theme-light');
-    document.getElementById('slider').checked = false;
   }
 })();
